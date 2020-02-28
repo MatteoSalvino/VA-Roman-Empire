@@ -3,7 +3,7 @@ const d3 = require('d3');
 //LineChart initialization
 var margin = { top: 50, right : 50, bottom: 50, left: 50},
     lchart_width = 500, //window.innerWidth - margin.left - margin.right,
-    lchart_height = 350; //window.innerHeight - margin.top - margin.bottom;
+    lchart_height = 500; //window.innerHeight - margin.top - margin.bottom;
 
 var lchart = d3.select('#line_chart_container')
                .append('svg')
@@ -12,13 +12,14 @@ var lchart = d3.select('#line_chart_container')
                .append('g')
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top +')');
 
+
 function populateChart(battles) {
   var battles_won = battles.filter(function(d) { return d.outcome == 'W'; });
-  //console.log(battles_won);
+  console.log(battles_won);
 
   //Axis scales and line
   var xScale = d3.scaleLinear()
-                 .domain([0 , d3.max(battles, function (d) { return Math.abs(+d.year); })])
+                 .domain([d3.min(battles, function(d) { return +d.year; }) , d3.max(battles, function (d) { return +d.year; })])
                  .range([0, lchart_width]);
 
   var range = d3.range(battles_won.length);
@@ -28,7 +29,7 @@ function populateChart(battles) {
 
   var line = d3.line()
                 .x(function(d) {
-                  return xScale(Math.abs(+d.year));
+                  return xScale(+d.year);
                 })
                 .y(function(d, i) {
                   return yScale(i);

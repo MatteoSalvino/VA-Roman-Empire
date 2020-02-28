@@ -46,7 +46,6 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: './empire_map.json', to: '.'},
-      { from: './places.csv', to: '.'},
       { from: './battles.csv', to: '.'}
     ])
   ]
