@@ -4,11 +4,14 @@ var width = 600
 var height = 400
 var margin = { top: 30, bottom: 30, left: 30, right: 30 };
 
-var lchart = d3.select("#line_chart_container")
+var isCumulative = true;
+
+var container = d3.select("#line_chart_container")
     .append("div")
     // Container class to make it responsive.
-    .classed("svg-container", true)
-    .append("svg")
+    .classed("svg-container", true);
+
+var lchart = container.append("svg")
     // Responsive SVG needs these 2 attributes and no width and height attr.
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "0 0 " + width + " " + height)
