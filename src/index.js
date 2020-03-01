@@ -2,7 +2,7 @@ import 'normalize.css'
 import './index.scss'
 import mapBuilder from './map'
 import lineChartBuilder from './lineChart'
-import barChartBuilder from './barchart'
+import barChartBuilder from './barChart'
 
 const d3 = require('d3');
 
