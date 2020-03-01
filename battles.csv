@@ -1,4 +1,4 @@
-id,warId,year,yearAU,relativeYear,label,locationLabel,latitude,longitude,stoaId,currentCountry,outcome,civil?,naval?,siege?,sack?,final?,period,,Missing
+id,warId,year,yearAU,relativeYear,label,locationLabel,latitude,longitude,stoaId,currentCountry,outcome,civil,naval,siege,sack,final,period,,Missing
 1,,-509,244,1,Battle of Silva Arsia,Silva Arsia,41.9,12.5,26347394,,W,,,,,,R,,guerre illiriche
 2,,-502,251,8,Battle of Pometia,Pometia,41.594438,12.826351,438841,,W,,,,,,R,,macedoni
 3,,-496,257,14,Battle of Lake Regilius,Lake Regilius,,,-,,W,,,,,,R,,etoli
