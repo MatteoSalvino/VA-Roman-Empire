@@ -3,6 +3,15 @@ const d3 = require('d3');
 var width = 600
 var height = 400
 
+//Setting up zoom feature
+/*
+var zoom = d3.zoom()
+             .scaleExtent([1, 4])
+             .translateExtent([[0, 0], [width, height]])
+             .extent([[0, 0], [width, height]])
+             .on('zoom', zoomed);
+*/
+
 var mapSvg = d3.select("#map_container")
     .append("div")
     // Container class to make it responsive.
@@ -18,6 +27,38 @@ mapSvg.append("rect")
     .classed("rect_b", true)
     .attr("width", width)
     .attr("height", height)
+
+var legend = mapSvg.append("svg")
+                    .attr("width", 200)
+                    .attr("height", 100)
+                    .attr('x', 400)
+                    .attr('y', 10);
+
+legend.append('text')
+        .attr('id', 'battle_label')
+        .attr('x', 5)
+        .attr('y', 20)
+        .attr('font-size', 12)
+        .attr('font-weight', 'bold');
+
+legend.append('text')
+          .attr('id', 'battle_year')
+          .attr('x', 5)
+          .attr('y', 40)
+          .attr('font-size', 10);
+
+legend.append('text')
+        .attr('id', 'battle_coordinate')
+        .attr('x', 5)
+        .attr('y', 60)
+        .attr('font-size', 10);
+
+legend.append('text')
+      .attr('id', 'battle_outcome')
+      .attr('x', 5)
+      .attr('y', 80)
+      .attr('font-size', 10);
+
 
 // create a Geo Projection
 var projection = d3.geoMercator()
@@ -50,6 +91,7 @@ function populateMap(map) {
 }
 
 var markerGroup;
+
 
 function addMarkers(battles) {
     markerGroup = mapSvg.append('g')
@@ -88,18 +130,57 @@ function brushed() {
 
     if (selection) {
         markerGroup.selectAll('circle')
-            .style('visibility', function(_d) {
+            .style('visibility', function(d) {
                 var cx = d3.select(this).attr('cx');
                 var cy = d3.select(this).attr('cy');
                 //Check if the point is inside the brushed area
                 var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
                     cy >= selection[0][1] && cy <= selection[1][1]);
 
-                return isBrushed ? 'visible' : 'hidden';
+                if(isBrushed) {
+                  d3.select(this)
+                    .attr('stroke-width', 0.5)
+                    .attr('stroke', 'white');
+
+                    legend.select('#battle_label')
+                          .text(d.label);
+                    legend.select('#battle_year')
+                          .text('Year : ' + d.year);
+                    legend.select('#battle_coordinate')
+                          .text('Coordinate : (' + d.latitude + ',' + d.longitude + ')');
+                    legend.select('#battle_outcome')
+                          .text('Outcome : ' + d.outcome);
+                  return 'visible';
+                } else{
+                  d3.select(this)
+                    .attr('stroke-width', 0);
+                  return 'hidden';
+                }
             });
-    } else markerGroup.selectAll('circle')
+    } else {
+      markerGroup.selectAll('circle')
         .style('visibility', "visible");
+
+      legend.select('#battle_label')
+            .text('');
+      legend.select('#battle_year')
+            .text('');
+      legend.select('#battle_coordinate')
+            .text('');
+      legend.select('#battle_outcome')
+            .text('');
+      }
 }
+
+/*
+function zoomed() {
+  d3.selectAll('path')
+    .attr('transform', d3.event.transform);
+
+  markerGroup.selectAll('circle')
+              .attr('transform', d3.event.transform);
+}
+*/
 
 export default {
     populateMap: populateMap,
