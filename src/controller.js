@@ -1,7 +1,7 @@
 import mapBuilder from './map'
 import lineChart from './lineChart'
 import barChartBuilder from './barChart'
-import boxplotBuilder from './boxPlot'
+import boxplot from './boxPlot'
 
 const d3 = require('d3');
 
@@ -11,6 +11,7 @@ class Controller {
         this.wars = undefined
         this.map = undefined
         this.brushedMapData = undefined
+        this.brushedWars = undefined
     }
 
     resetBrushedMapData() {
@@ -26,6 +27,11 @@ class Controller {
     onBrushedMapDataChanged() {
         lineChart.setBattles(this.brushedMapData)
         lineChart.notifyDataChanged()
+
+        this.brushedWars = this.wars.filter(w => this.battles.map(x => x.warId).includes(w.id))
+
+        boxplot.setWars(this.brushedWars)
+        boxplot.notifyDataChanged()
     }
 
     setup() {
@@ -66,7 +72,8 @@ class Controller {
         lineChart.setBattles(this.battles)
         lineChart.notifyDataChanged()
         barChartBuilder.populateChart(this.battles);
-        boxplotBuilder.populate(this.wars);
+        boxplot.setWars(this.wars);
+        boxplot.notifyDataChanged();
 
         this.setupButtons()
     }
