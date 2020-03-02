@@ -99,8 +99,6 @@ class Map {
 
                 d3.select(this)
                     .classed('selected', true);
-
-                console.log(d.label);
                 setLabel(d)
             })
             .style('visibility', 'visible');
@@ -116,9 +114,9 @@ class Map {
         markerGroup.selectAll(selector)
             .each(function(d) {
                 if (+d.year >= self.period.min && +d.year <= self.period.max) {
-                    points++;
-                    minYear = d3.min([minYear, d.year])
-                    maxYear = d3.max([maxYear, d.year])
+                    points++
+                    minYear = d3.min([minYear, +d.year])
+                    maxYear = d3.max([maxYear, +d.year])
                     d3.select(this)
                         .style('visibility', 'visible')
                         .attr('stroke-width', 0.5)
