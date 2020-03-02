@@ -4,25 +4,25 @@ const d3 = require('d3');
 
 var width = 600
 var height = 400
-var mapSvg, legend, projection, path, brush, markerGroup;
+var isBrushing = false,
+    brushedArea = undefined
 
+var mapSvg, legend, projection, path, brush, markerGroup
 
 class Map {
     constructor() {
         this.map = []
         this.battles = []
+        this.resetPeriod()
         this.setup()
     }
 
-    setMap(map) {
-        this.map = map
-    }
+    setMap(map) { this.map = map }
 
-    setBattles(battles) {
-        this.battles = battles
-    }
-    _resetLegend() {
-        resetLegend();
+    setBattles(battles) { this.battles = battles }
+
+    resetPeriod(min = -Infinity, max = Infinity) {
+        this.period = { min: min, max: max }
     }
 
     setup() {
@@ -58,11 +58,10 @@ class Map {
             ]).on('start brush end', brushed);
     }
 
-    notifyDataChanged(initialize = false, minYear = -600, maxYear = 600) {
-        if (initialize)
+    notifyDataChanged(redraw = true) {
+        if (redraw)
             this.drawChart()
-        else
-            this.update(minYear, maxYear)
+        else this.update()
     }
 
     drawChart() {
@@ -107,31 +106,40 @@ class Map {
             .style('visibility', 'visible');
     }
 
-    update(minYear, maxYear) {
-        var points = 0;
+    update() {
+        var points = 0
 
-        markerGroup.selectAll('circle')
+        var self = this
+        var minYear = Infinity,
+            maxYear = -Infinity
+        var selector = isBrushing ? ".brushed" : "circle"
+        markerGroup.selectAll(selector)
             .each(function(d) {
-                if (+d.year >= minYear && +d.year <= maxYear) {
+                if (+d.year >= self.period.min && +d.year <= self.period.max) {
                     points++;
+                    minYear = d3.min([minYear, d.year])
+                    maxYear = d3.max([maxYear, d.year])
                     d3.select(this)
+                        .style('visibility', 'visible')
                         .attr('stroke-width', 0.5)
                         .attr('stroke', 'white');
                     setLabel(d);
-                } else {
-                    d3.select(this)
-                        .attr('stroke-width', 0);
-                }
+                } else d3.select(this).style('visibility', 'hidden')
             });
 
-        if (points > 1) {
-            this._resetLegend();
+        updateLegend(points, minYear, maxYear)
+    }
+}
 
-            legend.select('#battle_label')
-                .text(points + " battles selected");
-            legend.select('#battle_year')
-                .text('From ' + parseRoman(Math.trunc(minYear)) + ' to ' + parseRoman(Math.trunc(maxYear)));
-        }
+function updateLegend(numBattles, min, max) {
+    if (numBattles == 1) return;
+
+    resetLegend();
+    if (numBattles != 0) {
+        legend.select('#battle_label')
+            .text(numBattles + " battles selected");
+        legend.select('#battle_year')
+            .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)));
     }
 }
 
@@ -162,50 +170,51 @@ function zoomed() {
 function brushed() {
     var selection = d3.event.selection;
 
+    var isClick = JSON.stringify(brushedArea) == JSON.stringify(selection)
+    brushedArea = selection
+
     var points = 0;
     var minYear = Infinity;
     var maxYear = -Infinity;
 
-
     var echo = []
     if (selection) {
-        markerGroup.selectAll('circle')
-            .style('visibility', function(d) {
-                var cx = d3.select(this).attr('cx');
-                var cy = d3.select(this).attr('cy');
-                //Check if the point is inside the brushed area
-                var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
-                    cy >= selection[0][1] && cy <= selection[1][1]);
+        if (!isClick) {
+            isBrushing = true
+            markerGroup.selectAll('circle')
+                .style('visibility', function(d) {
+                    var cx = d3.select(this).attr('cx');
+                    var cy = d3.select(this).attr('cy');
+                    //Check if the point is inside the brushed area
+                    var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
+                        cy >= selection[0][1] && cy <= selection[1][1]);
 
-                if (isBrushed) {
-                    echo.push(d)
-                    points++;
-                    minYear = d3.min([minYear, +d.year]);
-                    maxYear = d3.max([maxYear, +d.year]);
-                    d3.select(this)
-                        .attr('stroke-width', 0.5)
-                        .attr('stroke', 'white');
+                    if (isBrushed) {
+                        echo.push(d)
+                        points++;
+                        minYear = d3.min([minYear, +d.year]);
+                        maxYear = d3.max([maxYear, +d.year]);
+                        d3.select(this)
+                            .classed('brushed', true)
+                            .attr('stroke-width', 0.5)
+                            .attr('stroke', 'white');
 
-                    setLabel(d);
-                    return 'visible';
-                }
-                d3.select(this).attr('stroke-width', 0);
-                return 'hidden';
-            });
-        controller.setBrushedMapData(echo)
+                        setLabel(d);
+                        return 'visible';
+                    }
+                    d3.select(this).attr('stroke-width', 0).classed('brushed', false);
+                    return 'hidden';
+                });
+            controller.setBrushedMapData(echo)
+        }
     } else {
+        isBrushing = false
         markerGroup.selectAll('circle')
             .style('visibility', "visible");
         resetLegend();
         controller.resetBrushedMapData()
     }
-    if (points > 1) {
-        resetLegend();
-        legend.select('#battle_label')
-            .text(points + " battles selected");
-        legend.select('#battle_year')
-            .text('From ' + parseRoman(minYear) + ' to ' + parseRoman(maxYear));
-    }
+    updateLegend(points, minYear, maxYear)
 }
 
 function parseRoman(y) {
