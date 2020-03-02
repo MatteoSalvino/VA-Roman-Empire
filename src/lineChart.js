@@ -1,3 +1,4 @@
+import controller from './controller'
 const d3 = require('d3');
 
 
@@ -120,6 +121,9 @@ class LineChart {
                 .transition()
                 .duration(1500)
                 .attr('d', path);
+
+            //reflects changes on map
+            controller.resetBrushedLineData();
         });
     }
 
@@ -204,6 +208,9 @@ class LineChart {
               .transition()
               .duration(1500)
                 .attr('d', path);
+
+          //reflect changes on map
+          controller.resetBrushedLineData();
         });
     }
 
@@ -292,8 +299,19 @@ function brushend() {
 
     if (selection) {
         //Updating scales
-        xScale.domain([xScale.invert(selection[0]), xScale.invert(selection[1])]);
+        var minYear = xScale.invert(selection[0]),
+            maxYear = xScale.invert(selection[1]);
+
+        xScale.domain([minYear, maxYear]);
         line.select('.brush').call(brush.move, null);
+
+        if(!isCumulative) {
+          minYear *= 100;
+          maxYear *= 100;
+        }
+        console.log(minYear, maxYear);
+        //reflects changes on map
+        controller.onBrushedLineDataChanged(minYear, maxYear);
 
         zooming();
     }

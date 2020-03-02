@@ -55,11 +55,11 @@ class Map {
               ]).on('start brush end', brushed);
   }
 
-  notifyDataChanged(initialize=false) {
+  notifyDataChanged(initialize=false, minYear=-600, maxYear=600) {
     if(initialize)
       this.drawChart()
     else
-      this.update()
+      this.update(minYear, maxYear)
   }
 
   drawChart() {
@@ -102,6 +102,20 @@ class Map {
                     setLabel(d)
                 })
                .style('visibility', 'visible');
+  }
+
+  update(minYear, maxYear) {
+    markerGroup.selectAll('circle')
+               .each(function(d) {
+                 if(+d.year >= minYear && +d.year <= maxYear) {
+                   d3.select(this)
+                      .attr('stroke-width', 0.5)
+                      .attr('stroke', 'white');
+                 } else {
+                   d3.select(this)
+                      .attr('stroke-width', 0);
+                 }
+               });
   }
 }
 

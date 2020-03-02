@@ -31,17 +31,12 @@ class Controller {
 
     resetBrushedLineData() {
       this.brushedLineData = this.battles
-      this.onBrushedLineDataChanged()
+      this.onBrushedLineDataChanged(false, 0, -1)
     }
 
-    setBrushedLineData(battles) {
-      this.brushedLineData = battles
-      this.onBrushedLineDataChanged()
-    }
-
-    onBrushedLineDataChanged() {
+    onBrushedLineDataChanged(minYear, maxYear) {
       mapBuilder.setBattles(this.brushedLineData)
-      mapBuilder.notifyDataChanged()
+      mapBuilder.notifyDataChanged(false, minYear, maxYear)
     }
 
 
