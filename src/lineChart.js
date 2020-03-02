@@ -152,7 +152,8 @@ class LineChart {
 
         path = d3.line()
             .x(d => xScale(d.x))
-            .y(d => yScale(d.y));
+            .y(d => yScale(d.y))
+            .curve(d3.curveMonotoneX);
 
         line.append('path')
             .datum(won)
@@ -163,6 +164,10 @@ class LineChart {
             .datum(lost)
             .attr('class', 'line')
             .attr('d', path);
+
+        line.append('g')
+              .attr('class', 'brush')
+            .call(brush);
 
         xAxis = lchart.append('g')
             .attr('class', 'x-axis')
@@ -178,6 +183,23 @@ class LineChart {
             .attr('class', 'y-axis')
             .attr('transform', 'translate(' + margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
+
+        //Reset zoom
+        var self = this
+        lchart.on('dblclick', function() {
+          xScale.domain([-6, 6]);
+          xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
+                                                   .tickFormat(function(d) {
+                                                     if (d == 0) return 0;
+                                                     if (d < 0) return -d + "BC";
+                                                     return d + "AD"
+                                                   }));
+
+          line.selectAll('.line')
+              .transition()
+              .duration(1500)
+                .attr('d', path);
+        });
     }
 
     notifyDataChanged() {

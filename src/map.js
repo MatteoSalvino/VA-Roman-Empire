@@ -4,6 +4,113 @@ const d3 = require('d3');
 
 var width = 600
 var height = 400
+var mapSvg, legend, projection, path, brush, markerGroup;
+
+
+class Map {
+  constructor() {
+    this.map = []
+    this.battles = []
+    this.setup()
+  }
+
+  setMap(map) {
+    this.map = map
+  }
+
+  setBattles(battles) {
+    this.battles = battles
+  }
+
+  setup() {
+    mapSvg = d3.select("#map_container")
+               .append("div")
+               // Container class to make it responsive.
+               .classed("svg-container", true)
+               .append("svg")
+               // Responsive SVG needs these 2 attributes and no width and height attr.
+                 .attr("preserveAspectRatio", "xMinYMin meet")
+                 .attr("viewBox", "0 0 " + width + " " + height)
+                // Class to make it responsive.
+               .classed("svg-content-responsive", true);
+
+    drawBorders();
+
+    legend = setupLegend();
+
+    // create a Geo Projection
+    projection = d3.geoMercator()
+                   .translate([120, 600])
+                   .scale(500)
+                   .precision(10);
+
+    path = d3.geoPath()
+             .projection(projection);
+
+    //Setting up brush's area
+    brush = d3.brush()
+              .extent([
+                  [0, 0],
+                  [width, height]
+              ]).on('start brush end', brushed);
+  }
+
+  notifyDataChanged(initialize=false) {
+    if(initialize)
+      this.drawChart()
+    else
+      this.update()
+  }
+
+  drawChart() {
+    mapSvg.selectAll('path')
+          .data(this.map.features)
+          .enter()
+          .append('path')
+            .attr('class', 'state')
+            .attr('id', function(d) {
+                return d.properties['OBJECTID'];
+            })
+            .attr('d', path);
+
+    markerGroup = mapSvg.append('g')
+                          .attr('class', 'brush')
+                        .call(brush);
+
+    markerGroup.append('g')
+               .selectAll('circle')
+               .data(this.battles)
+               .enter()
+               .append('circle')
+                .attr('cx', function(d) {
+                  return projection([d.longitude, d.latitude])[0];
+                })
+                .attr('cy', function(d) {
+                  return projection([d.longitude, d.latitude])[1];
+                })
+                .attr('r', 4)
+                .attr('fill', 'blue')
+                .attr('pointer-events', 'all')
+                .on('click', function(d) {
+                    d3.selectAll('.selected')
+                        .classed('selected', false);
+
+                    d3.select(this)
+                        .classed('selected', true);
+
+                    console.log(d.label);
+                    setLabel(d)
+                })
+               .style('visibility', 'visible');
+  }
+}
+
+function drawBorders() {
+  mapSvg.append("rect")
+        .classed("rect_b", true)
+          .attr("width", width)
+          .attr("height", height);
+}
 
 //Setting up zoom feature
 /*
@@ -12,90 +119,15 @@ var zoom = d3.zoom()
              .translateExtent([[0, 0], [width, height]])
              .extent([[0, 0], [width, height]])
              .on('zoom', zoomed);
+
+function zoomed() {
+  d3.selectAll('path')
+      .attr('transform', d3.event.transform);
+
+  markerGroup.selectAll('circle')
+               .attr('transform', d3.event.transform);
+}
 */
-
-var mapSvg = d3.select("#map_container")
-    .append("div")
-    // Container class to make it responsive.
-    .classed("svg-container", true)
-    .append("svg")
-    // Responsive SVG needs these 2 attributes and no width and height attr.
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "0 0 " + width + " " + height)
-    // Class to make it responsive.
-    .classed("svg-content-responsive", true);
-
-mapSvg.append("rect")
-    .classed("rect_b", true)
-    .attr("width", width)
-    .attr("height", height)
-
-var legend = setupLegend();
-
-// create a Geo Projection
-var projection = d3.geoMercator()
-    .translate([120, 600])
-    .scale(500)
-    .precision(10);
-
-var path = d3.geoPath()
-    .projection(projection);
-
-//Setting up brush's area
-var brush = d3.brush()
-    .extent([
-        [0, 0],
-        [width, height]
-    ]).on('start brush end', brushed);
-
-function populateMap(map) {
-    //console.log(map.features);
-
-    mapSvg.selectAll('path')
-        .data(map.features)
-        .enter()
-        .append('path')
-        .attr('class', 'state')
-        .attr('id', function(d) {
-            return d.properties['OBJECTID'];
-        })
-        .attr('d', path);
-}
-
-var markerGroup;
-
-function addMarkers(battles) {
-    markerGroup = mapSvg.append('g')
-        .attr('class', 'brush')
-        .call(brush);
-
-    markerGroup.append('g')
-        .selectAll('circle')
-        .data(battles)
-        .enter()
-        .append('circle')
-        .attr('cx', function(d) {
-            return projection([d.longitude, d.latitude])[0];
-        })
-        .attr('cy', function(d) {
-            return projection([d.longitude, d.latitude])[1];
-        })
-        .attr('r', 4)
-        .attr('fill', 'blue')
-        .attr('pointer-events', 'all')
-        .on('click', function(d) {
-            d3.selectAll('.selected')
-                .classed('selected', false);
-
-            d3.select(this)
-                .classed('selected', true);
-
-            console.log(d.label);
-            setLabel(d)
-        })
-
-    .style('visibility', 'visible');
-}
 
 function brushed() {
     var selection = d3.event.selection;
@@ -153,16 +185,6 @@ function parseRoman(y) {
     return y + "AD"
 }
 
-/*
-function zoomed() {
-  d3.selectAll('path')
-    .attr('transform', d3.event.transform);
-
-  markerGroup.selectAll('circle')
-              .attr('transform', d3.event.transform);
-}
-*/
-
 function setLabel(d) {
     legend.select('#battle_label')
         .text(d.label);
@@ -219,7 +241,4 @@ function resetLegend() {
         .text('');
 }
 
-export default {
-    populateMap: populateMap,
-    addMarkers: addMarkers
-}
+export default new Map()
