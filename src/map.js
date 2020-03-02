@@ -8,138 +8,138 @@ var mapSvg, legend, projection, path, brush, markerGroup;
 
 
 class Map {
-  constructor() {
-    this.map = []
-    this.battles = []
-    this.setup()
-  }
+    constructor() {
+        this.map = []
+        this.battles = []
+        this.setup()
+    }
 
-  setMap(map) {
-    this.map = map
-  }
+    setMap(map) {
+        this.map = map
+    }
 
-  setBattles(battles) {
-    this.battles = battles
-  }
-  _resetLegend() {
-    resetLegend();
-  }
+    setBattles(battles) {
+        this.battles = battles
+    }
+    _resetLegend() {
+        resetLegend();
+    }
 
-  setup() {
-    mapSvg = d3.select("#map_container")
-               .append("div")
-               // Container class to make it responsive.
-               .classed("svg-container", true)
-               .append("svg")
-               // Responsive SVG needs these 2 attributes and no width and height attr.
-                 .attr("preserveAspectRatio", "xMinYMin meet")
-                 .attr("viewBox", "0 0 " + width + " " + height)
-                // Class to make it responsive.
-               .classed("svg-content-responsive", true);
+    setup() {
+        mapSvg = d3.select("#map_container")
+            .append("div")
+            // Container class to make it responsive.
+            .classed("svg-container", true)
+            .append("svg")
+            // Responsive SVG needs these 2 attributes and no width and height attr.
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "0 0 " + width + " " + height)
+            // Class to make it responsive.
+            .classed("svg-content-responsive", true);
 
-    drawBorders();
+        drawBorders();
 
-    legend = setupLegend();
+        legend = setupLegend();
 
-    // create a Geo Projection
-    projection = d3.geoMercator()
-                   .translate([120, 600])
-                   .scale(500)
-                   .precision(10);
+        // create a Geo Projection
+        projection = d3.geoMercator()
+            .translate([120, 600])
+            .scale(500)
+            .precision(10);
 
-    path = d3.geoPath()
-             .projection(projection);
+        path = d3.geoPath()
+            .projection(projection);
 
-    //Setting up brush's area
-    brush = d3.brush()
-              .extent([
-                  [0, 0],
-                  [width, height]
-              ]).on('start brush end', brushed);
-  }
+        //Setting up brush's area
+        brush = d3.brush()
+            .extent([
+                [0, 0],
+                [width, height]
+            ]).on('start brush end', brushed);
+    }
 
-  notifyDataChanged(initialize=false, minYear=-600, maxYear=600) {
-    if(initialize)
-      this.drawChart()
-    else
-      this.update(minYear, maxYear)
-  }
+    notifyDataChanged(initialize = false, minYear = -600, maxYear = 600) {
+        if (initialize)
+            this.drawChart()
+        else
+            this.update(minYear, maxYear)
+    }
 
-  drawChart() {
-    mapSvg.selectAll('path')
-          .data(this.map.features)
-          .enter()
-          .append('path')
+    drawChart() {
+        mapSvg.selectAll('path')
+            .data(this.map.features)
+            .enter()
+            .append('path')
             .attr('class', 'state')
             .attr('id', function(d) {
                 return d.properties['OBJECTID'];
             })
             .attr('d', path);
 
-    markerGroup = mapSvg.append('g')
-                          .attr('class', 'brush')
-                        .call(brush);
+        markerGroup = mapSvg.append('g')
+            .attr('class', 'brush')
+            .call(brush);
 
-    markerGroup.append('g')
-               .selectAll('circle')
-               .data(this.battles)
-               .enter()
-               .append('circle')
-                .attr('cx', function(d) {
-                  return projection([d.longitude, d.latitude])[0];
-                })
-                .attr('cy', function(d) {
-                  return projection([d.longitude, d.latitude])[1];
-                })
-                .attr('r', 4)
-                .attr('fill', 'blue')
-                .attr('pointer-events', 'all')
-                .on('click', function(d) {
-                    d3.selectAll('.selected')
-                        .classed('selected', false);
+        markerGroup.append('g')
+            .selectAll('circle')
+            .data(this.battles)
+            .enter()
+            .append('circle')
+            .attr('cx', function(d) {
+                return projection([d.longitude, d.latitude])[0];
+            })
+            .attr('cy', function(d) {
+                return projection([d.longitude, d.latitude])[1];
+            })
+            .attr('r', 4)
+            .attr('fill', 'blue')
+            .attr('pointer-events', 'all')
+            .on('click', function(d) {
+                d3.selectAll('.selected')
+                    .classed('selected', false);
 
-                    d3.select(this)
-                        .classed('selected', true);
+                d3.select(this)
+                    .classed('selected', true);
 
-                    console.log(d.label);
-                    setLabel(d)
-                })
-               .style('visibility', 'visible');
-  }
-
-  update(minYear, maxYear) {
-    var points = 0;
-
-    markerGroup.selectAll('circle')
-               .each(function(d) {
-                 if(+d.year >= minYear && +d.year <= maxYear) {
-                   points++;
-                   d3.select(this)
-                      .attr('stroke-width', 0.5)
-                      .attr('stroke', 'white');
-                   setLabel(d);
-                 } else {
-                   d3.select(this)
-                      .attr('stroke-width', 0);
-                 }
-               });
-
-    if (points > 1) {
-      this._resetLegend();
-
-      legend.select('#battle_label')
-            .text(points + " battles selected");
-      legend.select('#battle_year')
-            .text('From ' + parseRoman(Math.trunc(minYear)) + ' to ' + parseRoman(Math.trunc(maxYear)));
+                console.log(d.label);
+                setLabel(d)
+            })
+            .style('visibility', 'visible');
     }
-  }
+
+    update(minYear, maxYear) {
+        var points = 0;
+
+        markerGroup.selectAll('circle')
+            .each(function(d) {
+                if (+d.year >= minYear && +d.year <= maxYear) {
+                    points++;
+                    d3.select(this)
+                        .attr('stroke-width', 0.5)
+                        .attr('stroke', 'white');
+                    setLabel(d);
+                } else {
+                    d3.select(this)
+                        .attr('stroke-width', 0);
+                }
+            });
+
+        if (points > 1) {
+            this._resetLegend();
+
+            legend.select('#battle_label')
+                .text(points + " battles selected");
+            legend.select('#battle_year')
+                .text('From ' + parseRoman(Math.trunc(minYear)) + ' to ' + parseRoman(Math.trunc(maxYear)));
+        }
+    }
 }
 
 function drawBorders() {
-  mapSvg.append("rect")
+    mapSvg.append("rect")
         .classed("rect_b", true)
-          .attr("width", width)
-          .attr("height", height);
+        .attr("width", width)
+        .attr("height", height);
 }
 
 //Setting up zoom feature

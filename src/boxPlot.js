@@ -58,7 +58,7 @@ class BoxPlot {
 
         // Show the Y scale
         var y = d3.scaleLinear()
-            .domain([0, 20])
+            .domain([0, d3.max([10, Math.floor(max * 1.2)])])
             .range([height - margin.bottom, margin.top]);
 
         boxplot.append('g')
