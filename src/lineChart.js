@@ -310,7 +310,7 @@ function brushend(isCumulative) {
         xScale.domain([minYear, maxYear]);
         line.select('.brush').call(brush.move, null);
 
-        if (isCumulative) {
+        if (!isCumulative) {
             minYear *= 100;
             maxYear *= 100;
         }
