@@ -1,4 +1,4 @@
-import mapBuilder from './map'
+import mapChart from './map'
 import lineChart from './lineChart'
 import barChartBuilder from './barChart'
 import boxplot from './boxPlot'
@@ -7,22 +7,27 @@ const d3 = require('d3');
 
 class Controller {
     constructor() {
-      this.battles = undefined
-      this.wars = undefined
-      this.map = undefined
-      this.brushedMapData = undefined
-      this.brushedLineData = undefined
+        this.battles = undefined
+        this.wars = undefined
+        this.map = undefined
+        this.brushedMapData = undefined
+        this.brushedLineData = undefined
         this.brushedWars = undefined
     }
 
     resetBrushedMapData() {
-      this.brushedMapData = this.battles
-      this.onBrushedMapDataChanged()
+        this.brushedMapData = this.battles
+        this.onBrushedMapDataChanged()
     }
 
     setBrushedMapData(battles) {
-      this.brushedMapData = battles
-      this.onBrushedMapDataChanged()
+        this.brushedMapData = battles
+        this.onBrushedMapDataChanged()
+    }
+
+    setBrushedLinePeriod(minYear, maxYear) {
+        mapChart.resetPeriod(minYear, maxYear)
+        mapChart.notifyDataChanged(false)
     }
 
     onBrushedMapDataChanged() {
@@ -36,16 +41,10 @@ class Controller {
     }
 
     resetBrushedLineData() {
-      this.brushedLineData = this.battles
-      this.onBrushedLineDataChanged(false, 0, -1)
-      mapBuilder._resetLegend();
+        this.brushedLineData = this.battles
+        mapChart.resetPeriod()
+        mapChart.notifyDataChanged(false)
     }
-
-    onBrushedLineDataChanged(minYear, maxYear) {
-      mapBuilder.setBattles(this.brushedLineData)
-      mapBuilder.notifyDataChanged(false, minYear, maxYear)
-    }
-
 
     setup() {
         var c = this
@@ -79,14 +78,13 @@ class Controller {
     }
 
     setupGraphs() {
-        mapBuilder.setMap(this.map);
-        mapBuilder.setBattles(this.battles);
-        mapBuilder.notifyDataChanged(true)
-        //mapBuilder.populateMap(this.map);
-        //mapBuilder.addMarkers(this.battles);
+        mapChart.setMap(this.map);
+        mapChart.setBattles(this.battles);
+        mapChart.notifyDataChanged(true)
 
         lineChart.setBattles(this.battles)
-        lineChart.notifyDataChanged(true)
+        lineChart.notifyDataChanged()
+
         barChartBuilder.populateChart(this.battles);
         boxplot.setWars(this.wars);
         boxplot.notifyDataChanged();
