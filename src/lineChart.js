@@ -46,6 +46,9 @@ class LineChart {
     }
 
     drawCumulativeChart() {
+        //clean previous selections
+        controller.resetBrushedLineData();
+
         isCumulative = true
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
         var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
@@ -128,6 +131,9 @@ class LineChart {
     }
 
     drawChart() {
+        //clean previous selections
+        controller.resetBrushedLineData();
+
         isCumulative = false
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
         var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
@@ -309,7 +315,7 @@ function brushend() {
           minYear *= 100;
           maxYear *= 100;
         }
-        console.log(minYear, maxYear);
+        
         //reflects changes on map
         controller.onBrushedLineDataChanged(minYear, maxYear);
 

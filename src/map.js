@@ -21,6 +21,9 @@ class Map {
   setBattles(battles) {
     this.battles = battles
   }
+  _resetLegend() {
+    resetLegend();
+  }
 
   setup() {
     mapSvg = d3.select("#map_container")
@@ -105,17 +108,30 @@ class Map {
   }
 
   update(minYear, maxYear) {
+    var points = 0;
+
     markerGroup.selectAll('circle')
                .each(function(d) {
                  if(+d.year >= minYear && +d.year <= maxYear) {
+                   points++;
                    d3.select(this)
                       .attr('stroke-width', 0.5)
                       .attr('stroke', 'white');
+                   setLabel(d);
                  } else {
                    d3.select(this)
                       .attr('stroke-width', 0);
                  }
                });
+
+    if (points > 1) {
+      this._resetLegend();
+
+      legend.select('#battle_label')
+            .text(points + " battles selected");
+      legend.select('#battle_year')
+            .text('From ' + parseRoman(Math.trunc(minYear)) + ' to ' + parseRoman(Math.trunc(maxYear)));
+    }
   }
 }
 
@@ -152,7 +168,6 @@ function brushed() {
 
 
     var echo = []
-
     if (selection) {
         markerGroup.selectAll('circle')
             .style('visibility', function(d) {
@@ -210,6 +225,17 @@ function setLabel(d) {
         .text('Outcome: ' + d.outcome);
 }
 
+function resetLegend() {
+    legend.select('#battle_label')
+        .text('');
+    legend.select('#battle_year')
+        .text('');
+    legend.select('#battle_coordinate')
+        .text('');
+    legend.select('#battle_outcome')
+        .text('');
+}
+
 function setupLegend() {
     var legend = mapSvg.append("svg")
         .attr("width", 200)
@@ -242,17 +268,6 @@ function setupLegend() {
         .attr('y', 80)
         .attr('font-size', 10);
     return legend;
-}
-
-function resetLegend() {
-    legend.select('#battle_label')
-        .text('');
-    legend.select('#battle_year')
-        .text('');
-    legend.select('#battle_coordinate')
-        .text('');
-    legend.select('#battle_outcome')
-        .text('');
 }
 
 export default new Map()

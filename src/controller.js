@@ -32,6 +32,7 @@ class Controller {
     resetBrushedLineData() {
       this.brushedLineData = this.battles
       this.onBrushedLineDataChanged(false, 0, -1)
+      mapBuilder._resetLegend();
     }
 
     onBrushedLineDataChanged(minYear, maxYear) {
