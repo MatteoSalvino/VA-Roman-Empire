@@ -28,7 +28,7 @@ class Controller {
         lineChart.setBattles(this.brushedMapData)
         lineChart.notifyDataChanged()
 
-        this.brushedWars = this.wars.filter(w => this.battles.map(x => x.warId).includes(w.id))
+        this.brushedWars = this.wars.filter(w => this.brushedMapData.map(x => x.warId).includes(w.id))
 
         boxplot.setWars(this.brushedWars)
         boxplot.notifyDataChanged()
