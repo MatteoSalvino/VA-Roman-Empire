@@ -6,8 +6,6 @@ var width = 600
 var height = 400
 var margin = { top: 30, bottom: 30, left: 30, right: 30 };
 
-var isCumulative;
-var zoomSelection; //use this when drawing chart
 var xScale, yScale, xAxis, yAxis, line, path, container, lchart, brush, clip, legend;
 
 class LineChart {
@@ -40,7 +38,7 @@ class LineChart {
                 [margin.left, margin.top],
                 [width - margin.right, height - margin.bottom]
             ])
-            .on('end', brushend);
+            .on('end', () => brushend(this.isCumulative));
 
         setupCLip();
     }
@@ -49,7 +47,7 @@ class LineChart {
         //clean previous selections
         controller.resetBrushedLineData();
 
-        isCumulative = true
+        this.isCumulative = true
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
         var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
 
@@ -106,7 +104,7 @@ class LineChart {
             .call(d3.axisLeft(yScale));
 
         //Legend
-        var legend = setupLegend(isCumulative);
+        var legend = setupLegend(this.isCumulative);
 
 
         //Reset zoom
@@ -134,7 +132,7 @@ class LineChart {
         //clean previous selections
         controller.resetBrushedLineData();
 
-        isCumulative = false
+        this.isCumulative = false
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
         var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
 
@@ -179,7 +177,7 @@ class LineChart {
             .attr('d', path);
 
         line.append('g')
-              .attr('class', 'brush')
+            .attr('class', 'brush')
             .call(brush);
 
         xAxis = lchart.append('g')
@@ -197,32 +195,33 @@ class LineChart {
             .attr('transform', 'translate(' + margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
-        legend = setupLegend(isCumulative);
+        legend = setupLegend(this.isCumulative);
 
         //Reset zoom
         var self = this
         lchart.on('dblclick', function() {
-          xScale.domain([-6, 6]);
-          xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
-                                                   .tickFormat(function(d) {
-                                                     if (d == 0) return 0;
-                                                     if (d < 0) return -d + "BC";
-                                                     return d + "AD"
-                                                   }));
+            xScale.domain([-6, 6]);
+            xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
+                .tickFormat(function(d) {
+                    if (d == 0) return 0;
+                    if (d < 0) return -d + "BC";
+                    return d + "AD"
+                }));
 
-          line.selectAll('.line')
-              .transition()
-              .duration(1500)
+            line.selectAll('.line')
+                .transition()
+                .duration(1500)
                 .attr('d', path);
 
-          //reflect changes on map
-          controller.resetBrushedLineData();
+            //reflect changes on map
+            controller.resetBrushedLineData();
         });
     }
 
+    //Note: this always redraws from scratch the chart
     notifyDataChanged() {
         this.clear()
-        if (isCumulative) this.drawCumulativeChart()
+        if (this.isCumulative) this.drawCumulativeChart()
         else this.drawChart()
     }
 
@@ -253,54 +252,54 @@ function setupCLip() {
 }
 
 function setupLegend(isCumulative) {
-  var labels = ['won battles', 'lost battles'];
+    var labels = ['won battles', 'lost battles'];
 
-  if(isCumulative) {
-    legend = lchart.append("svg")
-                    .attr("width", 150)
-                    .attr("height", 55)
-                    .attr('x', 40)
-                    .attr('y', 30);
-  } else {
-    legend = lchart.append("svg")
-                    .attr("width", 150)
-                    .attr("height", 55)
-                    .attr('x', 410)
-                    .attr('y', 30);
-  }
+    if (isCumulative) {
+        legend = lchart.append("svg")
+            .attr("width", 150)
+            .attr("height", 55)
+            .attr('x', 40)
+            .attr('y', 30);
+    } else {
+        legend = lchart.append("svg")
+            .attr("width", 150)
+            .attr("height", 55)
+            .attr('x', 410)
+            .attr('y', 30);
+    }
 
-  legend.append("rect")
+    legend.append("rect")
         .classed("rect_b", true)
-          .attr("width", 150)
-          .attr("height", 55);
+        .attr("width", 150)
+        .attr("height", 55);
 
-  legend.selectAll('circle')
+    legend.selectAll('circle')
         .data(labels)
         .enter()
         .append('circle')
-          .attr('cx', 30)
-          .attr('cy', function(d, i) {
+        .attr('cx', 30)
+        .attr('cy', function(d, i) {
             return 20 + i * 15;
-          })
-          .attr('r', 5)
-          .attr('fill', '#ffab00');
+        })
+        .attr('r', 5)
+        .attr('fill', '#ffab00');
 
-  legend.selectAll('text')
+    legend.selectAll('text')
         .data(labels)
         .enter()
         .append('text')
-          .attr('x', 50)
-          .attr('y', function(d, i) {
+        .attr('x', 50)
+        .attr('y', function(d, i) {
             return 20 + i * 15;
-          })
-          .text(function(d) {
+        })
+        .text(function(d) {
             return d;
-          })
-          .style('alignment-baseline', 'middle');
+        })
+        .style('alignment-baseline', 'middle');
 }
 
 //todo: don't loose focus when data changes
-function brushend() {
+function brushend(isCumulative) {
     var selection = d3.event.selection;
 
     if (selection) {
@@ -311,19 +310,16 @@ function brushend() {
         xScale.domain([minYear, maxYear]);
         line.select('.brush').call(brush.move, null);
 
-        if(!isCumulative) {
-          minYear *= 100;
-          maxYear *= 100;
+        if (isCumulative) {
+            minYear *= 100;
+            maxYear *= 100;
         }
-        
+
         //reflects changes on map
-        controller.onBrushedLineDataChanged(minYear, maxYear);
+        controller.setBrushedLinePeriod(minYear, maxYear);
 
         zooming();
     }
-
-    zoomSelection = selection
-
 }
 
 function zooming() {
