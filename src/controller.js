@@ -7,21 +7,22 @@ const d3 = require('d3');
 
 class Controller {
     constructor() {
-        this.battles = undefined
-        this.wars = undefined
-        this.map = undefined
-        this.brushedMapData = undefined
+      this.battles = undefined
+      this.wars = undefined
+      this.map = undefined
+      this.brushedMapData = undefined
+      this.brushedLineData = undefined
         this.brushedWars = undefined
     }
 
     resetBrushedMapData() {
-        this.brushedMapData = this.battles
-        this.onBrushedMapDataChanged()
+      this.brushedMapData = this.battles
+      this.onBrushedMapDataChanged()
     }
 
     setBrushedMapData(battles) {
-        this.brushedMapData = battles
-        this.onBrushedMapDataChanged()
+      this.brushedMapData = battles
+      this.onBrushedMapDataChanged()
     }
 
     onBrushedMapDataChanged() {
@@ -33,6 +34,18 @@ class Controller {
         boxplot.setWars(this.brushedWars)
         boxplot.notifyDataChanged()
     }
+
+    resetBrushedLineData() {
+      this.brushedLineData = this.battles
+      this.onBrushedLineDataChanged(false, 0, -1)
+      mapBuilder._resetLegend();
+    }
+
+    onBrushedLineDataChanged(minYear, maxYear) {
+      mapBuilder.setBattles(this.brushedLineData)
+      mapBuilder.notifyDataChanged(false, minYear, maxYear)
+    }
+
 
     setup() {
         var c = this
@@ -66,11 +79,14 @@ class Controller {
     }
 
     setupGraphs() {
-        mapBuilder.populateMap(this.map);
-        mapBuilder.addMarkers(this.battles);
+        mapBuilder.setMap(this.map);
+        mapBuilder.setBattles(this.battles);
+        mapBuilder.notifyDataChanged(true)
+        //mapBuilder.populateMap(this.map);
+        //mapBuilder.addMarkers(this.battles);
 
         lineChart.setBattles(this.battles)
-        lineChart.notifyDataChanged()
+        lineChart.notifyDataChanged(true)
         barChartBuilder.populateChart(this.battles);
         boxplot.setWars(this.wars);
         boxplot.notifyDataChanged();

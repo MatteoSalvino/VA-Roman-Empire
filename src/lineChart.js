@@ -1,3 +1,4 @@
+import controller from './controller'
 const d3 = require('d3');
 
 
@@ -7,7 +8,7 @@ var margin = { top: 30, bottom: 30, left: 30, right: 30 };
 
 var isCumulative;
 var zoomSelection; //use this when drawing chart
-var xScale, yScale, xAxis, yAxis, line, path, container, lchart, brush, clip;
+var xScale, yScale, xAxis, yAxis, line, path, container, lchart, brush, clip, legend;
 
 class LineChart {
     constructor() {
@@ -45,6 +46,9 @@ class LineChart {
     }
 
     drawCumulativeChart() {
+        //clean previous selections
+        controller.resetBrushedLineData();
+
         isCumulative = true
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
         var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
@@ -101,6 +105,9 @@ class LineChart {
             .attr('transform', 'translate(' + margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
+        //Legend
+        var legend = setupLegend(isCumulative);
+
 
         //Reset zoom
         var self = this
@@ -117,10 +124,16 @@ class LineChart {
                 .transition()
                 .duration(1500)
                 .attr('d', path);
+
+            //reflects changes on map
+            controller.resetBrushedLineData();
         });
     }
 
     drawChart() {
+        //clean previous selections
+        controller.resetBrushedLineData();
+
         isCumulative = false
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
         var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
@@ -152,7 +165,8 @@ class LineChart {
 
         path = d3.line()
             .x(d => xScale(d.x))
-            .y(d => yScale(d.y));
+            .y(d => yScale(d.y))
+            .curve(d3.curveMonotoneX);
 
         line.append('path')
             .datum(won)
@@ -163,6 +177,10 @@ class LineChart {
             .datum(lost)
             .attr('class', 'line')
             .attr('d', path);
+
+        line.append('g')
+              .attr('class', 'brush')
+            .call(brush);
 
         xAxis = lchart.append('g')
             .attr('class', 'x-axis')
@@ -178,6 +196,28 @@ class LineChart {
             .attr('class', 'y-axis')
             .attr('transform', 'translate(' + margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
+
+        legend = setupLegend(isCumulative);
+
+        //Reset zoom
+        var self = this
+        lchart.on('dblclick', function() {
+          xScale.domain([-6, 6]);
+          xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
+                                                   .tickFormat(function(d) {
+                                                     if (d == 0) return 0;
+                                                     if (d < 0) return -d + "BC";
+                                                     return d + "AD"
+                                                   }));
+
+          line.selectAll('.line')
+              .transition()
+              .duration(1500)
+                .attr('d', path);
+
+          //reflect changes on map
+          controller.resetBrushedLineData();
+        });
     }
 
     notifyDataChanged() {
@@ -212,14 +252,72 @@ function setupCLip() {
         .attr('y', margin.top);
 }
 
+function setupLegend(isCumulative) {
+  var labels = ['won battles', 'lost battles'];
+
+  if(isCumulative) {
+    legend = lchart.append("svg")
+                    .attr("width", 150)
+                    .attr("height", 55)
+                    .attr('x', 40)
+                    .attr('y', 30);
+  } else {
+    legend = lchart.append("svg")
+                    .attr("width", 150)
+                    .attr("height", 55)
+                    .attr('x', 410)
+                    .attr('y', 30);
+  }
+
+  legend.append("rect")
+        .classed("rect_b", true)
+          .attr("width", 150)
+          .attr("height", 55);
+
+  legend.selectAll('circle')
+        .data(labels)
+        .enter()
+        .append('circle')
+          .attr('cx', 30)
+          .attr('cy', function(d, i) {
+            return 20 + i * 15;
+          })
+          .attr('r', 5)
+          .attr('fill', '#ffab00');
+
+  legend.selectAll('text')
+        .data(labels)
+        .enter()
+        .append('text')
+          .attr('x', 50)
+          .attr('y', function(d, i) {
+            return 20 + i * 15;
+          })
+          .text(function(d) {
+            return d;
+          })
+          .style('alignment-baseline', 'middle');
+}
+
 //todo: don't loose focus when data changes
 function brushend() {
     var selection = d3.event.selection;
 
     if (selection) {
         //Updating scales
-        xScale.domain([xScale.invert(selection[0]), xScale.invert(selection[1])]);
+        var minYear = xScale.invert(selection[0]),
+            maxYear = xScale.invert(selection[1]);
+
+        xScale.domain([minYear, maxYear]);
         line.select('.brush').call(brush.move, null);
+
+        if(!isCumulative) {
+          minYear *= 100;
+          maxYear *= 100;
+        }
+        
+        //reflects changes on map
+        controller.onBrushedLineDataChanged(minYear, maxYear);
 
         zooming();
     }
