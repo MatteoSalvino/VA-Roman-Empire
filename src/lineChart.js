@@ -7,7 +7,7 @@ var margin = { top: 30, bottom: 30, left: 30, right: 30 };
 
 var isCumulative;
 var zoomSelection; //use this when drawing chart
-var xScale, yScale, xAxis, yAxis, line, path, container, lchart, brush, clip;
+var xScale, yScale, xAxis, yAxis, line, path, container, lchart, brush, clip, legend;
 
 class LineChart {
     constructor() {
@@ -101,6 +101,9 @@ class LineChart {
             .attr('transform', 'translate(' + margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
+        //Legend
+        var legend = setupLegend(isCumulative);
+
 
         //Reset zoom
         var self = this
@@ -184,6 +187,8 @@ class LineChart {
             .attr('transform', 'translate(' + margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
+        legend = setupLegend(isCumulative);
+
         //Reset zoom
         var self = this
         lchart.on('dblclick', function() {
@@ -232,6 +237,53 @@ function setupCLip() {
         .attr('height', height - margin.top - margin.bottom)
         .attr('x', margin.left)
         .attr('y', margin.top);
+}
+
+function setupLegend(isCumulative) {
+  var labels = ['won battles', 'lost battles'];
+
+  if(isCumulative) {
+    legend = lchart.append("svg")
+                    .attr("width", 150)
+                    .attr("height", 55)
+                    .attr('x', 40)
+                    .attr('y', 30);
+  } else {
+    legend = lchart.append("svg")
+                    .attr("width", 150)
+                    .attr("height", 55)
+                    .attr('x', 410)
+                    .attr('y', 30);
+  }
+
+  legend.append("rect")
+        .classed("rect_b", true)
+          .attr("width", 150)
+          .attr("height", 55);
+
+  legend.selectAll('circle')
+        .data(labels)
+        .enter()
+        .append('circle')
+          .attr('cx', 30)
+          .attr('cy', function(d, i) {
+            return 20 + i * 15;
+          })
+          .attr('r', 5)
+          .attr('fill', '#ffab00');
+
+  legend.selectAll('text')
+        .data(labels)
+        .enter()
+        .append('text')
+          .attr('x', 50)
+          .attr('y', function(d, i) {
+            return 20 + i * 15;
+          })
+          .text(function(d) {
+            return d;
+          })
+          .style('alignment-baseline', 'middle');
 }
 
 //todo: don't loose focus when data changes
