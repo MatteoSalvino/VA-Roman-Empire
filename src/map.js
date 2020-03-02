@@ -1,3 +1,5 @@
+import controller from './controller'
+
 const d3 = require('d3');
 
 var width = 600
@@ -89,6 +91,7 @@ function addMarkers(battles) {
                 .classed('selected', true);
 
             console.log(d.label);
+            setLabel(d)
         })
 
     .style('visibility', 'visible');
@@ -101,6 +104,9 @@ function brushed() {
     var minYear = Infinity;
     var maxYear = -Infinity;
 
+
+    var echo = []
+
     if (selection) {
         markerGroup.selectAll('circle')
             .style('visibility', function(d) {
@@ -111,6 +117,7 @@ function brushed() {
                     cy >= selection[0][1] && cy <= selection[1][1]);
 
                 if (isBrushed) {
+                    echo.push(d)
                     points++;
                     minYear = d3.min([minYear, +d.year]);
                     maxYear = d3.max([maxYear, +d.year]);
@@ -118,23 +125,18 @@ function brushed() {
                         .attr('stroke-width', 0.5)
                         .attr('stroke', 'white');
 
-                    legend.select('#battle_label')
-                        .text(d.label);
-                    legend.select('#battle_year')
-                        .text('Year : ' + d.year);
-                    legend.select('#battle_coordinate')
-                        .text('Coordinate : (' + d.latitude + ',' + d.longitude + ')');
-                    legend.select('#battle_outcome')
-                        .text('Outcome : ' + d.outcome);
+                    setLabel(d);
                     return 'visible';
                 }
                 d3.select(this).attr('stroke-width', 0);
                 return 'hidden';
             });
+        controller.setBrushedMapData(echo)
     } else {
         markerGroup.selectAll('circle')
             .style('visibility', "visible");
         resetLegend();
+        controller.resetBrushedMapData()
     }
     if (points > 1) {
         resetLegend();
@@ -160,6 +162,17 @@ function zoomed() {
               .attr('transform', d3.event.transform);
 }
 */
+
+function setLabel(d) {
+    legend.select('#battle_label')
+        .text(d.label);
+    legend.select('#battle_year')
+        .text('Year: ' + parseRoman(d.year));
+    legend.select('#battle_coordinate')
+        .text('Coordinates: (' + d.latitude + ',' + d.longitude + ')');
+    legend.select('#battle_outcome')
+        .text('Outcome: ' + d.outcome);
+}
 
 function setupLegend() {
     var legend = mapSvg.append("svg")
