@@ -154,7 +154,7 @@ class LineChart {
             .range([margin.left, width - margin.right]);
 
         yScale = d3.scaleLinear()
-            .domain([0, d3.max([1, d3.max(won.map(w => w.y)), d3.max(lost.map(l => l.y))])])
+            .domain([0, d3.max([0, d3.max(won.map(w => w.y)), d3.max(lost.map(l => l.y))]) + 1])
             .range([height - margin.bottom, margin.top]);
 
         //x axis and lines
