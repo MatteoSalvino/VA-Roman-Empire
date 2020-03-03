@@ -4,58 +4,70 @@ var width = 600
 var height = 400
 var margin = { top: 30, bottom: 30, left: 30, right: 30 };
 
-var container = d3.select("#bar_chart_container")
-    .append("div")
-    // Container class to make it responsive.
-    .classed("svg-container", true);
+var container, barChart, xScale, yScale, xAxis, yAxis, groups, tooltip, legend;
 
-var barChart = container.append("svg")
-    // Responsive SVG needs these 2 attributes and no width and height attr.
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "0 0 " + width + " " + height)
-    // Class to make it responsive.
-    .classed("svg-content-responsive", true);
+class StackedChart {
+  constructor() {
+    this.battles = []
+    this.setup()
+  }
 
-barChart.append("rect")
-    .classed("rect_b", true)
-    .attr("width", width)
-    .attr("height", height);
+  setBattles(battles) {
+    this.battles = battles
+  }
 
-function populateChart(battles) {
-    var barData = makeDataset(battles);
+  setup() {
+    container = d3.select("#bar_chart_container")
+        .append("div")
+        // Container class to make it responsive.
+        .classed("svg-container", true);
+
+    barChart = container.append("svg")
+            // Responsive SVG needs these 2 attributes and no width and height attr.
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "0 0 " + width + " " + height)
+            // Class to make it responsive.
+            .classed("svg-content-responsive", true);
+
+    drawBorders();
+  }
+
+  drawChart() {
+    //Process given battles
+    var barData = makeDataset(this.battles);
 
     //sample colors
     var colors = ["b33040", "#d25c4d", "#f2b447", "#d9d574"];
 
     //Axis scales and axis
-    var x = d3.scaleBand()
+    xScale = d3.scaleBand()
         .range([margin.left, width - margin.right])
         .padding(0.1)
         .domain(barData.map(function(d) { return d.attack; }));
 
-    var y = d3.scaleLinear()
+    yScale = d3.scaleLinear()
         .range([height - margin.bottom, margin.top])
         .domain([0, d3.max(barData, function(d) { return d.total; } )]);
 
 
-    barChart.append('g')
+    xAxis = barChart.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(xScale));
 
-    barChart.append('g')
+    yAxis = barChart.append('g')
         .attr('class', 'y axis')
         .attr('transform', 'translate(' + margin.bottom + ', 0)')
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(yScale));
 
-
+    //Split our dataset in layers
     var stack = d3.stack()
                   .keys(['won', 'lost', 'civil', 'uncertain']);
 
     var dataset = stack(barData);
     console.log(dataset);
 
-    var groups = barChart.selectAll('g.layer')
+    groups = barChart.selectAll('g.layer')
                          .data(dataset)
                          .enter()
                          .append('g')
@@ -69,10 +81,10 @@ function populateChart(battles) {
         .enter()
         .append("rect")
           .attr("class", "bar")
-          .attr('x', function(d) { return x(d.data.attack); })
-          .attr('y', function(d) { return y(d[1]); })
-          .attr("width", x.bandwidth())
-          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+          .attr('x', function(d) { return xScale(d.data.attack); })
+          .attr('y', function(d) { return yScale(d[1]); })
+          .attr("width", xScale.bandwidth())
+          .attr("height", function(d) { return yScale(d[0]) - yScale(d[1]); })
           .on('mouseover', function(d) {
             tooltip.select('text').text(d[1] - d[0]);
             tooltip.style('display', null);
@@ -86,8 +98,8 @@ function populateChart(battles) {
             tooltip.style('display', 'none');
           });
 
-    //tooltip to show categories details
-    var tooltip = barChart.append('g')
+    //tooltip to show categories details (We should modularize it ?)
+    tooltip = barChart.append('g')
                           .style('display', 'none');
 
     tooltip.append('rect')
@@ -103,7 +115,19 @@ function populateChart(battles) {
             .attr('font-weight', 'bold')
            .style('text-anchor', 'middle');
 
-    var legend = setupLegend(colors);
+    setupLegend(colors);
+  }
+
+  notifyDataChanged() {
+    this.drawChart();
+  }
+}
+
+function drawBorders() {
+  barChart.append("rect")
+      .classed("rect_b", true)
+      .attr("width", width)
+      .attr("height", height);
 }
 
 function makeDataset(battles) {
@@ -164,7 +188,7 @@ function initDataset() {
 }
 
 function setupLegend(colors) {
-  var legend = barChart.append("svg")
+  legend = barChart.append("svg")
                      .attr("width", 150)
                      .attr("height", 85)
                      .attr('x', 410)
@@ -203,11 +227,7 @@ function setupLegend(colors) {
              }
          })
          .style('alignment-baseline', 'middle');
-
- return legend;
 }
 
 
-export default {
-    populateChart: populateChart
-}
+export default new StackedChart()
