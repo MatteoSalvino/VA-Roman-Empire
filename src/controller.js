@@ -1,6 +1,6 @@
 import mapChart from './map'
 import lineChart from './lineChart'
-import barChartBuilder from './barChart'
+import stackedChart from './barChart'
 import boxplot from './boxPlot'
 
 const d3 = require('d3');
@@ -30,7 +30,7 @@ class Controller {
      * Method to be called from within MapChart when a brush is performed. It updates all the other views (for now line chart and boxplot)
      * @see onBrushedMapDataChanged
      * @param {Array} battles - the battles inside the brush
-     * 
+     *
      * @todo - the lineChart is always redrawn from scratch (is it ok?)
      */
     setBrushedMapData(battles) {
@@ -40,7 +40,7 @@ class Controller {
 
     /**
      * Method to be called from within LineChart when a brush-zoom is performed. It updates all the other views (for now the map chart)
-     * 
+     *
      * @param {number} minYear - the starting year
      * @param {number} maxYear - the ending year
      */
@@ -82,16 +82,18 @@ class Controller {
     }
 
     setupGraphs() {
-        mapChart.setMap(this.map);
-        mapChart.setBattles(this.battles);
+        mapChart.setMap(this.map)
+        mapChart.setBattles(this.battles)
         mapChart.notifyDataChanged(true)
 
         lineChart.setBattles(this.battles)
         lineChart.notifyDataChanged()
 
-        barChartBuilder.populateChart(this.battles);
-        boxplot.setWars(this.wars);
-        boxplot.notifyDataChanged();
+        stackedChart.setBattles(this.battles)
+        stackedChart.notifyDataChanged()
+
+        boxplot.setWars(this.wars)
+        boxplot.notifyDataChanged()
 
         this.setupButtons()
     }
