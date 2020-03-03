@@ -7,12 +7,12 @@ const d3 = require('d3');
 
 class Controller {
     constructor() {
-        this.battles = undefined
-        this.wars = undefined
+        this.battles = []
+        this.wars = []
         this.map = undefined
-        this.brushedMapData = undefined
-        this.brushedLineData = undefined
-        this.brushedWars = undefined
+        this.brushedMapData = []
+        this.brushedLineData = []
+        this.brushedWars = []
     }
 
     /**
@@ -39,14 +39,17 @@ class Controller {
     }
 
     /**
-     * Method to be called from within LineChart when a brush-zoom is performed. It updates all the other views (for now the map chart)
+     * Method to be called from within LineChart when a brush-zoom is performed. It updates all the other views
      *
      * @param {number} minYear - the starting year
      * @param {number} maxYear - the ending year
      */
     setBrushedLinePeriod(minYear, maxYear) {
+        this.brushedLineData = this.battles.filter(b => b.year >= minYear && b.year <= maxYear)
         mapChart.resetPeriod(minYear, maxYear)
         mapChart.notifyDataChanged(false)
+
+        this.notifyBarChart()
     }
 
     /**
@@ -56,6 +59,7 @@ class Controller {
         this.brushedLineData = this.battles
         mapChart.resetPeriod()
         mapChart.notifyDataChanged(false)
+        this.notifyBarChart()
     }
 
     onBrushedMapDataChanged() {
@@ -66,6 +70,15 @@ class Controller {
 
         boxplot.setWars(this.brushedWars)
         boxplot.notifyDataChanged()
+
+        this.notifyBarChart()
+
+    }
+
+    notifyBarChart() {
+        var foo = this.brushedMapData.filter(b => this.brushedLineData.includes(b))
+        stackedChart.setBattles(foo)
+        stackedChart.notifyDataChanged(foo)
     }
 
     setup() {
@@ -73,6 +86,7 @@ class Controller {
         this.loadData().then(function(data) {
             self.map = data[0]
             self.battles = data[1]
+            self.brushedLineData = self.battles
             self.wars = data[2]
             self.setupGraphs()
         }).catch(function(error) {
@@ -114,20 +128,20 @@ class Controller {
     }
 
     updateData(ground, naval) {
-      //Filters battles according to the filters selected
+        //Filters battles according to the filters selected
     }
 
     setupFilters() {
-      var ground_filter = d3.select('#ground_filter'),
-          naval_filter = d3.select('#naval_filter');
+        var ground_filter = d3.select('#ground_filter'),
+            naval_filter = d3.select('#naval_filter');
 
-      ground_filter.on('click', _d => {
-        this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
-      });
+        ground_filter.on('click', _d => {
+            this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
+        });
 
-      naval_filter.on('click', _d => {
-        this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
-      });
+        naval_filter.on('click', _d => {
+            this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
+        });
     }
 
     loadData() {
