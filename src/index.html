@@ -11,7 +11,18 @@
 
 <body>
     <div class="container-fluid">
-        <h1>Roman Empire - VA Project</h1>
+        <div class="header">
+          <div class="header-left">
+            <p>Roman Empire - VA Project</p>
+          </div>
+          <div class="header-right">
+            <input type="checkbox" id="ground_filter" name="ground_filter" value="ground" checked />
+            <label for="ground_filter" style="font-weight:bold;">Ground (%)</label>
+            <input type="checkbox" id="naval_filter" name="naval_filter" value="naval" checked />
+            <label for="naval_filter" style="font-weight:bold;">Naval (%)</label>
+          </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6" id="map_container">
                 <button type="button" class="btn btn-primary">117 A.D</button>
