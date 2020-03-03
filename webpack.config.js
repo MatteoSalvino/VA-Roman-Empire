@@ -44,6 +44,7 @@ const config = {
             alwaysWriteToDisk: true
         }),
         new CopyWebpackPlugin([
+            { from: './map.json', to: '.' },
             { from: './empire_map.json', to: '.' },
             { from: './battles.csv', to: '.' },
             { from: './wars.csv', to: '.' }

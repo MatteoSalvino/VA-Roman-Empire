@@ -39,8 +39,6 @@ class Map {
 
         drawBorders();
 
-        legend = setupLegend();
-
         // create a Geo Projection
         projection = d3.geoMercator()
             .translate([120, 600])
@@ -102,6 +100,9 @@ class Map {
                 setLabel(d)
             })
             .style('visibility', 'visible');
+
+        legend = setupLegend();
+
     }
 
     update() {
@@ -203,6 +204,7 @@ function brushed() {
                     d3.select(this).attr('stroke-width', 0).classed('brushed', false);
                     return 'hidden';
                 });
+            updateLegend(points, minYear, maxYear)
             controller.setBrushedMapData(echo)
         }
     } else {
@@ -212,7 +214,6 @@ function brushed() {
         resetLegend();
         controller.resetBrushedMapData()
     }
-    updateLegend(points, minYear, maxYear)
 }
 
 function parseRoman(y) {
@@ -254,12 +255,14 @@ function setupLegend() {
         .attr('id', 'battle_label')
         .attr('x', 5)
         .attr('y', 20)
+        .attr('fill', 'red')
         .attr('font-size', 12)
         .attr('font-weight', 'bold');
 
     legend.append('text')
         .attr('id', 'battle_year')
         .attr('x', 5)
+        .attr('fill', 'red')
         .attr('y', 40)
         .attr('font-size', 10);
 
@@ -267,12 +270,14 @@ function setupLegend() {
         .attr('id', 'battle_coordinate')
         .attr('x', 5)
         .attr('y', 60)
+        .attr('fill', 'red')
         .attr('font-size', 10);
 
     legend.append('text')
         .attr('id', 'battle_outcome')
         .attr('x', 5)
         .attr('y', 80)
+        .attr('fill', 'red')
         .attr('font-size', 10);
     return legend;
 }
