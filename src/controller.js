@@ -96,6 +96,7 @@ class Controller {
         boxplot.notifyDataChanged()
 
         this.setupButtons()
+        this.setupFilters()
     }
 
     setupButtons() {
@@ -110,6 +111,23 @@ class Controller {
                 lineChart.clear();
                 lineChart.drawChart();
             });
+    }
+
+    updateData(ground, naval) {
+      //Filters battles according to the filters selected
+    }
+
+    setupFilters() {
+      var ground_filter = d3.select('#ground_filter'),
+          naval_filter = d3.select('#naval_filter');
+
+      ground_filter.on('click', _d => {
+        this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
+      });
+
+      naval_filter.on('click', _d => {
+        this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
+      });
     }
 
     loadData() {

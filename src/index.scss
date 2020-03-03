@@ -9,6 +9,24 @@ rect {
     transition: all 0.3s;
 }
 
+.header {
+  overflow: hidden;
+  background-color: #fcfcfc;
+  padding: 10px 10px;
+  border-bottom: 1px solid blue;
+  margin-bottom: 10px;
+}
+
+.header-left {
+  float: left;
+  margin-left: 20px;
+}
+
+.header-right {
+  float: right;
+  margin-right: 20px;
+}
+
 svg text {
     pointer-events: none;
 }
