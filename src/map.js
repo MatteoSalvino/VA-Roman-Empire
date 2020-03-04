@@ -30,6 +30,7 @@ class Map {
             .append("div")
             // Container class to make it responsive.
             .classed("svg-container", true)
+            .style("margin-top", "7px")
             .append("svg")
             // Responsive SVG needs these 2 attributes and no width and height attr.
             .attr("preserveAspectRatio", "xMinYMin meet")
