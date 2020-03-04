@@ -2,6 +2,7 @@ import mapChart from './map'
 import lineChart from './lineChart'
 import stackedChart from './barChart'
 import boxplot from './boxPlot'
+import scatterPlot from './scatterPlot'
 
 const d3 = require('d3');
 
@@ -94,6 +95,10 @@ class Controller {
 
         boxplot.setWars(this.wars)
         boxplot.notifyDataChanged()
+
+        //Update needed after PCA analysis
+        //scatterPlot.setBattles()
+        scatterPlot.notifyDataChanged()
 
         this.setupButtons()
         this.setupFilters()
