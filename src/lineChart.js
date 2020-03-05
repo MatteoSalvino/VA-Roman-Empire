@@ -1,51 +1,31 @@
 import controller from './controller'
-const d3 = require('d3');
+import BorderedChart from './borderedChart'
+const d3 = require('d3')
 
+var xScale, yScale, xAxis, line, path, legend
 
-var width = 600
-var height = 400
-var margin = { top: 30, bottom: 30, left: 30, right: 30 };
-
-var xScale, yScale, xAxis, yAxis, line, path, container, lchart, brush, clip, legend;
-
-class LineChart {
+class LineChart extends BorderedChart {
     constructor() {
+        super()
         this.battles = []
-        this.setup()
     }
 
     setBattles(battles) {
         this.battles = battles
     }
 
-    setup() {
-        container = d3.select("#line_chart_container")
-            .append("div")
-            // Container class to make it responsive.
-            .classed("svg-container", true);
-
-        lchart = container.append("svg")
-            // Responsive SVG needs these 2 attributes and no width and height attr.
-            .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "0 0 " + width + " " + height)
-            // Class to make it responsive.
-            .classed("svg-content-responsive", true);
-
-        drawBorders();
-
-        brush = d3.brushX()
+    onBindBrush() {
+        this.brush = d3.brushX()
             .extent([
-                [margin.left, margin.top],
-                [width - margin.right, height - margin.bottom]
+                [this.margin.left, this.margin.top],
+                [this.width - this.margin.right, this.height - this.margin.bottom]
             ])
-            .on('end', () => brushend(this.isCumulative));
-
-        setupCLip();
+            .on('end', () => brushend(this, this.isCumulative));
     }
 
     drawCumulativeChart() {
         //clean previous selections
-        controller.resetBrushedLineData();
+        controller.resetBrushedLineData()
 
         this.isCumulative = true
         var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
@@ -54,15 +34,15 @@ class LineChart {
         //Axis scales
         xScale = d3.scaleLinear()
             .domain([d3.min(this.battles, function(d) { return +d.year; }), d3.max(this.battles, function(d) { return +d.year; })])
-            .range([margin.left, width - margin.right]);
+            .range([this.margin.left, this.width - this.margin.right]);
 
         yScale = d3.scaleLinear()
             .domain([0, d3.max([0, wonBattles.length, lostBattles.length]) + 1])
-            .range([height - margin.bottom, margin.top]);
+            .range([this.height - this.margin.bottom, this.margin.top]);
 
 
         //x axis and lines
-        line = lchart.append('g')
+        line = this.chart.append('g')
             .attr('clip-path', 'url(#clip)');
 
         path = d3.line()
@@ -86,11 +66,11 @@ class LineChart {
 
         line.append('g')
             .attr('class', 'brush')
-            .call(brush);
+            .call(this.brush);
 
-        xAxis = lchart.append('g')
+        xAxis = this.chart.append('g')
             .attr('class', 'x-axis')
-            .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
+            .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
             .call(d3.axisBottom(xScale)
                 .tickFormat(function(d) {
                     if (d == 0) return 0;
@@ -98,18 +78,17 @@ class LineChart {
                     return d + "AD"
                 }));
 
-        yAxis = lchart.append('g')
+        this.chart.append('g')
             .attr('class', 'y-axis')
-            .attr('transform', 'translate(' + margin.bottom + ', 0)')
+            .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
         //Legend
-        var legend = setupLegend(this.isCumulative);
-
+        var legend = setupLegend(this.chart, this.isCumulative);
 
         //Reset zoom
         var self = this
-        lchart.on('dblclick', function() {
+        this.chart.on('dblclick', function() {
             xScale.domain([d3.min(self.battles, function(d) { return +d.year; }), d3.max(self.battles, function(d) { return +d.year; })]);
             xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
                 .tickFormat(function(d) {
@@ -151,14 +130,14 @@ class LineChart {
         //Axis scales
         xScale = d3.scaleLinear()
             .domain([-6, 6])
-            .range([margin.left, width - margin.right]);
+            .range([this.margin.left, this.width - this.margin.right]);
 
         yScale = d3.scaleLinear()
             .domain([0, d3.max([0, d3.max(won.map(w => w.y)), d3.max(lost.map(l => l.y))]) + 1])
-            .range([height - margin.bottom, margin.top]);
+            .range([this.height - this.margin.bottom, this.margin.top]);
 
         //x axis and lines
-        line = lchart.append('g')
+        line = this.chart.append('g')
             .attr('clip-path', 'url(#clip)');
 
         path = d3.line()
@@ -178,11 +157,11 @@ class LineChart {
 
         line.append('g')
             .attr('class', 'brush')
-            .call(brush);
+            .call(this.brush);
 
-        xAxis = lchart.append('g')
+        xAxis = this.chart.append('g')
             .attr('class', 'x-axis')
-            .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
+            .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
             .call(d3.axisBottom(xScale)
                 .tickFormat(function(d) {
                     if (d == 0) return 0;
@@ -190,16 +169,15 @@ class LineChart {
                     return d + "AD"
                 }));
 
-        yAxis = lchart.append('g')
+        this.chart.append('g')
             .attr('class', 'y-axis')
-            .attr('transform', 'translate(' + margin.bottom + ', 0)')
+            .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
-        legend = setupLegend(this.isCumulative);
+        legend = setupLegend(this.chart, this.isCumulative);
 
         //Reset zoom
-        var self = this
-        lchart.on('dblclick', function() {
+        this.chart.on('dblclick', function() {
             xScale.domain([-6, 6]);
             xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
                 .tickFormat(function(d) {
@@ -224,44 +202,19 @@ class LineChart {
         if (this.isCumulative) this.drawCumulativeChart()
         else this.drawChart()
     }
-
-    clear() {
-        lchart.selectAll("*").remove();
-        drawBorders();
-        setupCLip();
-    }
 }
 
-function drawBorders() {
-    lchart.append("rect")
-        .classed("rect_b", true)
-        .attr("width", width)
-        .attr("height", height);
-}
-
-//Clip path in order to cut out everything out the chart
-function setupCLip() {
-    clip = lchart.append('defs')
-        .append('svg:clipPath')
-        .attr('id', 'clip')
-        .append('svg:rect')
-        .attr('width', width - margin.left - margin.right)
-        .attr('height', height - margin.top - margin.bottom)
-        .attr('x', margin.left)
-        .attr('y', margin.top);
-}
-
-function setupLegend(isCumulative) {
+function setupLegend(chart, isCumulative) {
     var labels = ['won battles', 'lost battles'];
 
     if (isCumulative) {
-        legend = lchart.append("svg")
+        legend = chart.append("svg")
             .attr("width", 150)
             .attr("height", 55)
             .attr('x', 40)
             .attr('y', 30);
     } else {
-        legend = lchart.append("svg")
+        legend = chart.append("svg")
             .attr("width", 150)
             .attr("height", 55)
             .attr('x', 410)
@@ -299,16 +252,15 @@ function setupLegend(isCumulative) {
 }
 
 //todo: don't loose focus when data changes
-function brushend(isCumulative) {
-    var selection = d3.event.selection;
-
+function brushend(self, isCumulative) {
+    var selection = d3.event.selection
     if (selection) {
         //Updating scales
         var minYear = xScale.invert(selection[0]),
             maxYear = xScale.invert(selection[1]);
 
         xScale.domain([minYear, maxYear]);
-        line.select('.brush').call(brush.move, null);
+        line.select('.brush').call(self.brush.move, null);
 
         if (!isCumulative) {
             minYear *= 100;
@@ -318,12 +270,12 @@ function brushend(isCumulative) {
         //reflects changes on map
         controller.setBrushedLinePeriod(minYear, maxYear);
 
-        zooming();
+        zooming(self)
     }
 }
 
-function zooming() {
-    var transition = lchart.transition().duration(1000);
+function zooming(self) {
+    var transition = self.chart.transition().duration(1000);
 
     //Transitioning x axis
     xAxis.transition(transition).call(d3.axisBottom(xScale)
