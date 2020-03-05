@@ -1,6 +1,6 @@
 import mapChart from './map'
 import lineChart from './lineChart'
-import stackedChart from './barChart'
+import stackedBarChart from './stackedBarChart'
 import boxplot from './boxPlot'
 import scatterPlot from './scatterPlot';
 
@@ -82,8 +82,8 @@ class Controller {
 
     notifyBarChart() {
         var foo = this.brushedMapData.filter(b => this.brushedLineData.includes(b))
-        stackedChart.setBattles(foo)
-        stackedChart.notifyDataChanged(foo)
+        stackedBarChart.setBattles(foo)
+        stackedBarChart.notifyDataChanged(foo)
     }
 
     setup() {
@@ -102,6 +102,12 @@ class Controller {
     }
 
     setupGraphs() {
+        mapChart.bind("#map_container")
+        lineChart.bind("#line_chart_container")
+        stackedBarChart.bind("#bar_chart_container")
+        boxplot.bind("#boxplot_container")
+        scatterPlot.bind("#scatterplot_container")
+
         mapChart.setMap(this.map)
         mapChart.setBattles(this.battles)
         mapChart.notifyDataChanged(true)
@@ -109,8 +115,8 @@ class Controller {
         lineChart.setBattles(this.battles)
         lineChart.notifyDataChanged()
 
-        stackedChart.setBattles(this.battles)
-        stackedChart.notifyDataChanged()
+        stackedBarChart.setBattles(this.battles)
+        stackedBarChart.notifyDataChanged()
 
         boxplot.setWars(this.wars)
         boxplot.notifyDataChanged()
