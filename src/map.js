@@ -1,20 +1,27 @@
 import controller from './controller'
+import BorderedChart from './borderedChart';
 
 const d3 = require('d3');
 
-var width = 600
-var height = 400
 var isBrushing = false,
     brushedArea = undefined
 
-var mapSvg, legend, projection, path, brush, markerGroup
+var legend, projection, path, markerGroup
 
-class Map {
+class Map extends BorderedChart {
     constructor() {
+        super()
         this.map = []
         this.battles = []
         this.resetPeriod()
-        this.setup()
+    }
+
+    onBindBrush() {
+        super.onBindBrush()
+        this.brush.extent([
+            [0, 0],
+            [this.width, this.height]
+        ])
     }
 
     setMap(map) { this.map = map }
@@ -25,36 +32,18 @@ class Map {
         this.period = { min: min, max: max }
     }
 
-    setup() {
-        mapSvg = d3.select("#map_container")
-            .append("div")
-            // Container class to make it responsive.
-            .classed("svg-container", true)
-            .style("margin-top", "7px")
-            .append("svg")
-            // Responsive SVG needs these 2 attributes and no width and height attr.
-            .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "0 0 " + width + " " + height)
-            // Class to make it responsive.
-            .classed("svg-content-responsive", true);
-
-        drawBorders();
+    onBindView(selector) {
+        super.onBindView(selector)
+        this.container.style("margin-top", "7px") //lazy fix
 
         // create a Geo Projection
         projection = d3.geoMercator()
             .translate([120, 600])
             .scale(500)
-            .precision(10);
+            .precision(10)
 
         path = d3.geoPath()
-            .projection(projection);
-
-        //Setting up brush's area
-        brush = d3.brush()
-            .extent([
-                [0, 0],
-                [width, height]
-            ]).on('start brush end', brushed);
+            .projection(projection)
     }
 
     notifyDataChanged(redraw = true) {
@@ -64,7 +53,7 @@ class Map {
     }
 
     drawChart() {
-        mapSvg.selectAll('path')
+        this.chart.selectAll('path')
             .data(this.map.features)
             .enter()
             .append('path')
@@ -74,9 +63,9 @@ class Map {
             })
             .attr('d', path);
 
-        markerGroup = mapSvg.append('g')
+        markerGroup = this.chart.append('g')
             .attr('class', 'brush')
-            .call(brush);
+            .call(this.brush);
 
         markerGroup.append('g')
             .selectAll('circle')
@@ -102,7 +91,7 @@ class Map {
             })
             .style('visibility', 'visible');
 
-        legend = setupLegend();
+        legend = this.setupLegend()
 
     }
 
@@ -131,6 +120,94 @@ class Map {
 
         updateLegend(points, minYear, maxYear)
     }
+
+    onBrush() {
+        var selection = d3.event.selection;
+
+        var isClick = JSON.stringify(brushedArea) == JSON.stringify(selection)
+        brushedArea = selection
+
+        var points = 0;
+        var minYear = Infinity;
+        var maxYear = -Infinity;
+
+        var echo = []
+        if (selection) {
+            if (!isClick) {
+                isBrushing = true
+                markerGroup.selectAll('circle')
+                    .style('visibility', function(d) {
+                        var cx = d3.select(this).attr('cx');
+                        var cy = d3.select(this).attr('cy');
+                        //Check if the point is inside the brushed area
+                        var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
+                            cy >= selection[0][1] && cy <= selection[1][1]);
+
+                        if (isBrushed) {
+                            echo.push(d)
+                            points++;
+                            minYear = d3.min([minYear, +d.year]);
+                            maxYear = d3.max([maxYear, +d.year]);
+                            d3.select(this)
+                                .classed('brushed', true)
+                                .attr('stroke-width', 0.5)
+                                .attr('stroke', 'white');
+
+                            setLabel(d);
+                            return 'visible';
+                        }
+                        d3.select(this).attr('stroke-width', 0).classed('brushed', false);
+                        return 'hidden';
+                    });
+                updateLegend(points, minYear, maxYear)
+                controller.setBrushedMapData(echo)
+            }
+        } else {
+            isBrushing = false
+            markerGroup.selectAll('circle')
+                .style('visibility', "visible");
+            resetLegend();
+            controller.resetBrushedMapData()
+        }
+    }
+
+    setupLegend() {
+        var legend = this.chart.append("svg")
+            .attr("width", 200)
+            .attr("height", 100)
+            .attr('x', 400)
+            .attr('y', 10);
+
+        legend.append('text')
+            .attr('id', 'battle_label')
+            .attr('x', 5)
+            .attr('y', 20)
+            .attr('fill', 'red')
+            .attr('font-size', 12)
+            .attr('font-weight', 'bold');
+
+        legend.append('text')
+            .attr('id', 'battle_year')
+            .attr('x', 5)
+            .attr('fill', 'red')
+            .attr('y', 40)
+            .attr('font-size', 10);
+
+        legend.append('text')
+            .attr('id', 'battle_coordinate')
+            .attr('x', 5)
+            .attr('y', 60)
+            .attr('fill', 'red')
+            .attr('font-size', 10);
+
+        legend.append('text')
+            .attr('id', 'battle_outcome')
+            .attr('x', 5)
+            .attr('y', 80)
+            .attr('fill', 'red')
+            .attr('font-size', 10);
+        return legend;
+    }
 }
 
 function updateLegend(numBattles, min, max) {
@@ -143,13 +220,6 @@ function updateLegend(numBattles, min, max) {
         legend.select('#battle_year')
             .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)));
     }
-}
-
-function drawBorders() {
-    mapSvg.append("rect")
-        .classed("rect_b", true)
-        .attr("width", width)
-        .attr("height", height);
 }
 
 //Setting up zoom feature
@@ -168,56 +238,6 @@ function zoomed() {
                .attr('transform', d3.event.transform);
 }
 */
-
-function brushed() {
-    var selection = d3.event.selection;
-
-    var isClick = JSON.stringify(brushedArea) == JSON.stringify(selection)
-    brushedArea = selection
-
-    var points = 0;
-    var minYear = Infinity;
-    var maxYear = -Infinity;
-
-    var echo = []
-    if (selection) {
-        if (!isClick) {
-            isBrushing = true
-            markerGroup.selectAll('circle')
-                .style('visibility', function(d) {
-                    var cx = d3.select(this).attr('cx');
-                    var cy = d3.select(this).attr('cy');
-                    //Check if the point is inside the brushed area
-                    var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
-                        cy >= selection[0][1] && cy <= selection[1][1]);
-
-                    if (isBrushed) {
-                        echo.push(d)
-                        points++;
-                        minYear = d3.min([minYear, +d.year]);
-                        maxYear = d3.max([maxYear, +d.year]);
-                        d3.select(this)
-                            .classed('brushed', true)
-                            .attr('stroke-width', 0.5)
-                            .attr('stroke', 'white');
-
-                        setLabel(d);
-                        return 'visible';
-                    }
-                    d3.select(this).attr('stroke-width', 0).classed('brushed', false);
-                    return 'hidden';
-                });
-            updateLegend(points, minYear, maxYear)
-            controller.setBrushedMapData(echo)
-        }
-    } else {
-        isBrushing = false
-        markerGroup.selectAll('circle')
-            .style('visibility', "visible");
-        resetLegend();
-        controller.resetBrushedMapData()
-    }
-}
 
 function parseRoman(y) {
     if (y == 0) return 0;
@@ -245,44 +265,6 @@ function resetLegend() {
         .text('');
     legend.select('#battle_outcome')
         .text('');
-}
-
-function setupLegend() {
-    var legend = mapSvg.append("svg")
-        .attr("width", 200)
-        .attr("height", 100)
-        .attr('x', 400)
-        .attr('y', 10);
-
-    legend.append('text')
-        .attr('id', 'battle_label')
-        .attr('x', 5)
-        .attr('y', 20)
-        .attr('fill', 'red')
-        .attr('font-size', 12)
-        .attr('font-weight', 'bold');
-
-    legend.append('text')
-        .attr('id', 'battle_year')
-        .attr('x', 5)
-        .attr('fill', 'red')
-        .attr('y', 40)
-        .attr('font-size', 10);
-
-    legend.append('text')
-        .attr('id', 'battle_coordinate')
-        .attr('x', 5)
-        .attr('y', 60)
-        .attr('fill', 'red')
-        .attr('font-size', 10);
-
-    legend.append('text')
-        .attr('id', 'battle_outcome')
-        .attr('x', 5)
-        .attr('y', 80)
-        .attr('fill', 'red')
-        .attr('font-size', 10);
-    return legend;
 }
 
 export default new Map()
