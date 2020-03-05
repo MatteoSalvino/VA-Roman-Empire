@@ -82,7 +82,9 @@ class BoxPlot {
         boxplot.append("rect")
             .attr("x", center - boxWidth / 2)
             .attr("y", y(q3))
-            .attr("height", (y(q1) - y(q3)))
+            .attr("height", function() {
+              if(q1 != undefined && q3 != undefined) return (y(q1) - y(q3));
+            })
             .attr("width", boxWidth)
             .attr("stroke", "black")
             .style("fill", "#69b3a2")
