@@ -78,6 +78,16 @@ class Map extends BorderedChart {
             .attr('cy', function(d) {
                 return projection([d.longitude, d.latitude])[1];
             })
+            .attr('class', function(d) {
+              if(d.outcome == 'W')
+                return 'won';
+              else if(d.outcome == 'L')
+                return 'lost';
+              else if(d.outcome == 'C')
+                return 'civil';
+              else
+                return 'uncertain';
+            })
             .attr('r', 4)
             .attr('fill', 'blue')
             .attr('pointer-events', 'all')
@@ -182,14 +192,14 @@ class Map extends BorderedChart {
             .attr('id', 'battle_label')
             .attr('x', 5)
             .attr('y', 20)
-            .attr('fill', 'red')
+            .attr('fill', '#808080')
             .attr('font-size', 12)
             .attr('font-weight', 'bold');
 
         legend.append('text')
             .attr('id', 'battle_year')
             .attr('x', 5)
-            .attr('fill', 'red')
+            .attr('fill', '#808080')
             .attr('y', 40)
             .attr('font-size', 10);
 
@@ -197,14 +207,14 @@ class Map extends BorderedChart {
             .attr('id', 'battle_coordinate')
             .attr('x', 5)
             .attr('y', 60)
-            .attr('fill', 'red')
+            .attr('fill', '#808080')
             .attr('font-size', 10);
 
         legend.append('text')
             .attr('id', 'battle_outcome')
             .attr('x', 5)
             .attr('y', 80)
-            .attr('fill', 'red')
+            .attr('fill', '#808080')
             .attr('font-size', 10);
         return legend;
     }

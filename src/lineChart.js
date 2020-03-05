@@ -56,12 +56,12 @@ class LineChart extends BorderedChart {
 
         line.append('path')
             .datum(wonBattles)
-            .attr('class', 'line')
+            .attr('class', 'won-line')
             .attr('d', path);
 
         line.append('path')
             .datum(lostBattles)
-            .attr('class', 'line')
+            .attr('class', 'lost-line')
             .attr('d', path);
 
         line.append('g')
@@ -97,10 +97,15 @@ class LineChart extends BorderedChart {
                     return d + "AD"
                 }));
 
-            line.selectAll('.line')
+            line.selectAll('.won-line')
                 .transition()
                 .duration(1500)
-                .attr('d', path);
+                  .attr('d', path);
+
+            line.selectAll('.lost-line')
+                .transition()
+                .duration(1500)
+                  .attr('d', path);
 
             //reflects changes on map
             controller.resetBrushedLineData();
@@ -147,12 +152,12 @@ class LineChart extends BorderedChart {
 
         line.append('path')
             .datum(won)
-            .attr('class', 'line')
+            .attr('class', 'won-line')
             .attr('d', path);
 
         line.append('path')
             .datum(lost)
-            .attr('class', 'line')
+            .attr('class', 'lost-line')
             .attr('d', path);
 
         line.append('g')
@@ -186,10 +191,15 @@ class LineChart extends BorderedChart {
                     return d + "AD"
                 }));
 
-            line.selectAll('.line')
+            line.selectAll('.won-line')
                 .transition()
                 .duration(1500)
                 .attr('d', path);
+
+            line.selectAll('.lost-line')
+                .transition()
+                .duration(1500)
+                  .attr('d', path);
 
             //reflect changes on map
             controller.resetBrushedLineData();
@@ -230,6 +240,12 @@ function setupLegend(chart, isCumulative) {
         .data(labels)
         .enter()
         .append('circle')
+        .attr('class', function(d, i) {
+          if(i == 0)
+            return 'won';
+         else
+            return 'lost';
+        })
         .attr('cx', 30)
         .attr('cy', function(d, i) {
             return 20 + i * 15;
@@ -286,8 +302,12 @@ function zooming(self) {
         }));
 
     //Transitioning line
-    line.selectAll('.line')
+    line.selectAll('.won-line')
         .transition(transition)
+          .attr('d', path);
+
+  line.selectAll('.lost-line')
+      .transition(transition)
         .attr('d', path);
 }
 

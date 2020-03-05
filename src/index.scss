@@ -13,15 +13,17 @@ svg text {
     pointer-events: none;
 }
 
-.line,
-.won-line {
+.won-line, .lost-line {
     fill: none;
-    stroke: #ffab00;
     stroke-width: 3;
 }
 
-.state {
-    pointer-events: none;
+.won-line {
+  stroke: #33a02c;
+}
+
+.lost-line {
+  stroke: #1f78b4;
 }
 
 .svg-container {
@@ -51,4 +53,25 @@ svg .rect_b {
     fill-opacity: 0;
     stroke: steelblue;
     stroke-width: 5px;
+}
+
+.state {
+  fill: #b1d4e7;
+  stroke: #b3b3b3;
+  pointer-events: none;
+}
+
+.won {
+  fill: #33a02c;
+}
+
+.lost {
+  fill: #1f78b4;
+}
+.civil {
+  fill: #b2df8a;
+}
+
+.uncertain {
+  fill: #a6cee3;
 }
