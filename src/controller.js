@@ -7,6 +7,7 @@ import scatterPlot from './scatterPlot';
 const d3 = require('d3');
 
 class Controller {
+    //todo: refactor!
     constructor() {
         this.battles = []
         this.wars = []
@@ -14,6 +15,8 @@ class Controller {
         this.brushedMapData = []
         this.brushedLineData = []
         this.brushedWars = []
+        this.filters = { ground: true, naval: true, civil: true }
+        this.filteredBattles = []
     }
 
     /**
@@ -23,12 +26,12 @@ class Controller {
      * @see onBrushedMapDataChanged
      */
     resetBrushedMapData() {
-        this.brushedMapData = this.battles
+        this.brushedMapData = this.filteredBattles
         this.onBrushedMapDataChanged()
     }
 
     /**
-     * Method to be called from within MapChart when a brush is performed. It updates all the other views (for now line chart and boxplot)
+     * Method to be called from within MapChart when a brush is performed. It updates all the other views
      * @see onBrushedMapDataChanged
      * @param {Array} battles - the battles inside the brush
      *
@@ -46,7 +49,8 @@ class Controller {
      * @param {number} maxYear - the ending year
      */
     setBrushedLinePeriod(minYear, maxYear) {
-        this.brushedLineData = this.battles.filter(b => b.year >= minYear && b.year <= maxYear)
+
+        this.brushedLineData = this.filteredBattles.filter(b => b.year >= minYear && b.year <= maxYear)
         mapChart.resetPeriod(minYear, maxYear)
         mapChart.notifyDataChanged(false)
 
@@ -54,10 +58,10 @@ class Controller {
     }
 
     /**
-     * Method to be called from within LineChart when a brush-zoom is interrupted. It updates all the other views (for now the map chart)
+     * Method to be called from within LineChart when a brush-zoom is interrupted. It updates all the other views
      */
     resetBrushedLineData() {
-        this.brushedLineData = this.battles
+        this.brushedLineData = this.filteredBattles
         mapChart.resetPeriod()
         mapChart.notifyDataChanged(false)
         this.notifyBarChart()
@@ -87,6 +91,7 @@ class Controller {
         this.loadData().then(function(data) {
             self.map = data[0]
             self.battles = data[1]
+            self.filteredBattles = data[1]
             self.brushedLineData = self.battles
             self.wars = data[2]
             self.setupGraphs()
@@ -130,21 +135,49 @@ class Controller {
             });
     }
 
-    updateData(ground, naval) {
-        //Filters battles according to the filters selected
+    updateFilteredBattles() {
+        var self = this
+        this.filteredBattles = this.battles.filter(function(b) {
+            var isNaval = b.naval == 'y'
+            var isGround = !isNaval
+            var isCivil = b.civil
+
+            return (isNaval && self.filters.naval) || (isGround && self.filters.ground) || (isCivil && self.filters.civil)
+        })
+
+
+        mapChart.setBattles(this.filteredBattles)
+        mapChart.notifyDataChanged(false)
+
+        lineChart.setBattles(this.filteredBattles)
+        lineChart.notifyDataChanged()
+
+        this.notifyBarChart()
+
+
     }
+
 
     setupFilters() {
         var ground_filter = d3.select('#ground_filter'),
-            naval_filter = d3.select('#naval_filter');
+            naval_filter = d3.select('#naval_filter'),
+            civil_filter = d3.select('#civil_filter')
 
         ground_filter.on('click', _d => {
-            this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
+            this.filters.ground = ground_filter.property('checked')
+            this.updateFilteredBattles()
         });
 
         naval_filter.on('click', _d => {
-            this.updateData(ground_filter.property('checked'), naval_filter.property('checked'));
+            this.filters.naval = naval_filter.property('checked')
+            this.updateFilteredBattles()
         });
+
+        civil_filter.on('click', _d => {
+            this.filters.civil = civil_filter.property('checked')
+            this.updateFilteredBattles()
+        })
+
     }
 
     loadData() {

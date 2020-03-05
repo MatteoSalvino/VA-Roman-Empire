@@ -115,7 +115,9 @@ class Map {
         var selector = isBrushing ? ".brushed" : "circle"
         markerGroup.selectAll(selector)
             .each(function(d) {
-                if (+d.year >= self.period.min && +d.year <= self.period.max) {
+
+                var ok = self.battles.filter(b => b.id == d.id).length > 0
+                if (ok && +d.year >= self.period.min && +d.year <= self.period.max) {
                     points++
                     minYear = d3.min([minYear, +d.year])
                     maxYear = d3.max([maxYear, +d.year])

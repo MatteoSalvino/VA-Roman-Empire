@@ -65,7 +65,6 @@ class StackedChart {
             .keys(['won', 'lost', 'uncertain']);
 
         var dataset = stack(barData);
-        console.log(dataset);
 
         groups = barChart.selectAll('g.layer')
             .data(dataset)
