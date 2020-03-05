@@ -1,35 +1,17 @@
 const d3 = require('d3');
+import BorderedChart from './borderedChart';
 
-var width = 600
-var height = 400
-var margin = { top: 30, bottom: 30, left: 30, right: 120 };
+var xScale, yScale, groups, tooltip, legend
 
-var container, barChart, xScale, yScale, xAxis, yAxis, groups, tooltip, legend;
-
-class StackedChart {
+class StackedBarChart extends BorderedChart {
     constructor() {
+        super()
+        this.margin.right = 120 //lazy fix
         this.battles = []
-        this.setup()
     }
 
     setBattles(battles) {
         this.battles = battles
-    }
-
-    setup() {
-        container = d3.select("#bar_chart_container")
-            .append("div")
-            // Container class to make it responsive.
-            .classed("svg-container", true);
-
-        barChart = container.append("svg")
-            // Responsive SVG needs these 2 attributes and no width and height attr.
-            .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "0 0 " + width + " " + height)
-            // Class to make it responsive.
-            .classed("svg-content-responsive", true);
-
-        drawBorders();
     }
 
     drawChart() {
@@ -41,23 +23,23 @@ class StackedChart {
 
         //Axis scales and axis
         xScale = d3.scaleBand()
-            .range([margin.left, width - margin.right])
+            .range([this.margin.left, this.width - this.margin.right])
             .padding(0.5)
             .domain(barData.map(function(d) { return d.attack; }));
 
         yScale = d3.scaleLinear()
-            .range([height - margin.bottom, margin.top])
+            .range([this.height - this.margin.bottom, this.margin.top])
             .domain([0, d3.max(barData, function(d) { return d.total + 1; })]);
 
 
-        xAxis = barChart.append('g')
+        this.chart.append('g')
             .attr('class', 'x axis')
-            .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
+            .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
             .call(d3.axisBottom(xScale));
 
-        yAxis = barChart.append('g')
+        this.chart.append('g')
             .attr('class', 'y axis')
-            .attr('transform', 'translate(' + margin.bottom + ', 0)')
+            .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale).ticks(d3.max(barData, function(d) { return d.total + 1; })));
 
         //Split our dataset in layers
@@ -66,7 +48,7 @@ class StackedChart {
 
         var dataset = stack(barData);
 
-        groups = barChart.selectAll('g.layer')
+        groups = this.chart.selectAll('g.layer')
             .data(dataset)
             .enter()
             .append('g')
@@ -98,7 +80,7 @@ class StackedChart {
             });
 
         //tooltip to show categories details (We should modularize it ?)
-        tooltip = barChart.append('g')
+        tooltip = this.chart.append('g')
             .style('display', 'none');
 
         tooltip.append('rect')
@@ -114,17 +96,12 @@ class StackedChart {
             .attr('font-weight', 'bold')
             .style('text-anchor', 'middle');
 
-        setupLegend(colors);
+        this._setupLegend(colors);
     }
 
     notifyDataChanged() {
         this.clear()
         this.drawChart()
-    }
-
-    clear() {
-        barChart.selectAll("*").remove()
-        drawBorders()
     }
 
     makeDataset() {
@@ -151,13 +128,50 @@ class StackedChart {
 
         return barData;
     }
-}
 
-function drawBorders() {
-    barChart.append("rect")
-        .classed("rect_b", true)
-        .attr("width", width)
-        .attr("height", height);
+    _setupLegend(colors) {
+        legend = this.chart.append("svg")
+            .attr("width", 150)
+            .attr("height", 85)
+            .attr('x', 410)
+            .attr('y', 30);
+
+        legend.append("rect")
+            .classed("rect_b", true)
+            .attr("width", 150)
+            .attr("height", 85);
+
+        legend.selectAll('circle')
+            .data(colors)
+            .enter()
+            .append('circle')
+            .attr('cx', 30)
+            .attr('cy', function(_d, i) {
+                return 20 + i * 15;
+            })
+            .attr('r', 5)
+            .attr('fill', function(d) { return d; });
+
+        legend.selectAll('text')
+            .data(colors)
+            .enter()
+            .append('text')
+            .attr('x', 50)
+            .attr('y', function(_d, i) {
+                return 20 + i * 15;
+            })
+            .text(function(_d, i) {
+                switch (i) {
+                    case 0:
+                        return 'Won';
+                    case 1:
+                        return 'Lost';
+                    case 2:
+                        return 'Uncertain';
+                }
+            })
+            .style('alignment-baseline', 'middle');
+    }
 }
 
 function resetDataset() {
@@ -175,49 +189,4 @@ function resetDataset() {
     return dataset;
 }
 
-function setupLegend(colors) {
-    legend = barChart.append("svg")
-        .attr("width", 150)
-        .attr("height", 85)
-        .attr('x', 410)
-        .attr('y', 30);
-
-    legend.append("rect")
-        .classed("rect_b", true)
-        .attr("width", 150)
-        .attr("height", 85);
-
-    legend.selectAll('circle')
-        .data(colors)
-        .enter()
-        .append('circle')
-        .attr('cx', 30)
-        .attr('cy', function(_d, i) {
-            return 20 + i * 15;
-        })
-        .attr('r', 5)
-        .attr('fill', function(d) { return d; });
-
-    legend.selectAll('text')
-        .data(colors)
-        .enter()
-        .append('text')
-        .attr('x', 50)
-        .attr('y', function(_d, i) {
-            return 20 + i * 15;
-        })
-        .text(function(_d, i) {
-            switch (i) {
-                case 0:
-                    return 'Won';
-                case 1:
-                    return 'Lost';
-                case 2:
-                    return 'Uncertain';
-            }
-        })
-        .style('alignment-baseline', 'middle');
-}
-
-
-export default new StackedChart()
+export default new StackedBarChart()
