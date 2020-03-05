@@ -1,15 +1,9 @@
 const d3 = require('d3');
+import BorderedChart from './borderedChart'
 
-var width = 600
-var height = 400
-var margin = { top: 30, bottom: 30, left: 30, right: 30 };
-
-var container, boxplot;
-
-class BoxPlot {
+class BoxPlot extends BorderedChart {
     constructor() {
-        this.wars = []
-        this.setup()
+        super()
     }
 
     setWars(wars) {
@@ -21,31 +15,8 @@ class BoxPlot {
         this.drawChart()
     }
 
-    clear() {
-        boxplot.selectAll("*").remove();
-        drawBorders();
-    }
-
-    setup() {
-        container = d3.select("#boxplot_container")
-            .append("div")
-            // Container class to make it responsive.
-            .classed("svg-container", true);
-
-        boxplot = container.append("svg")
-            // Responsive SVG needs these 2 attributes and no width and height attr.
-            .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "0 0 " + width + " " + height)
-            // Class to make it responsive.
-            .classed("svg-content-responsive", true);
-
-        drawBorders()
-    }
-
     drawChart() {
-        var data = this.wars.map(function(d) {
-            return d.endYear - d.startYear + 1;
-        });
+        var data = this.wars.map(w => w.endYear - w.startYear + 1)
 
         // Compute summary statistics used for the box:
         var data_sorted = data.sort(d3.ascending)
@@ -59,19 +30,19 @@ class BoxPlot {
         // Show the Y scale
         var y = d3.scaleLinear()
             .domain([0, d3.max([10, Math.floor(max * 1.2)])])
-            .range([height - margin.bottom, margin.top]);
+            .range([this.height - this.margin.bottom, this.margin.top]);
 
-        boxplot.append('g')
+        this.chart.append('g')
             .attr('class', 'y axis')
-            .attr('transform', 'translate(' + margin.bottom + ', 0)')
+            .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(y));
 
         // a few features for the box
-        var center = width / 2
+        var center = this.width / 2
         var boxWidth = 100
 
         // Show the main vertical line
-        boxplot.append("line")
+        this.chart.append("line")
             .attr("x1", center)
             .attr("x2", center)
             .attr("y1", y(min))
@@ -79,18 +50,18 @@ class BoxPlot {
             .attr("stroke", "black")
 
         // Show the box
-        boxplot.append("rect")
+        this.chart.append("rect")
             .attr("x", center - boxWidth / 2)
             .attr("y", y(q3))
             .attr("height", function() {
-              if(q1 != undefined && q3 != undefined) return (y(q1) - y(q3));
+                if (q1 != undefined && q3 != undefined) return (y(q1) - y(q3));
             })
             .attr("width", boxWidth)
             .attr("stroke", "black")
             .style("fill", "#69b3a2")
 
         // show median, min and max horizontal lines
-        boxplot
+        this.chart
             .selectAll("toto")
             .data([min, median, max])
             .enter()
@@ -101,13 +72,6 @@ class BoxPlot {
             .attr("y2", function(d) { return (y(d)) })
             .attr("stroke", "black")
     }
-}
-
-function drawBorders() {
-    boxplot.append("rect")
-        .classed("rect_b", true)
-        .attr("width", width)
-        .attr("height", height);
 }
 
 export default new BoxPlot()
