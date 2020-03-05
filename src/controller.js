@@ -38,7 +38,7 @@ class Controller {
      * @todo - the lineChart is always redrawn from scratch (is it ok?)
      */
     setBrushedMapData(battles) {
-        this.brushedMapData = battles
+        this.brushedMapData = battles.filter(b => this.filteredBattles.includes(b))
         this.onBrushedMapDataChanged()
     }
 
