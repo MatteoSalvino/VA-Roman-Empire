@@ -6,7 +6,7 @@ var xScale, yScale, xAxis, line, path, legend
 
 class LineChart extends BorderedChart {
     constructor() {
-        super()
+        super({ width: 600, height: 400 }, { top: 60, bottom: 30, left: 30, right: 30 })
         this.battles = []
     }
 
@@ -84,7 +84,7 @@ class LineChart extends BorderedChart {
             .call(d3.axisLeft(yScale));
 
         //Legend
-        var legend = setupLegend(this.chart, this.isCumulative);
+        this.setupLegend()
 
         //Reset zoom
         var self = this
@@ -179,7 +179,7 @@ class LineChart extends BorderedChart {
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
 
-        legend = setupLegend(this.chart, this.isCumulative);
+        this.setupLegend()
 
         //Reset zoom
         this.chart.on('dblclick', function() {
@@ -212,59 +212,91 @@ class LineChart extends BorderedChart {
         if (this.isCumulative) this.drawCumulativeChart()
         else this.drawChart()
     }
-}
 
-function setupLegend(chart, isCumulative) {
-    var labels = ['won battles', 'lost battles'];
+    //so sketti
+    setupButtons() {
 
-    if (isCumulative) {
-        legend = chart.append("svg")
-            .attr("width", 150)
-            .attr("height", 55)
-            .attr('x', 40)
-            .attr('y', 30);
-    } else {
-        legend = chart.append("svg")
-            .attr("width", 150)
-            .attr("height", 55)
+        var self = this
+        this.chart
+            .append('rect')
+            .attr("x", 400)
+            .attr("width", "90")
+            .attr("height", "24")
+            .attr("fill", "#b1d4e7")
+            .attr('class', 'btn btn-primary')
+            .on("click", function() {
+                self.clear()
+                self.drawChart()
+            })
+
+        this.chart
+            .append('rect')
+            .attr("x", 492)
+            .attr("fill", "#b1d4e7")
+            .attr("width", "90")
+            .attr("height", "24")
+            .attr('class', 'btn btn-primary')
+            .on("click", function() {
+                self.clear()
+                self.drawCumulativeChart()
+            })
+
+        this.chart
+            .append('text')
             .attr('x', 410)
-            .attr('y', 30);
+            .attr('y', 12)
+            .text("by century")
+            .attr("fill", "white")
+            .style('alignment-baseline', 'middle')
+
+        this.chart
+            .append('text')
+            .attr('x', 498)
+            .attr('y', 12)
+            .text("cumulative")
+            .attr("fill", "white")
+            .style('alignment-baseline', 'middle')
     }
 
-    legend.append("rect")
-        .classed("rect_b", true)
-        .attr("width", 150)
-        .attr("height", 55);
+    setupLegend() {
+        var labels = ['won battles', 'lost battles'];
 
-    legend.selectAll('circle')
-        .data(labels)
-        .enter()
-        .append('circle')
-        .attr('class', function(d, i) {
-            if (i == 0)
-                return 'won';
-            else
-                return 'lost';
-        })
-        .attr('cx', 30)
-        .attr('cy', function(d, i) {
-            return 20 + i * 15;
-        })
-        .attr('r', 5)
-        .attr('fill', '#ffab00');
+        legend = this.chart.append("svg")
+            .attr("width", 150)
+            .attr("height", 55)
+            .attr('x', 0)
+            .attr('y', 0)
 
-    legend.selectAll('text')
-        .data(labels)
-        .enter()
-        .append('text')
-        .attr('x', 50)
-        .attr('y', function(d, i) {
-            return 20 + i * 15;
-        })
-        .text(function(d) {
-            return d;
-        })
-        .style('alignment-baseline', 'middle');
+        legend.selectAll('circle')
+            .data(labels)
+            .enter()
+            .append('circle')
+            .attr('class', function(_d, i) {
+                if (i == 0)
+                    return 'won';
+                else
+                    return 'lost';
+            })
+            .attr('cx', 30)
+            .attr('cy', function(_d, i) {
+                return 12 + i * 15;
+            })
+            .attr('r', 5)
+            .attr('fill', '#ffab00');
+
+        legend.selectAll('text')
+            .data(labels)
+            .enter()
+            .append('text')
+            .attr('x', 50)
+            .attr('y', function(_, i) {
+                return 12 + i * 15;
+            })
+            .text(d => d)
+            .style('alignment-baseline', 'middle')
+
+        this.setupButtons()
+    }
 }
 
 //todo: don't loose focus when data changes

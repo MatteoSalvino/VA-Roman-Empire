@@ -161,10 +161,7 @@ class Controller {
         lineChart.notifyDataChanged()
 
         this.notifyBarChart()
-
-
     }
-
 
     setupFilters() {
         var ground_counter = 0,
