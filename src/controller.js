@@ -146,7 +146,7 @@ class Controller {
         this.filteredBattles = this.battles.filter(function(b) {
             var isNaval = b.naval == 'y'
             var isGround = !isNaval
-            var isCivil = b.civil
+            var isCivil = b.civil == 'y'
 
             return (isNaval && self.filters.naval) || (isGround && self.filters.ground) || (isCivil && self.filters.civil)
         })
@@ -165,6 +165,33 @@ class Controller {
 
 
     setupFilters() {
+        var ground_counter = 0,
+            naval_counter  = 0,
+            civil_counter  = 0,
+            battles_size = this.battles.length
+
+        this.battles
+            .forEach(function(d) {
+              if(d.naval == 'y')
+                naval_counter++
+              else
+                ground_counter++
+
+              if(d.civil == 'y')
+                civil_counter++
+            });
+
+        //Filters's labels update
+        d3.select('#ground_filter_label')
+          .text('Ground (' + Math.ceil((ground_counter / battles_size) * 100) + '%)');
+
+        d3.select('#naval_filter_label')
+        .text('Naval (' + Math.floor((naval_counter / battles_size) * 100) + '%)');
+
+        d3.select('#civil_filter_label')
+        .text('Civil (' + Math.floor((civil_counter / battles_size) * 100) + '%)');
+
+
         var ground_filter = d3.select('#ground_filter'),
             naval_filter = d3.select('#naval_filter'),
             civil_filter = d3.select('#civil_filter')

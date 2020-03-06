@@ -102,7 +102,6 @@ class Map extends BorderedChart {
             .style('visibility', 'visible');
 
         legend = this.setupLegend()
-
     }
 
     update() {
@@ -231,23 +230,6 @@ function updateLegend(numBattles, min, max) {
             .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)));
     }
 }
-
-//Setting up zoom feature
-/*
-var zoom = d3.zoom()
-             .scaleExtent([1, 4])
-             .translateExtent([[0, 0], [width, height]])
-             .extent([[0, 0], [width, height]])
-             .on('zoom', zoomed);
-
-function zoomed() {
-  d3.selectAll('path')
-      .attr('transform', d3.event.transform);
-
-  markerGroup.selectAll('circle')
-               .attr('transform', d3.event.transform);
-}
-*/
 
 function parseRoman(y) {
     if (y == 0) return 0;
