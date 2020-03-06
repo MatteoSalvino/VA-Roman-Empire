@@ -9,6 +9,21 @@ rect {
     transition: all 0.3s;
 }
 
+.nav-item {
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+#map_container, #line_chart_container, #bar_chart_container,
+#boxplot_container, #scatterplot_container {
+  border: 5px solid #b1d4e7;
+}
+
+#cumulativeBtn, #centuriesBtn {
+  margin: 5px;
+
+}
+
 svg text {
     pointer-events: none;
 }

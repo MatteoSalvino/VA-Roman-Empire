@@ -47,7 +47,13 @@ const config = {
             { from: './map.json', to: '.' },
             { from: './empire_map.json', to: '.' },
             { from: './battles.csv', to: '.' },
-            { from: './wars.csv', to: '.' }
+            { from: './wars.csv', to: '.' },
+            { from: './src/assets/dark-eye-off.png', to: './assets' },
+            { from: './src/assets/light-eye-off.png', to: './assets' },
+            { from: './src/assets/dark-eye-on.png', to: './assets' },
+            { from: './src/assets/light-eye-on.png', to: './assets' },
+            { from: './src/assets/dark-theme.png', to: './assets' },
+            { from: './src/assets/light-theme.png', to: './assets' }
         ])
     ]
 }

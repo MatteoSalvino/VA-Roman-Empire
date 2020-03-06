@@ -29,11 +29,14 @@ class BorderedChart {
             .classed("svg-content-responsive", true)
     }
 
+    //Fixed with css attributes
     drawBorders() {
+      /*
         this.chart.append("rect")
             .classed("rect_b", true)
             .attr("width", this.width)
             .attr("height", this.height);
+     */
     }
 
     onBindBrush() {

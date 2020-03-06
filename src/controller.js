@@ -17,6 +17,8 @@ class Controller {
         this.brushedWars = []
         this.filters = { ground: true, naval: true, civil: true }
         this.filteredBattles = []
+        this.blindsafe = false
+        this.darkmode = false
     }
 
     /**
@@ -210,6 +212,37 @@ class Controller {
             this.filters.civil = civil_filter.property('checked')
             this.updateFilteredBattles()
         })
+
+        var blindsafeBtn = d3.select('#blindsafeBtn'),
+            darkModeBtn = d3.select('#darkModeBtn'),
+            self = this;
+
+        blindsafeBtn.on('click', function() {
+          if(self.blindsafe) {
+            if(self.darkmode)
+              d3.select(this).attr('src', './assets/light-eye-off.png');
+            else
+                d3.select(this).attr('src', './assets/dark-eye-off.png');
+          } else {
+            if(self.darkmode)
+              d3.select(this).attr('src', './assets/light-eye-on.png');
+            else
+              d3.select(this).attr('src', './assets/dark-eye-on.png');
+          }
+
+          self.blindsafe = !self.blindsafe
+          //perform actions based on the value of blindsafe flag
+        });
+
+        darkModeBtn.on('click', function() {
+          if(self.darkmode)
+            d3.select(this).attr('src', './assets/dark-theme.png');
+          else
+            d3.select(this).attr('src', './assets/light-theme.png');
+
+          self.darkmode = !self.darkmode
+          //perform actions based on the value of darkmode flag
+        });
 
     }
 
