@@ -1,0 +1,248 @@
+id,warId,year,yearAU,relativeYear,label,locationLabel,latitude,longitude,stoaId,currentCountry,outcome,civil,naval,siege,sack,final,period
+1,1,-509,244,1,Battle of Silva Arsia,Silva Arsia,41.9,12.5,26347394,,W,,,,,,R
+2,2,-502,251,8,Battle of Pometia,Pometia,41.594438,12.826351,438841,,W,,,,,,R
+3,4,-496,257,14,Battle of Lake Regilius,Lake Regilius,,,-,,W,,,,,,R
+4,,-495,258,15,Battle of Aricia,Aricia,41.72139965,12.67334715,422844,,W,,,,,,R
+5,5,-482,271,28,Battle of Antium,Antium,41.44795,12.628995,422837,,L,,,,,,R
+6,5,-482,271,28,Battle of Longula,Longula,41.5286695,12.5880115,438775,,W,,,,,,R
+7,5,-480,273,30,Battle of Veii,Veii,42.021338,12.390519,423116,,W,,,,,,R
+8,5,-477,276,33,Battle of Colline Gate,Colline Gate,41.907339,12.498714,-,,W,,,,,,R
+9,5,-477,276,33,Battle of the Cremera,Cremera,42.67830854,12.32754255,422912,,L,,,,,,R
+10,5,-477,276,33,Battle of the Temple of Hope,Temple of Hope,,,-,,,,,,,,R
+11,5,-458,295,52,Battle of Mount Algidus,Mount Algidus,41.73,12.7,-,,W,,,,,,R
+12,5,-446,307,64,Battle of Corbio,Corbio,41.7909,12.7621,438722,,W,,,,,,R
+13,1,-396,357,114,Battle of Veii,Veii,42.021338,12.390519,423116,,W,,,,,,R
+14,,-390,363,120,Battle of Allia River,Allia River,42.67830854,12.32754255,438670,,L,,,,,,R
+15,6,-342,411,168,Battle of Mount Gaurus,Mount Gaurus,40.827,14.139,432861,,W,,,,,,R
+16,6,-341,412,169,Battle of Suessula,Suessula,40.99006044,14.39860995,433133,,W,,,,,,R
+17,7,-339,414,171,Battle of Vesuvius,Vesuvius,40.8228645,14.4280779,433189,,W,,,,,,R
+18,7,-338,415,172,Battle of Trifanum,Trifanum,41.066667,14.333333,438857,,W,,,,,,R
+19,8,-321,432,189,Battle of the Caudine Forks,Caudine Forks,41.061111,14.633333,-,,L,,,,,,R
+20,8,-316,437,194,Battle of Lautulae,Lautulae,41.324,13.264,432903,,L,,,,,,R
+21,8,-310,443,200,Battle of Lake Vadimo,Lake Vadimo,42.48411889,12.3232359,413370,,W,,,,,,R
+22,8,-305,448,205,Battle of Bovianum,Bovianum,41.48673,14.473913,432725,,W,,,,,,R
+23,9,-298,455,212,Battle of Camerinum,Camerinum,43.140369,13.068764,413060,,L,,,,,,R
+24,9,-297,456,213,Battle of Tifernum,Tifernum,43.460874,12.243968,413339,,W,,,,,,R
+25,9,-295,458,215,Battle of Sentinum,Sentinum,43.427013,12.855963,413312,,W,,,,,,R
+26,9,-293,460,217,Battle of Aquilonia,Aquilonia,41.0205885,15.4503075,442471,,W,,,,,,R
+27,10,-284,469,226,Battle of Arretium,Arretium,43.471274,11.863048,413032,,L,,,,,,R
+28,10,-283,470,227,Battle of Lake Vadimo,Lake Vadimo,42.48411889,12.3232359,413370,,W,,,,,,R
+29,10,-282,471,228,Battle of Populonia,Populonia,42.9884197,10.48993922,403212,,W,,,,,,R
+30,11,-280,473,230,Battle of Heraclea,Heraclea,40.2117761,16.669885,452333,,L,,,,,,R
+31,11,-279,474,231,Battle of Asculum,Asculum,42.855397,13.574951,413036,,L,,,,,,R
+32,11,-275,478,235,Battle of Beneventum,Beneventum,41.130437,14.781161,432721,,,,,,,,R
+33,12,-261,492,249,Battle of Agrigentum,Agrigentum,37.290594,13.585475,462086,,W,,,,,,R
+34,12,-260,493,250,Battle of the Lipari Islands,Lipari Islands,38.46740105,14.9539573,462283,,L,,y,,,,R
+35,12,-260,493,250,Battle of Mylae,Mylae,38.219365,15.240385,462379,,W,,,,,,R
+36,12,-258,495,252,Battle of Sulci,Sulci,39.061743,8.4547,472024,,W,,,,,,R
+37,12,-257,496,253,Battle of Tyndaris,Tyndaris,38.14272495,15.0445609,462527,,W,,y,,,,R
+38,12,-256,497,254,Battle of Adys,Adys,36.635894,10.096906,321636,,W,,,,,,R
+39,12,-256,497,254,Battle of Cape Ecnomus,Cape Ecnomus,37.108333,13.946944,-,,W,,y,,,,R
+40,12,-255,498,255,Battle of Tunis,Tunis,37.25,10.25,315212,,L,,,,,,R
+41,12,-251,502,259,Battle of Panormus,Panormus,38.11127,13.3534422,462410,,W,,,,,,R
+42,12,-250,503,260,Siege of Lilybaeum,Lilybaeum,37.8025,12.425278,462282,,L,,,y,,,R
+43,12,-249,504,261,Battle of Drepala,Drepala,38.016667,12.516667,-,,L,,y,,,,R
+44,12,-242,511,268,Battle of the Aegates Islands,Aegates Islands,37.9620436,12.2471584,462075,,W,,y,,,,R
+45,,-229,524,281,Battle of Paxos,Paxos,39.192672,20.1550175,531049,,W,,y,,,,R
+46,14,-225,528,285,Battle of Faesulae,Faesulae,43.8070785,11.2926275,413124,,L,,,,,,R
+47,14,-224,529,286,Battle of Telamon,Telamon,42.555325,11.133273,403280,,W,,,,,,R
+48,14,-222,531,288,Battle of Clastidium,Clastidium,45.011113,9.123457,383618,,W,,,,,,R
+49,13,-218,535,292,Battle of Cissa,Cissa,44.54,14.91,197211,,W,,,,,,R
+50,13,-218,535,292,Battle of Lilybaeum,Lilybaeum,37.8025,12.425278,462282,,W,,y,,,,R
+51,13,-218,535,292,Battle of the Ticinus,Ticinus,45.1803284,9.1552338,383799,,L,,,,,,R
+52,13,-218,535,292,Battle of the Trebia,Trebia,44.5260393,9.2421515,383802,,L,,,,,,R
+53,13,-217,536,293,Battle of Ager Falernus,Ager Falernus,41.17590236,13.98280271,432828,,L,,,,,,R
+54,13,-217,536,293,Battle of Ebro River,Ebro River,40.72,0.863056,-,,W,,y,,,,R
+55,13,-217,536,293,Battle of Lake Trasimene,Lake Trasimene,43.13944,12.1075,-,,L,,,,,,R
+56,13,-216,537,294,Battle of Cannae,Cannae,41.296496,16.15132,442523,,L,,,,,,R
+57,13,-216,537,294,First Battle of Nola,Nola,40.926823,14.524545,432981,,W,,,,,,R
+58,13,-215,538,295,Second Battle of Nola,Nola,40.926823,14.524545,432981,,W,,,,,,R
+59,13,-214,539,296,Third Battle of Nola,Nola,40.926823,14.524545,432981,,,,,,,,R
+60,13,-212,541,298,First Battle of Capua,Capua,41.0860925,14.250207,432754,,L,,,,,,R
+61,13,-212,541,298,Battle of Herdonia,Herdonia,41.3107496,15.6237042,442613,,L,,,,,,R
+62,13,-212,541,298,Battle of the Silarus,Silarus,40.5365504,15.0311303,442795,,L,,,,,,R
+63,13,-211,542,299,Second Battle of Capua,Capua,41.0860925,14.250207,432754,,W,,,,,,R
+64,13,-211,542,299,Battle of the Upper Baetis,Upper Baetis,36.783,-6.35,-,,L,,,,,,R
+65,13,-210,543,300,Second Battle of Herdonia,Herdonia,41.3107496,15.6237042,442613,,L,,,,,,R
+66,13,-210,543,300,Battle of Numistro,Numistro,40.753576,15.486709,442693,,L,,,,,,R
+67,13,-209,544,301,Battle of Asculum,Asculum,42.855397,13.574951,413036,,L,,,,,,R
+68,13,-209,544,301,Battle of Baecula,Baecula,38.095872,-3.774889,265814,,W,,,,,,R
+69,13,-207,546,303,Battle of Carmona,Carmona,37.4703045,-5.6464685,256058,,W,,,,,,R
+70,13,-207,546,303,Battle of Grumentum,Grumentum,40.284832,15.9062905,442603,,,,,,,,R
+71,13,-207,546,303,Battle of the Metaurus,Metaurus,43.688683,12.6583754,413199,,W,,,,,,R
+72,13,-206,547,304,Battle of Carteia,Carteia,36.183163,-5.410359,256063,,W,,y,,,,R
+73,13,-206,547,304,Battle of the Guadalquivir,Guadalquivir,36.8273903,-6.3455489,256263,,W,,,,,,R
+74,13,-206,547,304,Battle of Ilipa,Ilipa,37.518215,-5.978254,256222,,W,,,,,,R
+75,13,-204,549,306,Battle of Crotona,Crotona,39.0811675,17.127966,452317,,,,,,,,R
+76,13,-203,550,307,Battle of Bagbrades,Bagbrades,37.057944,10.0625972,-,,W,,,,,,R
+77,13,-202,551,308,Battle of Zama,Zama,36.1118585,9.285729,315267,,W,,,,,,R
+78,14,-200,553,310,Battle of Cremona,Cremona,45.133639,10.026149,383628,,W,,,,,,R
+79,17,-198,555,312,Battle of the Aous,Aous,40.6125045,19.4812849,481726,,W,,,,,,R
+80,17,-197,556,313,Battle of Cynoscephalae,Cynoscephalae,39.378033,22.415199,540719,,W,,,,,,R
+81,18,-194,559,316,Battle of Gythium,Gythium,36.7600725,22.5626005,570268,,W,,,,,,R
+82,,-194,559,316,Battle of Placentia,Placentia,45.0525855,9.6976645,383741,,W,,,,,,R
+83,,-193,560,317,Battle of Mutina,Mutina,44.647057,10.925223,383715,,W,,,,,,R
+84,19,-191,562,319,Battle of Thermopylae,Thermopylae,38.796,22.543644,541140,,W,,,,,,R
+85,19,-190,563,320,Battle of the Eurymedon,Eurymedon,37.1968531,31.1815439,638836,,W,,y,,,,R
+86,19,-190,563,320,Battle of Magnesia,Magnesia,38.541317,27.4873015,550706,,W,,,,,,R
+87,19,-190,563,320,Battle of Myonessus,Myonessus,38.1721,26.7907,-,,W,,y,,,,R
+88,20,-189,564,321,Battle of Ancyra,Ancyra,39.96282667,32.81975567,619103,,W,,,,,,R
+89,20,-189,564,321,Battle of Mount Olympus,Mount Olympus,40.06667,29.21667,511343,,W,,,,,,R
+90,21,-181,572,329,Battle of Manlian Pass,Manlian Pass,40.321049,-2.8937871,246322,,W,,,,,,R
+91,22,-171,582,339,Battle of Callicinus,Callicinus,39.632098,22.419935,-,,L,,,,,,R
+92,22,-168,585,342,Battle of Pydna,Port of Carthage,36.8456504,10.3248036,836358555,,W,,,,,,R
+93,24,-148,605,362,Second Battle of Pydna,Pydna,40.25,22.75,491704,,W,,,,,,R
+94,25,-147,606,363,Battle of the Port of Carthage,Carthage,36.8500325,10.318,314921,,L,,,,,,R
+95,25,-147,606,363,Battle of Nepheris,Nepheris,36.615106,10.383068,315094,,W,,,,,,R
+96,25,-146,607,364,Battle of Carthage,Carthage,36.8500325,10.318,314921,,W,,,,,,R
+97,26,-146,607,364,Battle of Corinth,Corinth,37.90082115,22.89573724,570182,,W,,,,,,R
+98,23,-134,619,376,Siege of Numantia,Numantia,41.80938824,-2.444333385,246523,,W,,,y,,,R
+99,27,-112,641,398,Battle of Noreia,Noreia,47.013808,14.526732,197411,,L,,,,,,R
+100,27,-109,644,401,Battle of the Rhone River,Rhone River,,,-,,L,,,,,,R
+101,28,-108,645,402,Battle of Muthul,Muthul,36.25,8.75,315086,,,,,,,,R
+102,27,-107,646,403,Battle of Burdigala,Burdigala,44.837205,-0.576533,138248,,L,,,,,,R
+103,27,-105,648,405,Battle of Arausio,Arausio,44.1367875,4.8079175,148054,,L,,,,,,R
+104,27,-102,651,408,Battle of Aquae Sextiae,Aquae Sextiae,45.68907973,5.9154928,167650,,W,,,,,,R
+105,27,-101,652,409,Battle of Vercellae,Vercellae,45.321094,8.426374,383815,,W,,,,,,R
+106,29,-89,664,421,Battle of Asculum,Asculum,42.855397,13.574951,413036,,W,,,,,,R
+107,29,-89,664,421,Battle of Fucin Lake,Fucin Lake,41.995,13.547222,432853,,L,,,,,,R
+108,30,-87,666,423,Siege of Athens,Athens,37.97281915,23.72374385,579885,,W,,,y,,,R
+109,30,-86,667,424,Battle of Chaeronea,Chaeronea,38.495182,22.8434315,540701,,W,,,,,,R
+110,30,-86,667,424,Battle of Orchomenus,Orchomenus,38.49457533,22.978315,540987,,W,,,,,,R
+111,31,-83,670,427,Battle of Mount Tifata,Mount Tifata,41.25,14.25,433153,,C,y,,,,,R
+112,34,-82,671,428,Battle of the Asio River,Asio River,43.55905465,13.2253118,413003,,C,y,,,,,R
+113,34,-82,671,428,Battle of Clusium,Clusium,43.016367,11.9487025,413096,,C,y,,,,,R
+114,34,-82,671,428,Second Battle of Clusium,Clusium,43.016367,11.9487025,413096,,C,y,,,,,R
+115,34,-82,671,428,Battle of Colline Gate,Colline Gate,41.907339,12.498714,-,,C,y,,,,,R
+116,34,-82,671,428,Battle of Faventia,Faventia,44.286236,11.883507,393420,,C,y,,,,,R
+117,34,-82,671,428,Battle of Fidentia,Fidentia,44.865109,10.061732,383648,,C,y,,,,,R
+118,32,-82,671,428,Battle of Halys,Halys,41.6767598,35.9295291,857148,,L,,,,,,R
+119,34,-82,671,428,Battle of Sacriporto,Sacriporto,41.875,12.375,208591878,,C,y,,,,,R
+120,33,-80,673,430,Battle of the Baetis River,Baetis River,37.969207,-2.910335,256009,,L,,,,,,R
+121,35,-73,680,437,Battle of Cyzicus,Cyzicus,40.3855645,27.883191,511218,,W,,,,,,R
+122,36,-73,680,437,Battle of Mount Vesuvius,Mount Vesuvius,40.8228645,14.4280779,433189,,L,,,,,,R
+123,35,-72,681,438,Battle of Cabira,Cabira,40.5892125,37.0201215,857177,,W,,,,,,R
+124,36,-72,681,438,First Battle of Mutina,Mutina,44.647057,10.925223,383715,,L,,,,,,R
+125,36,-72,681,438,Battle of Picenum,Picenum,43.20182587,13.54464432,413253,,L,,,,,,R
+126,36,-71,682,439,Battle of Campania,Campania,42.5,12.5,991350,,L,,,,,,R
+127,36,-71,682,439,Second Battle of Campania,Campania,42.5,12.5,991350,,W,,,,,,R
+128,36,-71,682,439,Battle of the Silarius,Silarius,40.5365504,15.0311303,442795,,W,,,,,,R
+129,35,-69,684,441,Battle of Tigranocerta,Tigranocerta,38.069736,41.346114,874774,,W,,,,,,R
+130,35,-68,685,442,Battle of Artaxata,Artaxata,39.94889533,44.53352067,874361,,W,,,,,,R
+131,35,-66,687,444,Battle of the Lycus,Lycus,37.8809338,29.1001262,638967,,W,,,,,,R
+132,37,-62,691,448,Battle of Pistoria,Pistoria,43.932766,10.9182435,403254,,C,y,,,,,R
+133,38,-58,695,452,Battle of the Arar,Arar,47.7018263,6.0421883,167652,,W,,,,,,R
+134,38,-58,695,452,Battle of Bibracte,Bibracte,46.9208565,4.0360565,177473,,W,,,,,,R
+135,38,-58,695,452,"Battle of ""Belfort""",,,,,,W,,,,,,R
+136,38,-57,696,453,Battle of the Axona,Axona,49.0487801,2.1034696,108779,,W,,,,,,R
+137,38,-57,696,453,Battle of Octodurus,Octodurus,46.100848,7.073918,167859,,W,,,,,,R
+138,38,-57,696,453,Battle of the Sabis,Sabis,50.3035216,4.1161292,109299,,W,,,,,,R
+139,39,-53,700,457,Battle of Carrhae,Carrhae,36.8655215,39.0301785,658427,,L,,,,,,R
+140,38,-52,701,458,Battle of Alesia,Alesia,47.536622,4.503884,177434,,W,,,,,,R
+141,40,-49,704,461,Battle of the Bagradas River,Bagradas River,37.116667,10.216667,30218,,C,y,,,,,R
+142,40,-49,704,461,Battle of Ilerda,Ilerda,41.6159535,0.625938,246431,,C,y,,,,,R
+143,40,-48,705,462,Battle of Dyrrachium,Dyrrachium,41.3163425,19.447355,481818,,C,y,,,,,R
+144,40,-48,705,462,Battle of Pharsalus,Pharsalus,39.30915475,22.3563245,541042,,C,y,,,,,R
+145,40,-47,706,463,Battle of the Nile,Nile,19.21140877,30.56732963,727172,,C,y,,,,,R
+146,41,-47,706,463,Battle of Zela,Zela,40.304617,35.89152015,857382,,W,,,,,,R
+147,40,-46,707,464,Battle of Ruspina,Ruspina,35.7742245,10.8291825,324803,,C,y,,,,,R
+148,40,-46,707,464,Battle of Thapsus,Thapsus,35.622554,11.042848,324827,,C,y,,,,,R
+149,40,-45,708,465,Battle of Munda,Munda,37.419687,-5.141862,256314,,C,y,,,,,R
+150,42,-43,710,467,Battle of Forum Gallorum,Forum Gallorum,44.596736,11.053156,393425,,C,y,,,,,R
+151,42,-43,710,467,Second Battle of Mutina,Mutina,44.647057,10.925223,383715,,C,y,,,,,R
+152,42,-42,711,468,First Battle of Philippi,Philippi,41.013317,24.28360833,501482,,C,y,,,,,R
+153,42,-42,711,468,Second Battle of Philippi,Philippi,41.013317,24.28360833,501482,,C,y,,,,,R
+154,44,-41,712,469,Battle of Perugia,Perugia,43.111192,12.3899085,413248,,C,y,,,,,R
+155,43,-36,717,474,Battle of Naulochus,Naulochus,38.221699,15.374469,462384,,W,,y,,,,R
+156,45,-31,722,479,Battle of Actium,Actium,38.953115,20.768402,530771,,C,y,y,,,,R
+157,46,-25,728,7,Siege of Aracillum,Aracillum,43.176488,-3.973369,236339,,W,,,y,,,E
+158,46,-25,728,7,Battle of Vellica,Vellica,43.5,-4.5,236403,,W,,,,,,E
+159,47,-16,737,16,Clades Lolliana,Clades Lolliana,49.66019923,6.7871561,109277,,L,,,,,,E
+160,47,-11,742,21,Battle of Lupia River,Lupia River,51.7538459,8.6917099,109125,,W,,,,,,E
+161,,9,762,41,Battle of the Teutoburg Forest,Teutoburg Forest,52.408056,8.129444,-,,L,,,,,,E
+162,,16,769,48,Battle of the Weser River,Weser River,53.53556,8.56556,-,,W,,,,,,E
+163,48,43,796,75,Battle of the Medway,Medway,51.44,0.742,-,,W,,,,,,E
+164,48,50,803,82,Battle of Caer Caradoc,Caer Caradoc,52.0582,-2.3518,-,,W,,,,,,E
+165,49,58,811,90,Sack of Artaxata,Artaxata,39.94889533,44.53352067,874361,,W,,,,y,,E
+166,49,59,812,91,Capture of Tigranocerta,Tigranocerta,38.069736,41.346114,874774,,W,,,y,,,E
+167,50,60,813,92,Battle of Camulodunum,Camulodunum,53.654721,-1.8788195,79371,,L,,,,,,E
+168,50,61,814,93,Battle of Watling Street,Watling Street,52.65625,-1.927139,-,,W,,,,,,E
+169,49,62,815,94,Battle of Rhandeia,Rhandeia,,,876687,,L,,,,,,E
+170,51,66,819,98,Battle of Beth-Horon,Beth-Horon,,,-,,L,,,,,,E
+171,52,69,822,101,First Battle of Bedriacum,Bedriacum,45.129535,10.442348,383584,,C,y,,,,,E
+172,52,69,822,101,Second Battle of Bedriacum,Bedriacum,45.129535,10.442348,383584,,C,y,,,,,E
+173,52,69,822,101,Battle of Forum Julii,Forum Julii,43.43299,6.736984,-,,C,y,,,,,E
+174,48,71,824,103,Battle of Scotch Corner,Scotch Corner,,,-,,W,,,,,,E
+175,51,73,826,105,Siege of Masada,Masada,31.31625824,35.35368434,687968,,W,,,y,,,E
+176,48,83,836,115,Battle of Mons Graupius,Mons Graupius,56.735567,-3.090308857,92147,,W,,,,,,E
+177,53,87,840,119,First Battle of Tapae,Tapae,45.5056,22.7247,211464,,L,,,,,,E
+178,54,101,854,133,Second Battle of Tapae,Tapae,45.5056,22.7247,211464,,W,,,,,,E
+179,54,102,855,134,Battle of Adamclisi,Adamclisi,44.09282595,27.9429605,217027,,W,,,,,,E
+180,55,106,859,138,Battle of Sarmisegetusa,Sarmisegetusa,45.669615,23.323961,207425,,W,,,,,,E
+181,59,170,923,202,Battle of Carnuntum,Carnuntum,48.113346,16.867891,128376,,L,,,,,,E
+182,59,179,932,211,Battle of Laugaricio,Laugaricio,48.893052,18.038558,128442,,W,,,,,,E
+183,60,193,946,225,Battle of Cyzicus,Cyzicus,40.3855645,27.883191,511218,,C,y,,,,,E
+184,60,193,946,225,Battle of Nicaea,Nicaea,40.42909367,29.71468167,511268,,C,y,,,,,E
+185,60,194,947,226,Battle of Issus,Issus,36.8402925,36.1950485,658490,,C,y,,,,,E
+186,60,197,950,229,Battle of Lugdunum,Lugdunum,45.758866,4.8194815,167717,,C,y,,,,,E
+187,56,198,951,230,Battle of Ctesiphon,Ctesiphon,33.094703,44.58122267,893976,,W,,,y,,,E
+188,61,217,970,249,Battle of Nisibis,Nisibis,37.06751167,41.21544667,874623,,L,,,,,,E
+189,62,218,971,250,Battle of Antioch,Antioch,36.2055,36.171806,-,,C,y,,,,,E
+190,63,235,988,267,Battle at the Harzhorn,Harzhorn,,,-,,W,,,,,,E
+191,62,238,991,270,Battle of Carthage,Carthage,36.8500325,10.318,314921,,C,y,,,,,E
+192,61,243,996,275,Battle of Resaena,Resaena,32.083333,34.95,,,W,,,,,,E
+193,63,250,1003,282,Battle of Philippopolis,Philippopolis,42.145589,24.749474,216927,,L,,,y,,,E
+194,63,251,1004,283,Battle of Abrittus,Abrittus,,,-,,L,,,,,,E
+195,63,259,1012,291,Battle of Mediolanum,Mediolanum,45.463746,9.18806,383706,,W,,,,,,E
+196,61,260,1013,292,Battle of Edessa,Edessa,37.9122455,40.2334445,874298,,L,,,,,,E
+197,63,268,1021,300,Battle of Naissus,Naissus,43.316295,21.893884,207303,,W,,,,,,E
+198,63,269,1022,301,Battle of Lake Benacus,Lake Benacus,45.63003951,10.68428684,383587,,W,,,,,,E
+199,63,271,1024,303,Battle of Fano,Fano,43.844902,13.016921,413129,,W,,,,,,E
+200,63,271,1024,303,Battle of Pavia,Pavia,45.185899,9.156562,383798,,W,,,,,,E
+201,63,271,1024,303,Battle of Placentia,Placentia,45.0525855,9.6976645,383741,,L,,,,,,E
+202,64,272,1025,304,Battle of Emesa,Emesa,34.7376565,36.719319,668261,,W,,,,,,E
+203,64,272,1025,304,Battle of Immae,Immae,,,-,,W,,,,,,E
+204,62,274,1027,306,Battle of Châlons,Châlons,48.9575,4.365,-,,C,y,,,,,E
+205,62,285,1038,317,Battle of the Margus,Margus,44.7183621,21.0386919,207268,,C,y,,,,,E
+206,61,296,1049,328,Battle of Carrhae,Carrhae,36.8655215,39.0301785,658427,,L,,,,,,E
+207,63,298,1051,330,Battle of Lingones,Lingones,47.864221,5.335214,177564,,W,,,,,,E
+208,61,298,1051,330,Battle of Satala,Satala,40.027787,39.597934,874684,,W,,,,,,E
+209,63,298,1051,330,Battle of Vindonissa,Vindonissa,47.478494,8.220204,177661,,W,,,,,,E
+210,65,312,1065,344,Battle of Milvian Bridge,Milvian Bridge,,,-,,C,,,,,,E
+211,65,312,1065,344,Battle of Turin,Turin,,,,,C,,,,,,E
+212,65,312,1065,344,Battle of Verona,Verona,45.438954,10.994371,383816,,C,,,,,,E
+213,65,313,1066,345,Battle of Tzirallum,Tzirallum,,,-,,C,,,,,,E
+214,65,314,1067,346,Battle of Cibalae,Cibalae,45.291016,18.801056,197207,,C,,,,,,E
+215,65,316,1069,348,Battle of Mardia,Mardia,,,-,,C,,,,,,E
+216,65,324,1077,356,Battle of Adrianople,Adrianople,41.676459,26.562891,501428,,C,,,,,,E
+217,65,324,1077,356,Battle of Chrysopolis,Chrysopolis,41.020639,29.012856,520995,,C,,,,,,E
+218,65,324,1077,356,Battle of the Hellespont,Hellespont,40.2,26.4,501434,,C,,,,,,E
+219,66,344,1097,376,Battle of Singara,Singara,36.3224685,41.861983,874699,,,,,,,,E
+220,67,351,1104,383,Battle of Mursa Major,Mursa Major,45.560018,18.675749,197389,,C,y,,,,,E
+221,67,353,1106,385,Battle of Mons Seleucus,Mons Seleucus,,,-,,C,y,,,,,E
+222,68,356,1109,388,Battle of Reims,Reims,49.2539525,4.0332025,108945,,L,,,,,,E
+223,68,357,1110,389,Battle of Strasbourg,Strasbourg,,,-,,W,,,,,,E
+224,66,359,1112,391,Siege of Amida,Amida,37.9122455,40.2334445,874298,,L,,,y,,,E
+225,66,363,1116,395,Battle of Ctesiphon,Ctesiphon,33.094703,44.58122267,893976,,W,,,,,,E
+226,,366,1119,398,Battle of Thyatira,Thyatira,38.910724,27.844879,550924,,C,y,,,,,E
+227,68,368,1121,400,Battle of Solicinium,Solicinium,,,123120,,W,,,,,,E
+228,69,377,1130,409,Battle of the Willows,Willows,,,,,,,,,,,E
+229,69,378,1131,410,Battle of Adrianople,Adrianople,41.676459,26.562891,501428,,L,,,,,,E
+230,69,378,1131,410,Battle of Argentovaria,Argentovaria,48.0512685,7.545778,108755,,W,,,,,,E
+231,69,380,1133,412,Battle of Thessalonica,Thessalonica,40.628342,22.952885,491741,,L,,,,,,E
+232,,388,1141,420,Battle of the Save,Save,,,-,,C,y,,,,,E
+233,,394,1147,426,Battle of the Frigidus,Frigidus,45.5,13.5,197279,,C,y,,,,,E
+234,70,402,1155,434,Battle of Pollentia,Pollentia,44.686768,7.895976,383745,,W,,,,,,E
+235,70,402,1155,434,Battle of Verona,Verona,45.438954,10.994371,383816,,W,,,,,,E
+236,70,406,1159,438,Battle of Mainz,Mainz,49.998912,8.273869,109169,,L,,,,,,E
+237,70,410,1163,442,Sack of Rome,Rome,41.891775,12.486137,423025,,L,,,,y,,E
+238,70,419,1172,451,Battle of the Nervasos Mountains,Nervasos Mountains,,,-,,W,,,,,,E
+239,,432,1185,464,Battle of Ravenna,Ravenna,44.415718,12.196604,393480,,C,y,,,,,E
+240,71,436,1189,468,Battle of Narbonne,Narbonne,43.1836165,3.004203,246347,,W,,,,,,E
+241,72,447,1200,479,Battle of the Utus,Utus,43.5,24.5,217034,,,,,,,,E
+242,72,451,1204,483,Battle of the Catalaunian Plains,Catalaunian Plains,,,-,,,,,,,,E
+243,73,455,1208,487,Sack of Rome,Rome,41.891775,12.486137,423025,,L,,,,y,,E
+244,73,463,1216,495,Battle of Orleans,Orleans,,,-,,W,,,,,,E
+245,70,468,1221,500,Battle of Cap Bon,Cap Bon,37.0836241,11.0416578,315036,,W,,,,,,E
+246,73,486,1239,518,Battle of Soissons,Soissons,49.380839,3.3258515,108772,,L,,,,,,E
+247,73,516,1269,548,Battle of Mons Badonicus,Mons Badonicus,,,-,,W,,,,,,E
