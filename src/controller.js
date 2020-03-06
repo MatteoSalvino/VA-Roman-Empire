@@ -15,7 +15,7 @@ class Controller {
         this.brushedMapData = []
         this.brushedLineData = []
         this.brushedWars = []
-        this.filters = { ground: true, naval: true, civil: true }
+        this.filters = { ground: true, naval: true, civil: true, not_civil: true }
         this.filteredBattles = []
         this.blindsafe = false
         this.darkmode = false
@@ -149,8 +149,11 @@ class Controller {
             var isNaval = b.naval == 'y'
             var isGround = !isNaval
             var isCivil = b.civil == 'y'
+            var isNotCivil = !isCivil
 
-            return (isNaval && self.filters.naval) || (isGround && self.filters.ground) || (isCivil && self.filters.civil)
+            var f1 = (isNaval && self.filters.naval) || (isGround && self.filters.ground)
+            var f2 = (isCivil && self.filters.civil) || (isNotCivil && self.filters.not_civil)
+            return f1 && f2
         })
 
 
@@ -164,8 +167,7 @@ class Controller {
     }
 
     setupFilters() {
-        var ground_counter = 0,
-            naval_counter = 0,
+        var naval_counter = 0,
             civil_counter = 0,
             battles_size = this.battles.length
 
@@ -173,40 +175,50 @@ class Controller {
             .forEach(function(d) {
                 if (d.naval == 'y')
                     naval_counter++
-                    else
-                        ground_counter++
 
-                        if (d.civil == 'y')
-                            civil_counter++
-            });
+                    if (d.civil == 'y')
+                        civil_counter++
+            })
 
         //Filters's labels update
+        var naval_p = Math.ceil((naval_counter / battles_size) * 100)
+        var civil_p = Math.ceil((civil_counter / battles_size) * 100)
+
         d3.select('#ground_filter_label')
-            .text('Ground (' + Math.ceil((ground_counter / battles_size) * 100) + '%)');
+            .text('Ground (' + (100 - naval_p) + '%)');
 
         d3.select('#naval_filter_label')
-            .text('Naval (' + Math.floor((naval_counter / battles_size) * 100) + '%)');
+            .text('Naval (' + naval_p + '%)');
 
         d3.select('#civil_filter_label')
-            .text('Civil (' + Math.floor((civil_counter / battles_size) * 100) + '%)');
+            .text('Civil (' + civil_p + '%)');
+
+        d3.select('#not_civil_filter_label')
+            .text('Not Civil (' + (100 - civil_p) + '%)');
 
 
         var ground_filter = d3.select('#ground_filter'),
             naval_filter = d3.select('#naval_filter'),
-            civil_filter = d3.select('#civil_filter')
+            civil_filter = d3.select('#civil_filter'),
+            not_civil_filter = d3.select("#not_civil_filter")
 
-        ground_filter.on('click', _d => {
+        ground_filter.on('click', _ => {
             this.filters.ground = ground_filter.property('checked')
             this.updateFilteredBattles()
         });
 
-        naval_filter.on('click', _d => {
+        naval_filter.on('click', _ => {
             this.filters.naval = naval_filter.property('checked')
             this.updateFilteredBattles()
         });
 
-        civil_filter.on('click', _d => {
+        civil_filter.on('click', _ => {
             this.filters.civil = civil_filter.property('checked')
+            this.updateFilteredBattles()
+        })
+
+        not_civil_filter.on('click', _ => {
+            this.filters.not_civil = not_civil_filter.property('checked')
             this.updateFilteredBattles()
         })
 
