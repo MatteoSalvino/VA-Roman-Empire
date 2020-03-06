@@ -34,7 +34,6 @@ class Map extends BorderedChart {
 
     onBindView(selector) {
         super.onBindView(selector)
-        this.container.style("margin-top", "7px") //lazy fix
 
         // create a Geo Projection
         projection = d3.geoMercator()
