@@ -1,5 +1,6 @@
 const d3 = require('d3')
 import BorderedChart from './borderedChart'
+import controller from './controller'
 
 var xScale, yScale, points
 
@@ -61,6 +62,8 @@ class ScatterPlot extends BorderedChart {
                 return yScale(d.y);
             })
             .attr('fill', '#159914');
+
+        controller.applyDarkMode(controller.darkmode);
     }
 
     onBrush() {

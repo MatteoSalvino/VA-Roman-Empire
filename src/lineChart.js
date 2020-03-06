@@ -110,6 +110,7 @@ class LineChart extends BorderedChart {
             //reflects changes on map
             controller.resetBrushedLineData();
         });
+        controller.applyDarkMode(controller.darkmode);
     }
 
     drawChart() {
@@ -204,6 +205,7 @@ class LineChart extends BorderedChart {
             //reflect changes on map
             controller.resetBrushedLineData();
         });
+        controller.applyDarkMode(controller.darkmode);
     }
 
     //Note: this always redraws from scratch the chart
@@ -257,6 +259,7 @@ function setupLegend(chart, isCumulative) {
         .data(labels)
         .enter()
         .append('text')
+        .attr('class', 'legend-label')
         .attr('x', 50)
         .attr('y', function(d, i) {
             return 20 + i * 15;

@@ -189,31 +189,31 @@ class Map extends BorderedChart {
 
         legend.append('text')
             .attr('id', 'battle_label')
+            .attr('class', 'legend-label')
             .attr('x', 5)
             .attr('y', 20)
-            .attr('fill', '#808080')
             .attr('font-size', 12)
             .attr('font-weight', 'bold');
 
         legend.append('text')
             .attr('id', 'battle_year')
+            .attr('class', 'legend-label')
             .attr('x', 5)
-            .attr('fill', '#808080')
             .attr('y', 40)
             .attr('font-size', 10);
 
         legend.append('text')
             .attr('id', 'battle_coordinate')
+            .attr('class', 'legend-label')
             .attr('x', 5)
             .attr('y', 60)
-            .attr('fill', '#808080')
             .attr('font-size', 10);
 
         legend.append('text')
             .attr('id', 'battle_outcome')
+            .attr('class', 'legend-label')
             .attr('x', 5)
             .attr('y', 80)
-            .attr('fill', '#808080')
             .attr('font-size', 10);
         return legend;
     }

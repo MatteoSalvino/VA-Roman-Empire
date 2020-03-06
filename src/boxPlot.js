@@ -1,5 +1,6 @@
 const d3 = require('d3');
 import BorderedChart from './borderedChart'
+import controller from './controller'
 
 class BoxPlot extends BorderedChart {
     constructor() {
@@ -43,6 +44,7 @@ class BoxPlot extends BorderedChart {
 
         // Show the main vertical line
         this.chart.append("line")
+            .attr('class', 'box-stroke')
             .attr("x1", center)
             .attr("x2", center)
             .attr("y1", y(min))
@@ -51,6 +53,7 @@ class BoxPlot extends BorderedChart {
 
         // Show the box
         this.chart.append("rect")
+            .attr('class', 'box-area')
             .attr("x", center - boxWidth / 2)
             .attr("y", y(q3))
             .attr("height", function() {
@@ -66,11 +69,14 @@ class BoxPlot extends BorderedChart {
             .data([min, median, max])
             .enter()
             .append("line")
+            .attr('class', 'box-stroke')
             .attr("x1", center - boxWidth / 2)
             .attr("x2", center + boxWidth / 2)
             .attr("y1", function(d) { return (y(d)) })
             .attr("y2", function(d) { return (y(d)) })
             .attr("stroke", "black")
+
+        controller.applyDarkMode(controller.darkmode);
     }
 }
 
