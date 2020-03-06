@@ -232,13 +232,26 @@ class Controller {
         });
 
         darkModeBtn.on('click', function() {
-            if (self.darkmode)
-                d3.select(this).attr('src', './assets/dark-theme.png');
+          if(self.darkmode) {
+            if(self.blindsafe)
+              blindsafeBtn.attr('src', './assets/dark-eye-on.png');
             else
-                d3.select(this).attr('src', './assets/light-theme.png');
+              blindsafeBtn.attr('src', './assets/dark-eye-off.png');
 
-            self.darkmode = !self.darkmode
-                //perform actions based on the value of darkmode flag
+            d3.select(this).attr('src', './assets/dark-theme.png');
+          } else  {
+            if(self.blindsafe)
+              blindsafeBtn.attr('src', './assets/light-eye-on.png');
+            else
+              blindsafeBtn.attr('src', './assets/light-eye-off.png');
+
+            d3.select(this).attr('src', './assets/light-theme.png');
+          }
+            self.applyDarkMode();
+
+          self.darkmode = !self.darkmode
+          self.applyDarkMode()
+          //perform actions based on the value of darkmode flag
         });
 
     }
@@ -249,6 +262,168 @@ class Controller {
             d3.csv('/battles.csv'),
             d3.csv('/wars.csv')
         ])
+    }
+
+    applyDarkMode() {
+      if(this.darkmode) {
+        //Update battles on map
+        d3.selectAll('circle.won')
+          .style('fill', '#1b9e77');
+
+        d3.selectAll('circle.lost')
+          .style('fill', '#d95f02');
+
+        d3.selectAll('circle.civil')
+          .style('fill', '#7570b3');
+
+        d3.selectAll('circle.uncertain')
+          .style('fill', '#e7298a');
+
+        //Update map's paths, svg and legend
+        d3.selectAll('path.state')
+          .style('fill', '#255874')
+          .style('stroke', '#737373');
+
+        d3.selectAll('.svg-content-responsive')
+          .style('background-color', '#4d4d4d')
+
+        d3.selectAll('.legend-label')
+          .style('fill', '#cccccc');
+
+        //Update line chart's lines
+        d3.selectAll('.won-line')
+          .style('stroke', '#1b9e77');
+
+        d3.selectAll('.lost-line')
+          .style('stroke', '#d95f02');
+
+        //Update axis
+        d3.selectAll('path.domain')
+          .style('stroke', '#ffffff');
+
+        d3.selectAll('g.tick')
+          .selectAll('line')
+          .style('stroke', '#ffffff');
+
+        d3.selectAll('g.tick')
+          .selectAll('text')
+          .style('fill', '#ffffff');
+
+        //Update navbar with its items
+        d3.select('.navbar')
+          .classed('bg-light', false)
+          .style('background-color', '#808080');
+
+        d3.select('.navbar-brand')
+          .style('color', '#ffffff');
+
+        d3.select('.navbar-toggler')
+          .style('border-color', '#ffffff');
+
+        d3.selectAll('.custom-control-label')
+          .style('color', '#ffffff');
+
+        //Update stacked chart layers
+        d3.selectAll('g.layer')
+          .style('fill', function(_d, i) {
+              if(i == 0)
+                return '#1b9e77';
+              else if(i == 1)
+                return '#d95f02';
+              else
+                return '#e7298a';
+          });
+
+        //Update boxplot's lines and area
+        d3.selectAll('.box-stroke')
+          .style('stroke', '#ffffff');
+
+        d3.selectAll('.box-area')
+          .style('fill', '#255874')
+          .style('stroke', '#ffffff');
+
+        d3.selectAll('div.row')
+          .style('background-color', '#4d4d4d');
+
+      } else {
+        //Update battles on map
+        d3.selectAll('circle.won')
+          .style('fill', '#33a02c');
+
+        d3.selectAll('circle.lost')
+          .style('fill', '#1f78b4');
+
+        d3.selectAll('circle.civil')
+          .style('fill', '#b2df8a');
+
+        d3.selectAll('circle.uncertain')
+          .style('fill', '#a6cee3');
+
+        //Update map's paths, svg and legend
+        d3.selectAll('path.state')
+          .style('fill', '#b1d4e7')
+          .style('stroke', '#b3b3b3');
+
+        d3.selectAll('.svg-content-responsive')
+          .style('background-color', '#ffffff')
+
+        d3.selectAll('.legend-label')
+          .style('fill', '#808080');
+
+        //Update line chart's lines
+        d3.selectAll('.won-line')
+          .style('stroke', '#33a02c');
+
+        d3.selectAll('.lost-line')
+          .style('stroke', '#1f78b4');
+
+        //Update axis colors
+        d3.selectAll('path.domain')
+          .style('stroke', '#000000');
+
+        d3.selectAll('g.tick')
+          .selectAll('line')
+          .style('stroke', '#000000');
+
+        d3.selectAll('g.tick')
+          .selectAll('text')
+          .style('fill', '#000000');
+
+        //Update navbar with its items
+        d3.select('.navbar')
+          .classed('bg-light', true);
+
+        d3.select('.navbar-brand')
+          .style('color', '#000000');
+
+        d3.select('.navbar-toggler')
+          .style('border-color', 'rgba(0, 0, 0, 0.1)');
+
+        d3.selectAll('.custom-control-label')
+          .style('color', '#000000');
+
+        //Update stacked chart layers
+        d3.selectAll('g.layer')
+          .style('fill', function(_d, i) {
+              if(i == 0)
+                return '#33a02c';
+              else if(i == 1)
+                return '#1f78b4';
+              else
+                return '#a6cee3';
+            });
+
+        //Update boxplot's lines and area
+        d3.selectAll('.box-stroke')
+          .style('stroke', '#000000');
+
+        d3.selectAll('.box-area')
+          .style('fill', '#69b3a2')
+          .style('stroke', '#000000');
+
+        d3.selectAll('div.row')
+          .style('background-color', '#ffffff');
+      }
     }
 }
 

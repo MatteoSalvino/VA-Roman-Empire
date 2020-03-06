@@ -1,5 +1,6 @@
 const d3 = require('d3');
 import BorderedChart from './borderedChart';
+import controller from './controller';
 
 var xScale, yScale, groups, tooltip, legend
 
@@ -102,6 +103,7 @@ class StackedBarChart extends BorderedChart {
             .style('text-anchor', 'middle');
 
         this._setupLegend(colors);
+        controller.applyDarkMode(controller.darkmode);
     }
 
     notifyDataChanged() {
@@ -169,6 +171,7 @@ class StackedBarChart extends BorderedChart {
             .data(colors)
             .enter()
             .append('text')
+            .attr('class', 'legend-label')
             .attr('x', 50)
             .attr('y', function(_d, i) {
                 return 20 + i * 15;
