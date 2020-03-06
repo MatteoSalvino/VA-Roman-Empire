@@ -2,7 +2,7 @@ import mapChart from './map'
 import lineChart from './lineChart'
 import stackedBarChart from './stackedBarChart'
 import boxplot from './boxPlot'
-import scatterPlot from './scatterPlot';
+import scatterPlot from './scatterPlot'
 
 const d3 = require('d3');
 
@@ -88,6 +88,13 @@ class Controller {
         stackedBarChart.notifyDataChanged(foo)
     }
 
+    /**
+     * Method to be called from within app/index. It loads the dataset and
+     * draws all the charts. Moreover it initializes the filters and adds the
+     * corresponding listeners.
+     * 
+     * @throws an error, and logs to console, if data cannot be read.
+     */
     setup() {
         var self = this
         this.loadData().then(function(data) {
@@ -96,6 +103,7 @@ class Controller {
             self.filteredBattles = data[1]
             self.brushedLineData = self.battles
             self.wars = data[2]
+            self.setupFilters()
             self.setupGraphs()
         }).catch(function(error) {
             console.log(error);
@@ -103,6 +111,9 @@ class Controller {
         })
     }
 
+    /**
+     * Draws all the charts and makes the proper bindings.
+     */
     setupGraphs() {
         mapChart.bind("#map_container")
         lineChart.bind("#line_chart_container")
@@ -124,25 +135,11 @@ class Controller {
         boxplot.notifyDataChanged()
 
         scatterPlot.notifyDataChanged()
-
-        this.setupButtons()
-        this.setupFilters()
     }
 
-    setupButtons() {
-        d3.select("#cumulativeBtn")
-            .on("click", _e => {
-                lineChart.clear();
-                lineChart.drawCumulativeChart();
-            });
-
-        d3.select("#centuriesBtn")
-            .on("click", _e => {
-                lineChart.clear();
-                lineChart.drawChart();
-            });
-    }
-
+    /**
+     * Updates the charts when filters change (they are handled as checkboxes).s
+     */
     updateFilteredBattles() {
         var self = this
         this.filteredBattles = this.battles.filter(function(b) {
@@ -196,7 +193,6 @@ class Controller {
         d3.select('#not_civil_filter_label')
             .text('Not Civil (' + (100 - civil_p) + '%)');
 
-
         var ground_filter = d3.select('#ground_filter'),
             naval_filter = d3.select('#naval_filter'),
             civil_filter = d3.select('#civil_filter'),
@@ -227,45 +223,28 @@ class Controller {
             self = this;
 
         blindsafeBtn.on('click', function() {
-            if (self.blindsafe) {
-                if (self.darkmode)
-                    d3.select(this).attr('src', './assets/light-eye-off.png');
-                else
-                    d3.select(this).attr('src', './assets/dark-eye-off.png');
-            } else {
-                if (self.darkmode)
-                    d3.select(this).attr('src', './assets/light-eye-on.png');
-                else
-                    d3.select(this).attr('src', './assets/dark-eye-on.png');
-            }
+            var bg = self.darkmode ? "light" : "dark"
+            var blind = self.blindsafe ? "on" : "off"
+            d3.select(this).attr('src', './assets/' + bg + '-eye-' + blind + '.png ')
 
             self.blindsafe = !self.blindsafe
                 //perform actions based on the value of blindsafe flag
         });
 
         darkModeBtn.on('click', function() {
-            if (self.darkmode) {
-                if (self.blindsafe)
-                    blindsafeBtn.attr('src', './assets/dark-eye-on.png');
-                else
-                    blindsafeBtn.attr('src', './assets/dark-eye-off.png');
+            var theme = self.darkmode ? "dark" : "light"
+            var blind = self.blindsafe ? "on" : "off"
 
-                d3.select(this).attr('src', './assets/dark-theme.png');
-            } else {
-                if (self.blindsafe)
-                    blindsafeBtn.attr('src', './assets/light-eye-on.png');
-                else
-                    blindsafeBtn.attr('src', './assets/light-eye-off.png');
+            blindsafeBtn.attr('src', './assets/' + theme + '-eye-' + blind + '.png ')
 
-                d3.select(this).attr('src', './assets/light-theme.png');
-            }
-            self.applyDarkMode();
+            d3.select(this).attr('src', './assets/' + theme + '-theme.png')
 
+            //update self
             self.darkmode = !self.darkmode
-            self.applyDarkMode()
-                //perform actions based on the value of darkmode flag
-        });
 
+            //perform actions based on the value of darkmode flag
+            self.applyDarkMode()
+        })
     }
 
     loadData() {
