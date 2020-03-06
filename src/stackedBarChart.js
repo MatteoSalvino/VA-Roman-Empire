@@ -54,12 +54,12 @@ class StackedBarChart extends BorderedChart {
             .append('g')
             .attr('class', 'layer')
             .attr('fill', function(_d, i) {
-                if(i == 0)
-                  return '#33a02c';
-                else if(i == 1)
-                  return '#1f78b4';
+                if (i == 0)
+                    return '#33a02c';
+                else if (i == 1)
+                    return '#1f78b4';
                 else
-                  return '#a6cee3';
+                    return '#a6cee3';
             });
 
         groups.selectAll("rect")
@@ -151,12 +151,12 @@ class StackedBarChart extends BorderedChart {
             .enter()
             .append('circle')
             .attr('class', function(d, i) {
-              if(i == 0)
-                return 'won';
-              else if(i == 1)
-                return 'lost';
-              else
-                return 'uncertain';
+                if (i == 0)
+                    return 'won';
+                else if (i == 1)
+                    return 'lost';
+                else
+                    return 'uncertain';
             })
             .attr('cx', 30)
             .attr('cy', function(_d, i) {

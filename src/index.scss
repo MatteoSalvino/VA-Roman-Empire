@@ -10,35 +10,39 @@ rect {
 }
 
 .nav-item {
-  margin-left: 15px;
-  margin-right: 5px;
+    margin-left: 15px;
+    margin-right: 5px;
 }
 
-#map_container, #line_chart_container, #bar_chart_container,
-#boxplot_container, #scatterplot_container {
-  border: 5px solid #b1d4e7;
+#map_container,
+#line_chart_container,
+#bar_chart_container,
+#boxplot_container,
+#scatterplot_container {
+    border: 5px solid #b1d4e7;
 }
 
-#cumulativeBtn, #centuriesBtn {
-  margin: 5px;
-
+#cumulativeBtn,
+#centuriesBtn {
+    margin: 5px;
 }
 
 svg text {
     pointer-events: none;
 }
 
-.won-line, .lost-line {
+.won-line,
+.lost-line {
     fill: none;
     stroke-width: 3;
 }
 
 .won-line {
-  stroke: #33a02c;
+    stroke: #33a02c;
 }
 
 .lost-line {
-  stroke: #1f78b4;
+    stroke: #1f78b4;
 }
 
 .svg-container {
@@ -71,22 +75,23 @@ svg .rect_b {
 }
 
 .state {
-  fill: #b1d4e7;
-  stroke: #b3b3b3;
-  pointer-events: none;
+    fill: #b1d4e7;
+    stroke: #b3b3b3;
+    pointer-events: none;
 }
 
 .won {
-  fill: #33a02c;
+    fill: #33a02c;
 }
 
 .lost {
-  fill: #1f78b4;
+    fill: #1f78b4;
 }
+
 .civil {
-  fill: #b2df8a;
+    fill: #b2df8a;
 }
 
 .uncertain {
-  fill: #a6cee3;
+    fill: #a6cee3;
 }

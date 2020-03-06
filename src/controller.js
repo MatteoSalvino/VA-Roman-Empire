@@ -168,30 +168,30 @@ class Controller {
 
     setupFilters() {
         var ground_counter = 0,
-            naval_counter  = 0,
-            civil_counter  = 0,
+            naval_counter = 0,
+            civil_counter = 0,
             battles_size = this.battles.length
 
         this.battles
             .forEach(function(d) {
-              if(d.naval == 'y')
-                naval_counter++
-              else
-                ground_counter++
+                if (d.naval == 'y')
+                    naval_counter++
+                    else
+                        ground_counter++
 
-              if(d.civil == 'y')
-                civil_counter++
+                        if (d.civil == 'y')
+                            civil_counter++
             });
 
         //Filters's labels update
         d3.select('#ground_filter_label')
-          .text('Ground (' + Math.ceil((ground_counter / battles_size) * 100) + '%)');
+            .text('Ground (' + Math.ceil((ground_counter / battles_size) * 100) + '%)');
 
         d3.select('#naval_filter_label')
-        .text('Naval (' + Math.floor((naval_counter / battles_size) * 100) + '%)');
+            .text('Naval (' + Math.floor((naval_counter / battles_size) * 100) + '%)');
 
         d3.select('#civil_filter_label')
-        .text('Civil (' + Math.floor((civil_counter / battles_size) * 100) + '%)');
+            .text('Civil (' + Math.floor((civil_counter / battles_size) * 100) + '%)');
 
 
         var ground_filter = d3.select('#ground_filter'),
@@ -218,30 +218,30 @@ class Controller {
             self = this;
 
         blindsafeBtn.on('click', function() {
-          if(self.blindsafe) {
-            if(self.darkmode)
-              d3.select(this).attr('src', './assets/light-eye-off.png');
-            else
-                d3.select(this).attr('src', './assets/dark-eye-off.png');
-          } else {
-            if(self.darkmode)
-              d3.select(this).attr('src', './assets/light-eye-on.png');
-            else
-              d3.select(this).attr('src', './assets/dark-eye-on.png');
-          }
+            if (self.blindsafe) {
+                if (self.darkmode)
+                    d3.select(this).attr('src', './assets/light-eye-off.png');
+                else
+                    d3.select(this).attr('src', './assets/dark-eye-off.png');
+            } else {
+                if (self.darkmode)
+                    d3.select(this).attr('src', './assets/light-eye-on.png');
+                else
+                    d3.select(this).attr('src', './assets/dark-eye-on.png');
+            }
 
-          self.blindsafe = !self.blindsafe
-          //perform actions based on the value of blindsafe flag
+            self.blindsafe = !self.blindsafe
+                //perform actions based on the value of blindsafe flag
         });
 
         darkModeBtn.on('click', function() {
-          if(self.darkmode)
-            d3.select(this).attr('src', './assets/dark-theme.png');
-          else
-            d3.select(this).attr('src', './assets/light-theme.png');
+            if (self.darkmode)
+                d3.select(this).attr('src', './assets/dark-theme.png');
+            else
+                d3.select(this).attr('src', './assets/light-theme.png');
 
-          self.darkmode = !self.darkmode
-          //perform actions based on the value of darkmode flag
+            self.darkmode = !self.darkmode
+                //perform actions based on the value of darkmode flag
         });
 
     }

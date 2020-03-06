@@ -100,12 +100,12 @@ class LineChart extends BorderedChart {
             line.selectAll('.won-line')
                 .transition()
                 .duration(1500)
-                  .attr('d', path);
+                .attr('d', path);
 
             line.selectAll('.lost-line')
                 .transition()
                 .duration(1500)
-                  .attr('d', path);
+                .attr('d', path);
 
             //reflects changes on map
             controller.resetBrushedLineData();
@@ -199,7 +199,7 @@ class LineChart extends BorderedChart {
             line.selectAll('.lost-line')
                 .transition()
                 .duration(1500)
-                  .attr('d', path);
+                .attr('d', path);
 
             //reflect changes on map
             controller.resetBrushedLineData();
@@ -241,10 +241,10 @@ function setupLegend(chart, isCumulative) {
         .enter()
         .append('circle')
         .attr('class', function(d, i) {
-          if(i == 0)
-            return 'won';
-         else
-            return 'lost';
+            if (i == 0)
+                return 'won';
+            else
+                return 'lost';
         })
         .attr('cx', 30)
         .attr('cy', function(d, i) {
@@ -304,10 +304,10 @@ function zooming(self) {
     //Transitioning line
     line.selectAll('.won-line')
         .transition(transition)
-          .attr('d', path);
+        .attr('d', path);
 
-  line.selectAll('.lost-line')
-      .transition(transition)
+    line.selectAll('.lost-line')
+        .transition(transition)
         .attr('d', path);
 }
 

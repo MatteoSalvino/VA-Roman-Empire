@@ -79,14 +79,14 @@ class Map extends BorderedChart {
                 return projection([d.longitude, d.latitude])[1];
             })
             .attr('class', function(d) {
-              if(d.outcome == 'W')
-                return 'won';
-              else if(d.outcome == 'L')
-                return 'lost';
-              else if(d.outcome == 'C')
-                return 'civil';
-              else
-                return 'uncertain';
+                if (d.outcome == 'W')
+                    return 'won';
+                else if (d.outcome == 'L')
+                    return 'lost';
+                else if (d.outcome == 'C')
+                    return 'civil';
+                else
+                    return 'uncertain';
             })
             .attr('r', 4)
             .attr('fill', 'blue')

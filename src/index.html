@@ -13,59 +13,59 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <a href="." class="navbar-brand">Roman Empire - VA Project</a>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a href="." class="navbar-brand">Roman Empire - VA Project</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav ml-auto d-lg-flex align-items-center">
-        <li class="nav-item h-100">
-          <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" class="custom-control-input" id="ground_filter" name="ground_filter" value="ground" checked />
-            <label class="custom-control-label" id="ground_filter_label" for="ground_filter" style="font-weight:bold;">Ground (%)</label>
-          </div>
-        </li>
-        <li class="nav-item h-100">
-          <div class="custom-control custom-checkbox custom-control-inline">
-              <input type="checkbox" class="custom-control-input" id="naval_filter" name="naval_filter" value="naval" checked />
-              <label class="custom-control-label" id="naval_filter_label" for="naval_filter" style="font-weight:bold;">Naval (%)</label>
-          </div>
-        </li>
-        <li class="nav-item h-100">
-          <div class="custom-control custom-checkbox custom-control-inline">
-              <input type="checkbox" class="custom-control-input" id="civil_filter" name="civil_filter" value="civil" checked />
-              <label class="custom-control-label" id="civil_filter_label" for="civil_filter" style="font-weight:bold;">Civil (%)</label>
-          </div>
-        </li>
-        <li class="nav-item h-100">
-          <input type="image" src="./assets/dark-eye-off.png" id="blindsafeBtn" />
-        </li>
-        <li class="nav-item h-100">
-          <input type="image" src="./assets/dark-theme.png" id="darkModeBtn" />
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6" id="map_container"></div>
-      <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6" id="line_chart_container">
-        <div>
-          <button type="button" class="btn btn-primary" id="cumulativeBtn">Cumulative</button>
-          <button type="button" class="btn btn-primary" id="centuriesBtn">By century</button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto d-lg-flex align-items-center">
+                <li class="nav-item h-100">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="ground_filter" name="ground_filter" value="ground" checked />
+                        <label class="custom-control-label" id="ground_filter_label" for="ground_filter" style="font-weight:bold;">Ground (%)</label>
+                    </div>
+                </li>
+                <li class="nav-item h-100">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="naval_filter" name="naval_filter" value="naval" checked />
+                        <label class="custom-control-label" id="naval_filter_label" for="naval_filter" style="font-weight:bold;">Naval (%)</label>
+                    </div>
+                </li>
+                <li class="nav-item h-100">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="civil_filter" name="civil_filter" value="civil" checked />
+                        <label class="custom-control-label" id="civil_filter_label" for="civil_filter" style="font-weight:bold;">Civil (%)</label>
+                    </div>
+                </li>
+                <li class="nav-item h-100">
+                    <input type="image" src="./assets/dark-eye-off.png" id="blindsafeBtn" />
+                </li>
+                <li class="nav-item h-100">
+                    <input type="image" src="./assets/dark-theme.png" id="darkModeBtn" />
+                </li>
+            </ul>
         </div>
-      </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6" id="map_container"></div>
+            <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6" id="line_chart_container">
+                <div>
+                    <button type="button" class="btn btn-primary" id="cumulativeBtn">Cumulative</button>
+                    <button type="button" class="btn btn-primary" id="centuriesBtn">By century</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6 col-lg-4 col-xl-4" id="bar_chart_container"></div>
+            <div class="col-xs-6 col-md-6 col-lg-4 col-xl-4" id="boxplot_container"></div>
+            <div class="col-xs-6 col-md-6 col-lg-4 col-xl-4" id="scatterplot_container"></div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-xs-6 col-md-6 col-lg-4 col-xl-4" id="bar_chart_container"></div>
-      <div class="col-xs-6 col-md-6 col-lg-4 col-xl-4" id="boxplot_container"></div>
-      <div class="col-xs-6 col-md-6 col-lg-4 col-xl-4" id="scatterplot_container"></div>
-    </div>
-  </div>
-  <h2 style="margin-top: 20px;">About</h2>
-  <p>This is a project for Visual Analytics course.</p>
-  <!--Add link to GitHub-->
+    <h2 style="margin-top: 20px;">About</h2>
+    <p>This is a project for Visual Analytics course.</p>
+    <!--Add link to GitHub-->
 </body>
 
 </html>

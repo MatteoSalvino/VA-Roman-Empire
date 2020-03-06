@@ -20,7 +20,6 @@ class BorderedChart {
             // Container class to make it responsive.
             .classed("svg-container", true);
 
-        console.log(this.width)
         this.chart = this.container.append("svg")
             // Responsive SVG needs these 2 attributes and no width and height attr.
             .attr("preserveAspectRatio", "xMinYMin meet")
@@ -31,7 +30,7 @@ class BorderedChart {
 
     //Fixed with css attributes
     drawBorders() {
-      /*
+        /*
         this.chart.append("rect")
             .classed("rect_b", true)
             .attr("width", this.width)
