@@ -220,83 +220,83 @@ class Map extends BorderedChart {
     }
 
     applyThemeChanged(darkmode, blindsafe) {
-      if (darkmode && !blindsafe) {
-        //Update battles on map
-        markerGroup.selectAll('circle.won')
-            .style('fill', '#1b9e77');
+        if (darkmode && !blindsafe) {
+            //Update battles on map
+            markerGroup.selectAll('circle.won')
+                .style('fill', '#1b9e77');
 
-        markerGroup.selectAll('circle.lost')
-            .style('fill', '#d95f02');
+            markerGroup.selectAll('circle.lost')
+                .style('fill', '#d95f02');
 
-        markerGroup.selectAll('circle.civil')
-            .style('fill', '#7570b3');
+            markerGroup.selectAll('circle.civil')
+                .style('fill', '#7570b3');
 
-        markerGroup.selectAll('circle.uncertain')
-            .style('fill', '#e7298a');
+            markerGroup.selectAll('circle.uncertain')
+                .style('fill', '#e7298a');
 
-        //Update map's paths, svg and legend
-        this.chart.selectAll('path.state')
-            .style('fill', '#255874')
-            .style('stroke', '#737373');
+            //Update map's paths, svg and legend
+            this.chart.selectAll('path.state')
+                .style('fill', '#255874')
+                .style('stroke', '#737373');
 
-        legend.selectAll('text.legend-label')
+            legend.selectAll('text.legend-label')
                 .style('fill', '#cccccc');
 
-      } else if((!darkmode && blindsafe) || (darkmode && blindsafe)) {
-        //Update battles on map
-        markerGroup.selectAll('circle.won')
-            .style('fill', '#33a02c');
+        } else if ((!darkmode && blindsafe) || (darkmode && blindsafe)) {
+            //Update battles on map
+            markerGroup.selectAll('circle.won')
+                .style('fill', '#33a02c');
 
-        markerGroup.selectAll('circle.lost')
-            .style('fill', '#1f78b4');
+            markerGroup.selectAll('circle.lost')
+                .style('fill', '#1f78b4');
 
-        markerGroup.selectAll('circle.civil')
-            .style('fill', '#b2df8a');
+            markerGroup.selectAll('circle.civil')
+                .style('fill', '#b2df8a');
 
-        markerGroup.selectAll('circle.uncertain')
-            .style('fill', '#a6cee3');
+            markerGroup.selectAll('circle.uncertain')
+                .style('fill', '#a6cee3');
 
-        if(!darkmode) {
-          //Update map's paths, svg and legend
-          this.chart.selectAll('path.state')
-              .style('fill', '#b1d4e7')
-              .style('stroke', '#b3b3b3');
+            if (!darkmode) {
+                //Update map's paths, svg and legend
+                this.chart.selectAll('path.state')
+                    .style('fill', '#b1d4e7')
+                    .style('stroke', '#b3b3b3');
 
-          legend.selectAll('text.legend-label')
-                  .style('fill', '#808080');
+                legend.selectAll('text.legend-label')
+                    .style('fill', '#808080');
+            } else {
+                //Update map's paths, svg and legend
+                this.chart.selectAll('path.state')
+                    .style('fill', '#255874')
+                    .style('stroke', '#737373');
+
+                legend.selectAll('text.legend-label')
+                    .style('fill', '#cccccc');
+            }
         } else {
-          //Update map's paths, svg and legend
-          this.chart.selectAll('path.state')
-              .style('fill', '#255874')
-              .style('stroke', '#737373');
+            //!darkmode && !blindsafe
 
-          legend.selectAll('text.legend-label')
-                  .style('fill', '#cccccc');
+            //Update battles on map
+            markerGroup.selectAll('circle.won')
+                .style('fill', '#8dd3c7');
+
+            markerGroup.selectAll('circle.lost')
+                .style('fill', '#fb8072');
+
+            markerGroup.selectAll('circle.civil')
+                .style('fill', '#ffffb3');
+
+            markerGroup.selectAll('circle.uncertain')
+                .style('fill', '#bebada');
+
+            //Update map's paths, svg and legend
+            this.chart.selectAll('path.state')
+                .style('fill', '#b1d4e7')
+                .style('stroke', '#b3b3b3');
+
+            legend.selectAll('text.legend-label')
+                .style('fill', '#808080');
         }
-      } else {
-        //!darkmode && !blindsafe
-
-        //Update battles on map
-        markerGroup.selectAll('circle.won')
-            .style('fill', '#8dd3c7');
-
-        markerGroup.selectAll('circle.lost')
-            .style('fill', '#fb8072');
-
-        markerGroup.selectAll('circle.civil')
-            .style('fill', '#ffffb3');
-
-        markerGroup.selectAll('circle.uncertain')
-            .style('fill', '#bebada');
-
-        //Update map's paths, svg and legend
-        this.chart.selectAll('path.state')
-              .style('fill', '#b1d4e7')
-              .style('stroke', '#b3b3b3');
-
-        legend.selectAll('text.legend-label')
-                  .style('fill', '#808080');
-      }
     }
 }
 

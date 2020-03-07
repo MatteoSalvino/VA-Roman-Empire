@@ -190,129 +190,129 @@ class StackedBarChart extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-      if(blindsafe) {
-        //Update stacked chart layers
-        this.chart.selectAll('g.layer')
-            .style('fill', function(_d, i) {
-                if (i == 0)
-                    return '#33a02c';
-                else if (i == 1)
-                    return '#1f78b4';
-                else
-                    return '#a6cee3';
-            });
+        if (blindsafe) {
+            //Update stacked chart layers
+            this.chart.selectAll('g.layer')
+                .style('fill', function(_d, i) {
+                    if (i == 0)
+                        return '#33a02c';
+                    else if (i == 1)
+                        return '#1f78b4';
+                    else
+                        return '#a6cee3';
+                });
 
-        //Update legend components
-        legend.select('circle.won')
+            //Update legend components
+            legend.select('circle.won')
                 .style('fill', '#33a02c');
 
-        legend.select('circle.lost')
+            legend.select('circle.lost')
                 .style('fill', '#1f78b4');
 
-        legend.select('circle.uncertain')
+            legend.select('circle.uncertain')
                 .style('fill', '#a6cee3');
-      } else {
-        if(darkmode) {
-          //Update stacked chart layers
-          this.chart.selectAll('g.layer')
-              .style('fill', function(_d, i) {
-                  if (i == 0)
-                      return '#1b9e77';
-                  else if (i == 1)
-                      return '#d95f02';
-                  else
-                      return '#e7298a';
-              });
-
-          //Update legend components
-          legend.select('circle.won')
-                  .style('fill', '#1b9e77');
-
-          legend.select('circle.lost')
-                  .style('fill', '#d95f02');
-
-          legend.select('circle.uncertain')
-                  .style('fill', '#e7298a');
         } else {
-          //Update stacked chart layers
-          this.chart.selectAll('g.layer')
-              .style('fill', function(_d, i) {
-                  if (i == 0)
-                      return '#8dd3c7';
-                  else if (i == 1)
-                      return '#fb8072';
-                  else
-                      return '#bebada';
-              });
+            if (darkmode) {
+                //Update stacked chart layers
+                this.chart.selectAll('g.layer')
+                    .style('fill', function(_d, i) {
+                        if (i == 0)
+                            return '#1b9e77';
+                        else if (i == 1)
+                            return '#d95f02';
+                        else
+                            return '#e7298a';
+                    });
 
-          //Update legend components
-          legend.select('circle.won')
-                  .style('fill', '#8dd3c7');
+                //Update legend components
+                legend.select('circle.won')
+                    .style('fill', '#1b9e77');
 
-          legend.select('circle.lost')
-                  .style('fill', '#fb8072');
+                legend.select('circle.lost')
+                    .style('fill', '#d95f02');
 
-          legend.select('circle.uncertain')
-                  .style('fill', '#bebada');
+                legend.select('circle.uncertain')
+                    .style('fill', '#e7298a');
+            } else {
+                //Update stacked chart layers
+                this.chart.selectAll('g.layer')
+                    .style('fill', function(_d, i) {
+                        if (i == 0)
+                            return '#8dd3c7';
+                        else if (i == 1)
+                            return '#fb8072';
+                        else
+                            return '#bebada';
+                    });
+
+                //Update legend components
+                legend.select('circle.won')
+                    .style('fill', '#8dd3c7');
+
+                legend.select('circle.lost')
+                    .style('fill', '#fb8072');
+
+                legend.select('circle.uncertain')
+                    .style('fill', '#bebada');
+            }
         }
-      }
     }
 
     applyThemeChanged(darkmode, blindsafe) {
-      if(darkmode) {
-        legend.selectAll('text.legend-label')
+        if (darkmode) {
+            legend.selectAll('text.legend-label')
                 .style('fill', '#cccccc');
 
-        //Update axis components
-        xAxis.select('path.domain')
-              .style('stroke', '#ffffff');
+            //Update axis components
+            xAxis.select('path.domain')
+                .style('stroke', '#ffffff');
 
-        xAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#ffffff');
+            xAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        xAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#ffffff');
+            xAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
 
-        yAxis.select('path.domain')
-              .style('stroke', '#ffffff');
+            yAxis.select('path.domain')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#ffffff');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#ffffff');
-      } else {
-        legend.selectAll('text.legend-label')
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
+        } else {
+            legend.selectAll('text.legend-label')
                 .style('fill', '#808080');
 
-        //Update axis components
-        xAxis.select('path.domain')
+            //Update axis components
+            xAxis.select('path.domain')
                 .style('stroke', '#000000');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('line')
-            .style('stroke', '#000000');
+            xAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('text')
-            .style('fill', '#000000');
+            xAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
 
-        yAxis.select('path.domain')
-              .style('stroke', '#000000');
+            yAxis.select('path.domain')
+                .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#000000');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#000000');
-      }
-      this.applyBlindSafe(darkmode, blindsafe);
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
+        }
+        this.applyBlindSafe(darkmode, blindsafe);
     }
 }
 

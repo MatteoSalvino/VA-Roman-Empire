@@ -94,58 +94,58 @@ class ScatterPlot extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-      //To-Do : implements actions !
+        //To-Do : implements actions !
     }
 
     applyThemeChanged(darkmode, blindsafe) {
-      if(darkmode) {
-        //Update axis components
-        xAxis.select('path.domain')
-            .style('stroke', '#ffffff');
+        if (darkmode) {
+            //Update axis components
+            xAxis.select('path.domain')
+                .style('stroke', '#ffffff');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('line')
-            .style('stroke', '#ffffff');
+            xAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('text')
-            .style('fill', '#ffffff');
+            xAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
 
-        yAxis.select('path.domain')
-              .style('stroke', '#ffffff');
+            yAxis.select('path.domain')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#ffffff');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#ffffff');
-      }else {
-        //Update axis components
-        xAxis.select('path.domain')
-            .style('stroke', '#000000');
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
+        } else {
+            //Update axis components
+            xAxis.select('path.domain')
+                .style('stroke', '#000000');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('line')
-            .style('stroke', '#000000');
+            xAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('text')
-            .style('fill', '#000000');
+            xAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
 
-        yAxis.select('path.domain')
-              .style('stroke', '#000000');
+            yAxis.select('path.domain')
+                .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#000000');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#000000');
-      }
-      this.applyBlindSafe(darkmode, blindsafe);
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
+        }
+        this.applyBlindSafe(darkmode, blindsafe);
     }
 }
 export default new ScatterPlot()

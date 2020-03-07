@@ -256,59 +256,59 @@ class Controller {
     }
 
     applyDarkMode() {
-      mapChart.applyThemeChanged(this.darkmode, this.blindsafe);
-      lineChart.applyThemeChanged(this.darkmode, this.blindsafe);
-      stackedBarChart.applyThemeChanged(this.darkmode, this.blindsafe);
-      boxplot.applyThemeChanged(this.darkmode, this.blindsafe);
-      scatterPlot.applyThemeChanged(this.darkmode, this.blindsafe);
+        mapChart.applyThemeChanged(this.darkmode, this.blindsafe);
+        lineChart.applyThemeChanged(this.darkmode, this.blindsafe);
+        stackedBarChart.applyThemeChanged(this.darkmode, this.blindsafe);
+        boxplot.applyThemeChanged(this.darkmode, this.blindsafe);
+        scatterPlot.applyThemeChanged(this.darkmode, this.blindsafe);
 
-      //General changes
-      if(this.darkmode) {
-        d3.selectAll('.svg-content-responsive')
-            .style('background-color', '#4d4d4d')
+        //General changes
+        if (this.darkmode) {
+            d3.selectAll('.svg-content-responsive')
+                .style('background-color', '#4d4d4d')
 
-        d3.selectAll('.container-fluid')
-            .style('background-color', '#4d4d4d')
+            d3.selectAll('.container-fluid')
+                .style('background-color', '#4d4d4d')
 
-        d3.selectAll('div.row')
-            .style('background-color', '#4d4d4d');
+            d3.selectAll('div.row')
+                .style('background-color', '#4d4d4d');
 
-        //Update navbar with its items
-        d3.select('.navbar')
-          .classed('bg-light', false)
-            .style('background-color', '#808080');
+            //Update navbar with its items
+            d3.select('.navbar')
+                .classed('bg-light', false)
+                .style('background-color', '#808080');
 
-        d3.select('.navbar-brand')
-            .style('color', '#ffffff');
+            d3.select('.navbar-brand')
+                .style('color', '#ffffff');
 
-        d3.select('.navbar-toggler')
-            .style('border-color', '#ffffff');
+            d3.select('.navbar-toggler')
+                .style('border-color', '#ffffff');
 
-        d3.selectAll('.custom-control-label')
-            .style('color', '#ffffff');
-      } else {
-        d3.selectAll('.svg-content-responsive')
-            .style('background-color', '#ffffff')
+            d3.selectAll('.custom-control-label')
+                .style('color', '#ffffff');
+        } else {
+            d3.selectAll('.svg-content-responsive')
+                .style('background-color', '#ffffff')
 
-        d3.selectAll('.container-fluid')
-            .style('background-color', '#ffffff')
+            d3.selectAll('.container-fluid')
+                .style('background-color', '#ffffff')
 
-        d3.selectAll('div.row')
-            .style('background-color', '#ffffff');
+            d3.selectAll('div.row')
+                .style('background-color', '#ffffff');
 
-        //Update navbar with its items
-        d3.select('.navbar')
-          .classed('bg-light', true);
+            //Update navbar with its items
+            d3.select('.navbar')
+                .classed('bg-light', true);
 
-        d3.select('.navbar-brand')
-            .style('color', '#000000');
+            d3.select('.navbar-brand')
+                .style('color', '#000000');
 
-        d3.select('.navbar-toggler')
-            .style('border-color', 'rgba(0, 0, 0, 0.1)');
+            d3.select('.navbar-toggler')
+                .style('border-color', 'rgba(0, 0, 0, 0.1)');
 
-        d3.selectAll('.custom-control-label')
-            .style('color', '#000000');
-      }
+            d3.selectAll('.custom-control-label')
+                .style('color', '#000000');
+        }
     }
 }
 

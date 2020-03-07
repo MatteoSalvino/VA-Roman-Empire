@@ -82,59 +82,59 @@ class BoxPlot extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-      console.log(darkmode, blindsafe)
-      if(blindsafe) {
-        d3.selectAll('.box-area')
-            .style('fill', '#fb8072');
-      } else {
-        if(darkmode) {
-          d3.selectAll('.box-area')
-              .style('fill', '#255874');
+        console.log(darkmode, blindsafe)
+        if (blindsafe) {
+            d3.selectAll('.box-area')
+                .style('fill', '#fb8072');
         } else {
-          d3.selectAll('.box-area')
-              .style('fill', '#69b3a2');
+            if (darkmode) {
+                d3.selectAll('.box-area')
+                    .style('fill', '#255874');
+            } else {
+                d3.selectAll('.box-area')
+                    .style('fill', '#69b3a2');
+            }
         }
-      }
     }
 
     applyThemeChanged(darkmode, blindsafe) {
-      if(darkmode) {
-        yAxis.select('path.domain')
-              .style('stroke', '#ffffff');
-
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
+        if (darkmode) {
+            yAxis.select('path.domain')
                 .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#ffffff');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        //Update boxplot's lines and area
-        d3.selectAll('.box-stroke')
-            .style('stroke', '#ffffff');
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
 
-        d3.selectAll('.box-area')
-              .style('stroke', '#ffffff');
-      } else {
-        yAxis.selectAll('path.domain')
-              .style('stroke', '#000000');
+            //Update boxplot's lines and area
+            d3.selectAll('.box-stroke')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
+            d3.selectAll('.box-area')
+                .style('stroke', '#ffffff');
+        } else {
+            yAxis.selectAll('path.domain')
                 .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#000000');
-        //Update boxplot's lines and area
-        d3.selectAll('.box-stroke')
-            .style('stroke', '#000000');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        d3.selectAll('.box-area')
-              .style('stroke', '#000000');
-      }
-      this.applyBlindSafe(darkmode, blindsafe)
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
+            //Update boxplot's lines and area
+            d3.selectAll('.box-stroke')
+                .style('stroke', '#000000');
+
+            d3.selectAll('.box-area')
+                .style('stroke', '#000000');
+        }
+        this.applyBlindSafe(darkmode, blindsafe)
     }
 }
 

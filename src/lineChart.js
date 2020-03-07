@@ -302,105 +302,105 @@ class LineChart extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-      if(blindsafe) {
-        //Update line chart's lines and legend components
-        line.selectAll('.won-line')
-            .style('stroke', '#33a02c');
+        if (blindsafe) {
+            //Update line chart's lines and legend components
+            line.selectAll('.won-line')
+                .style('stroke', '#33a02c');
 
-        line.selectAll('.lost-line')
-            .style('stroke', '#1f78b4');
+            line.selectAll('.lost-line')
+                .style('stroke', '#1f78b4');
 
-        legend.select('circle.won')
+            legend.select('circle.won')
                 .style('fill', '#33a02c');
 
-        legend.select('circle.lost')
+            legend.select('circle.lost')
                 .style('fill', '#1f78b4');
-      } else {
-        if(darkmode) {
-          //Update line chart's lines and legend components
-          line.selectAll('.won-line')
-              .style('stroke', '#1b9e77');
-
-          line.selectAll('.lost-line')
-              .style('stroke', '#d95f02');
-
-          legend.select('circle.won')
-                  .style('fill', '#1b9e77');
-
-          legend.select('circle.lost')
-                  .style('fill', '#d95f02');
         } else {
-          //Update line chart's lines and legend components
-          line.selectAll('.won-line')
-              .style('stroke', '#8dd3c7');
+            if (darkmode) {
+                //Update line chart's lines and legend components
+                line.selectAll('.won-line')
+                    .style('stroke', '#1b9e77');
 
-          line.selectAll('.lost-line')
-              .style('stroke', '#fb8072');
+                line.selectAll('.lost-line')
+                    .style('stroke', '#d95f02');
 
-          legend.select('circle.won')
-                  .style('fill', '#8dd3c7');
+                legend.select('circle.won')
+                    .style('fill', '#1b9e77');
 
-          legend.select('circle.lost')
-                  .style('fill', '#fb8072');
+                legend.select('circle.lost')
+                    .style('fill', '#d95f02');
+            } else {
+                //Update line chart's lines and legend components
+                line.selectAll('.won-line')
+                    .style('stroke', '#8dd3c7');
+
+                line.selectAll('.lost-line')
+                    .style('stroke', '#fb8072');
+
+                legend.select('circle.won')
+                    .style('fill', '#8dd3c7');
+
+                legend.select('circle.lost')
+                    .style('fill', '#fb8072');
+            }
         }
-      }
     }
 
     applyThemeChanged(darkmode, blindsafe) {
-      if(darkmode) {
-        legend.selectAll('text.legend-label')
+        if (darkmode) {
+            legend.selectAll('text.legend-label')
                 .style('fill', '#cccccc');
 
-        //Update axis components
-        xAxis.select('path.domain')
-            .style('stroke', '#ffffff');
+            //Update axis components
+            xAxis.select('path.domain')
+                .style('stroke', '#ffffff');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('line')
-            .style('stroke', '#ffffff');
+            xAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('text')
-            .style('fill', '#ffffff');
+            xAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
 
-        yAxis.select('path.domain')
-              .style('stroke', '#ffffff');
+            yAxis.select('path.domain')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#ffffff');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#ffffff');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#ffffff');
-      } else {
-        legend.selectAll('text.legend-label')
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#ffffff');
+        } else {
+            legend.selectAll('text.legend-label')
                 .style('fill', '#808080');
 
-        //Update axis components
-        xAxis.select('path.domain')
-            .style('stroke', '#000000');
+            //Update axis components
+            xAxis.select('path.domain')
+                .style('stroke', '#000000');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('line')
-            .style('stroke', '#000000');
+            xAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        xAxis.selectAll('g.tick')
-            .selectAll('text')
-            .style('fill', '#000000');
+            xAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
 
-        yAxis.select('path.domain')
-              .style('stroke', '#000000');
+            yAxis.select('path.domain')
+                .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('line')
-              .style('stroke', '#000000');
+            yAxis.selectAll('g.tick')
+                .selectAll('line')
+                .style('stroke', '#000000');
 
-        yAxis.selectAll('g.tick')
-              .selectAll('text')
-              .style('fill', '#000000');
-      }
-      this.applyBlindSafe(darkmode, blindsafe);
+            yAxis.selectAll('g.tick')
+                .selectAll('text')
+                .style('fill', '#000000');
+        }
+        this.applyBlindSafe(darkmode, blindsafe);
     }
 }
 
