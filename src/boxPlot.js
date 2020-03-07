@@ -2,6 +2,8 @@ const d3 = require('d3');
 import BorderedChart from './borderedChart'
 import controller from './controller'
 
+var yAxis
+
 class BoxPlot extends BorderedChart {
     constructor() {
         super()
@@ -33,7 +35,7 @@ class BoxPlot extends BorderedChart {
             .domain([0, d3.max([10, Math.floor(max * 1.2)])])
             .range([this.height - this.margin.bottom, this.margin.top]);
 
-        this.chart.append('g')
+        yAxis = this.chart.append('g')
             .attr('class', 'y axis')
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(y));
@@ -76,7 +78,49 @@ class BoxPlot extends BorderedChart {
             .attr("y2", function(d) { return (y(d)) })
             .attr("stroke", "black")
 
-        controller.applyDarkMode(controller.darkmode);
+        this.applyThemeChanged(controller.darkmode);
+    }
+
+    applyThemeChanged(darkmode) {
+      if(darkmode) {
+        //Update boxplot's lines and area
+        d3.selectAll('.box-stroke')
+            .style('stroke', '#ffffff');
+
+        d3.selectAll('.box-area')
+            .style('fill', '#255874')
+            .style('stroke', '#ffffff');
+
+        yAxis.select('path.domain')
+              .style('stroke', '#ffffff');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('line')
+                .style('stroke', '#ffffff');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#ffffff');
+      }else {
+        //Update boxplot's lines and area
+        d3.selectAll('.box-stroke')
+            .style('stroke', '#000000');
+
+        d3.selectAll('.box-area')
+            .style('fill', '#69b3a2')
+            .style('stroke', '#000000');
+
+        yAxis.selectAll('path.domain')
+              .style('stroke', '#000000');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('line')
+                .style('stroke', '#000000');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#000000');
+      }
     }
 }
 

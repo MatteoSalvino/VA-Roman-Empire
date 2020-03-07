@@ -2,7 +2,7 @@ const d3 = require('d3');
 import BorderedChart from './borderedChart';
 import controller from './controller';
 
-var xScale, yScale, groups, tooltip, legend
+var xScale, yScale, xAxis, yAxis, groups, tooltip, legend
 
 class StackedBarChart extends BorderedChart {
     constructor() {
@@ -33,12 +33,12 @@ class StackedBarChart extends BorderedChart {
             .domain([0, d3.max(barData, function(d) { return d.total + 1; })]);
 
 
-        this.chart.append('g')
+        xAxis = this.chart.append('g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
             .call(d3.axisBottom(xScale));
 
-        this.chart.append('g')
+        yAxis = this.chart.append('g')
             .attr('class', 'y axis')
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale).ticks(d3.max(barData, function(d) { return d.total + 1; })));
@@ -103,7 +103,7 @@ class StackedBarChart extends BorderedChart {
             .style('text-anchor', 'middle');
 
         this._setupLegend(colors);
-        controller.applyDarkMode(controller.darkmode);
+        this.applyThemeChanged(controller.darkmode);
     }
 
     notifyDataChanged() {
@@ -187,6 +187,104 @@ class StackedBarChart extends BorderedChart {
                 }
             })
             .style('alignment-baseline', 'middle');
+    }
+
+    applyThemeChanged(darkmode) {
+      if(darkmode) {
+        //Update stacked chart layers
+        this.chart.selectAll('g.layer')
+            .style('fill', function(_d, i) {
+                if (i == 0)
+                    return '#1b9e77';
+                else if (i == 1)
+                    return '#d95f02';
+                else
+                    return '#e7298a';
+            });
+
+        //Update axis components
+        xAxis.select('path.domain')
+              .style('stroke', '#ffffff');
+
+        xAxis.selectAll('g.tick')
+              .selectAll('line')
+              .style('stroke', '#ffffff');
+
+        xAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#ffffff');
+
+        yAxis.select('path.domain')
+              .style('stroke', '#ffffff');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('line')
+              .style('stroke', '#ffffff');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#ffffff');
+
+        //Update legend components
+        legend.select('circle.won')
+                .style('fill', '#1b9e77');
+
+        legend.select('circle.lost')
+                .style('fill', '#d95f02');
+
+        legend.select('circle.uncertain')
+                .style('fill', '#e7298a');
+
+        legend.selectAll('text.legend-label')
+                .style('fill', '#cccccc');
+      }else {
+        //Update stacked chart layers
+        this.chart.selectAll('g.layer')
+            .style('fill', function(_d, i) {
+                if (i == 0)
+                    return '#33a02c';
+                else if (i == 1)
+                    return '#1f78b4';
+                else
+                    return '#a6cee3';
+            });
+
+        //Update axis components
+        xAxis.select('path.domain')
+                .style('stroke', '#000000');
+
+        xAxis.selectAll('g.tick')
+            .selectAll('line')
+            .style('stroke', '#000000');
+
+        xAxis.selectAll('g.tick')
+            .selectAll('text')
+            .style('fill', '#000000');
+
+        yAxis.select('path.domain')
+              .style('stroke', '#000000');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('line')
+              .style('stroke', '#000000');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#000000');
+
+        //Update legend components
+        legend.select('circle.won')
+                .style('fill', '#33a02c');
+
+        legend.select('circle.lost')
+                .style('fill', '#1f78b4');
+
+        legend.select('circle.uncertain')
+                .style('fill', '#a6cee3');
+
+        legend.selectAll('text.legend-label')
+                .style('fill', '#808080');
+      }
     }
 }
 

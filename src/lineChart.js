@@ -2,7 +2,7 @@ import controller from './controller'
 import BorderedChart from './borderedChart'
 const d3 = require('d3')
 
-var xScale, yScale, xAxis, line, path, legend
+var xScale, yScale, xAxis, yAxis, line, path, legend
 
 class LineChart extends BorderedChart {
     constructor() {
@@ -78,7 +78,7 @@ class LineChart extends BorderedChart {
                     return d + "AD"
                 }));
 
-        this.chart.append('g')
+        yAxis = this.chart.append('g')
             .attr('class', 'y-axis')
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
@@ -110,7 +110,7 @@ class LineChart extends BorderedChart {
             //reflects changes on map
             controller.resetBrushedLineData();
         });
-        controller.applyDarkMode(controller.darkmode);
+        this.applyThemeChanged(controller.darkmode)
     }
 
     drawChart() {
@@ -175,7 +175,7 @@ class LineChart extends BorderedChart {
                     return d + "AD"
                 }));
 
-        this.chart.append('g')
+        yAxis = this.chart.append('g')
             .attr('class', 'y-axis')
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(yScale));
@@ -205,7 +205,7 @@ class LineChart extends BorderedChart {
             //reflect changes on map
             controller.resetBrushedLineData();
         });
-        controller.applyDarkMode(controller.darkmode);
+        this.applyThemeChanged(controller.darkmode)
     }
 
     //Note: this always redraws from scratch the chart
@@ -299,6 +299,88 @@ class LineChart extends BorderedChart {
             .style('alignment-baseline', 'middle')
 
         this.setupButtons()
+    }
+
+    applyThemeChanged(darkmode) {
+      if(darkmode) {
+        //Update line chart's lines and legend components
+        line.selectAll('.won-line')
+            .style('stroke', '#1b9e77');
+
+        line.selectAll('.lost-line')
+            .style('stroke', '#d95f02');
+
+        legend.select('circle.won')
+                .style('fill', '#1b9e77');
+
+        legend.select('circle.lost')
+                .style('fill', '#d95f02');
+
+        legend.selectAll('text.legend-label')
+                .style('fill', '#cccccc');
+
+        //Update axis components
+        xAxis.select('path.domain')
+            .style('stroke', '#ffffff');
+
+        xAxis.selectAll('g.tick')
+            .selectAll('line')
+            .style('stroke', '#ffffff');
+
+        xAxis.selectAll('g.tick')
+            .selectAll('text')
+            .style('fill', '#ffffff');
+
+        yAxis.select('path.domain')
+              .style('stroke', '#ffffff');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('line')
+              .style('stroke', '#ffffff');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#ffffff');
+      }else {
+        //Update line chart's lines and legend components
+        line.selectAll('.won-line')
+            .style('stroke', '#33a02c');
+
+        line.selectAll('.lost-line')
+            .style('stroke', '#1f78b4');
+
+        legend.select('circle.won')
+                .style('fill', '#33a02c');
+
+        legend.select('circle.lost')
+                .style('fill', '#1f78b4');
+
+        legend.selectAll('text.legend-label')
+                .style('fill', '#808080');
+
+        //Update axis components
+        xAxis.select('path.domain')
+            .style('stroke', '#000000');
+
+        xAxis.selectAll('g.tick')
+            .selectAll('line')
+            .style('stroke', '#000000');
+
+        xAxis.selectAll('g.tick')
+            .selectAll('text')
+            .style('fill', '#000000');
+
+        yAxis.select('path.domain')
+              .style('stroke', '#000000');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('line')
+              .style('stroke', '#000000');
+
+        yAxis.selectAll('g.tick')
+              .selectAll('text')
+              .style('fill', '#000000');
+      }
     }
 }
 

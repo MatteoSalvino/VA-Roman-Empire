@@ -101,6 +101,8 @@ class Map extends BorderedChart {
             .style('visibility', 'visible');
 
         legend = this.setupLegend()
+
+        this.applyThemeChanged(controller.darkmode)
     }
 
     update() {
@@ -215,6 +217,53 @@ class Map extends BorderedChart {
             .attr('y', 80)
             .attr('font-size', 10);
         return legend;
+    }
+
+    applyThemeChanged(darkmode) {
+      if (darkmode) {
+        //Update battles on map
+        markerGroup.selectAll('circle.won')
+            .style('fill', '#1b9e77');
+
+        markerGroup.selectAll('circle.lost')
+            .style('fill', '#d95f02');
+
+        markerGroup.selectAll('circle.civil')
+            .style('fill', '#7570b3');
+
+        markerGroup.selectAll('circle.uncertain')
+            .style('fill', '#e7298a');
+
+        //Update map's paths, svg and legend
+        this.chart.selectAll('path.state')
+            .style('fill', '#255874')
+            .style('stroke', '#737373');
+
+        legend.selectAll('text.legend-label')
+                .style('fill', '#cccccc');
+
+      } else {
+        //Update battles on map
+        markerGroup.selectAll('circle.won')
+            .style('fill', '#33a02c');
+
+        markerGroup.selectAll('circle.lost')
+            .style('fill', '#1f78b4');
+
+        markerGroup.selectAll('circle.civil')
+            .style('fill', '#b2df8a');
+
+        markerGroup.selectAll('circle.uncertain')
+            .style('fill', '#a6cee3');
+
+        //Update map's paths, svg and legend
+        this.chart.selectAll('path.state')
+            .style('fill', '#b1d4e7')
+            .style('stroke', '#b3b3b3');
+
+        legend.selectAll('text.legend-label')
+                .style('fill', '#808080');
+      }
     }
 }
 
