@@ -224,11 +224,11 @@ class Controller {
 
         blindsafeBtn.on('click', function() {
             var bg = self.darkmode ? "light" : "dark"
-            var blind = self.blindsafe ? "on" : "off"
+            var blind = self.blindsafe ? "off" : "on"
             d3.select(this).attr('src', './assets/' + bg + '-eye-' + blind + '.png ')
 
             self.blindsafe = !self.blindsafe
-                //perform actions based on the value of blindsafe flag
+            self.applyDarkMode()
         });
 
         darkModeBtn.on('click', function() {
@@ -256,11 +256,11 @@ class Controller {
     }
 
     applyDarkMode() {
-      mapChart.applyThemeChanged(this.darkmode);
-      lineChart.applyThemeChanged(this.darkmode);
-      stackedBarChart.applyThemeChanged(this.darkmode);
-      boxplot.applyThemeChanged(this.darkmode);
-      scatterPlot.applyThemeChanged(this.darkmode);
+      mapChart.applyThemeChanged(this.darkmode, this.blindsafe);
+      lineChart.applyThemeChanged(this.darkmode, this.blindsafe);
+      stackedBarChart.applyThemeChanged(this.darkmode, this.blindsafe);
+      boxplot.applyThemeChanged(this.darkmode, this.blindsafe);
+      scatterPlot.applyThemeChanged(this.darkmode, this.blindsafe);
 
       //General changes
       if(this.darkmode) {

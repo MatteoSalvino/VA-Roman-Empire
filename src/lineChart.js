@@ -110,7 +110,7 @@ class LineChart extends BorderedChart {
             //reflects changes on map
             controller.resetBrushedLineData();
         });
-        this.applyThemeChanged(controller.darkmode)
+        this.applyThemeChanged(controller.darkmode, controller.blindsafe)
     }
 
     drawChart() {
@@ -205,7 +205,7 @@ class LineChart extends BorderedChart {
             //reflect changes on map
             controller.resetBrushedLineData();
         });
-        this.applyThemeChanged(controller.darkmode)
+        this.applyThemeChanged(controller.darkmode, controller.blindsafe)
     }
 
     //Note: this always redraws from scratch the chart
@@ -301,21 +301,53 @@ class LineChart extends BorderedChart {
         this.setupButtons()
     }
 
-    applyThemeChanged(darkmode) {
-      if(darkmode) {
+    applyBlindSafe(darkmode, blindsafe) {
+      if(blindsafe) {
         //Update line chart's lines and legend components
         line.selectAll('.won-line')
-            .style('stroke', '#1b9e77');
+            .style('stroke', '#33a02c');
 
         line.selectAll('.lost-line')
-            .style('stroke', '#d95f02');
+            .style('stroke', '#1f78b4');
 
         legend.select('circle.won')
-                .style('fill', '#1b9e77');
+                .style('fill', '#33a02c');
 
         legend.select('circle.lost')
-                .style('fill', '#d95f02');
+                .style('fill', '#1f78b4');
+      } else {
+        if(darkmode) {
+          //Update line chart's lines and legend components
+          line.selectAll('.won-line')
+              .style('stroke', '#1b9e77');
 
+          line.selectAll('.lost-line')
+              .style('stroke', '#d95f02');
+
+          legend.select('circle.won')
+                  .style('fill', '#1b9e77');
+
+          legend.select('circle.lost')
+                  .style('fill', '#d95f02');
+        } else {
+          //Update line chart's lines and legend components
+          line.selectAll('.won-line')
+              .style('stroke', '#8dd3c7');
+
+          line.selectAll('.lost-line')
+              .style('stroke', '#fb8072');
+
+          legend.select('circle.won')
+                  .style('fill', '#8dd3c7');
+
+          legend.select('circle.lost')
+                  .style('fill', '#fb8072');
+        }
+      }
+    }
+
+    applyThemeChanged(darkmode, blindsafe) {
+      if(darkmode) {
         legend.selectAll('text.legend-label')
                 .style('fill', '#cccccc');
 
@@ -341,20 +373,7 @@ class LineChart extends BorderedChart {
         yAxis.selectAll('g.tick')
               .selectAll('text')
               .style('fill', '#ffffff');
-      }else {
-        //Update line chart's lines and legend components
-        line.selectAll('.won-line')
-            .style('stroke', '#33a02c');
-
-        line.selectAll('.lost-line')
-            .style('stroke', '#1f78b4');
-
-        legend.select('circle.won')
-                .style('fill', '#33a02c');
-
-        legend.select('circle.lost')
-                .style('fill', '#1f78b4');
-
+      } else {
         legend.selectAll('text.legend-label')
                 .style('fill', '#808080');
 
@@ -381,6 +400,7 @@ class LineChart extends BorderedChart {
               .selectAll('text')
               .style('fill', '#000000');
       }
+      this.applyBlindSafe(darkmode, blindsafe);
     }
 }
 

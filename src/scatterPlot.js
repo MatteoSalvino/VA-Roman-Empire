@@ -63,7 +63,7 @@ class ScatterPlot extends BorderedChart {
             })
             .attr('fill', '#159914');
 
-        this.applyThemeChanged(controller.darkmode);
+        this.applyThemeChanged(controller.darkmode, controller.blindsafe);
     }
 
     onBrush() {
@@ -93,7 +93,11 @@ class ScatterPlot extends BorderedChart {
         }
     }
 
-    applyThemeChanged(darkmode) {
+    applyBlindSafe(darkmode, blindsafe) {
+      //To-Do : implements actions !
+    }
+
+    applyThemeChanged(darkmode, blindsafe) {
       if(darkmode) {
         //Update axis components
         xAxis.select('path.domain')
@@ -141,6 +145,7 @@ class ScatterPlot extends BorderedChart {
               .selectAll('text')
               .style('fill', '#000000');
       }
+      this.applyBlindSafe(darkmode, blindsafe);
     }
 }
 export default new ScatterPlot()

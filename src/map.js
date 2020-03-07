@@ -102,7 +102,7 @@ class Map extends BorderedChart {
 
         legend = this.setupLegend()
 
-        this.applyThemeChanged(controller.darkmode)
+        this.applyThemeChanged(controller.darkmode, controller.blindsafe)
     }
 
     update() {
@@ -219,8 +219,8 @@ class Map extends BorderedChart {
         return legend;
     }
 
-    applyThemeChanged(darkmode) {
-      if (darkmode) {
+    applyThemeChanged(darkmode, blindsafe) {
+      if (darkmode && !blindsafe) {
         //Update battles on map
         markerGroup.selectAll('circle.won')
             .style('fill', '#1b9e77');
@@ -242,7 +242,7 @@ class Map extends BorderedChart {
         legend.selectAll('text.legend-label')
                 .style('fill', '#cccccc');
 
-      } else {
+      } else if((!darkmode && blindsafe) || (darkmode && blindsafe)) {
         //Update battles on map
         markerGroup.selectAll('circle.won')
             .style('fill', '#33a02c');
@@ -256,13 +256,46 @@ class Map extends BorderedChart {
         markerGroup.selectAll('circle.uncertain')
             .style('fill', '#a6cee3');
 
+        if(!darkmode) {
+          //Update map's paths, svg and legend
+          this.chart.selectAll('path.state')
+              .style('fill', '#b1d4e7')
+              .style('stroke', '#b3b3b3');
+
+          legend.selectAll('text.legend-label')
+                  .style('fill', '#808080');
+        } else {
+          //Update map's paths, svg and legend
+          this.chart.selectAll('path.state')
+              .style('fill', '#255874')
+              .style('stroke', '#737373');
+
+          legend.selectAll('text.legend-label')
+                  .style('fill', '#cccccc');
+        }
+      } else {
+        //!darkmode && !blindsafe
+
+        //Update battles on map
+        markerGroup.selectAll('circle.won')
+            .style('fill', '#8dd3c7');
+
+        markerGroup.selectAll('circle.lost')
+            .style('fill', '#fb8072');
+
+        markerGroup.selectAll('circle.civil')
+            .style('fill', '#ffffb3');
+
+        markerGroup.selectAll('circle.uncertain')
+            .style('fill', '#bebada');
+
         //Update map's paths, svg and legend
         this.chart.selectAll('path.state')
-            .style('fill', '#b1d4e7')
-            .style('stroke', '#b3b3b3');
+              .style('fill', '#b1d4e7')
+              .style('stroke', '#b3b3b3');
 
         legend.selectAll('text.legend-label')
-                .style('fill', '#808080');
+                  .style('fill', '#808080');
       }
     }
 }

@@ -78,19 +78,27 @@ class BoxPlot extends BorderedChart {
             .attr("y2", function(d) { return (y(d)) })
             .attr("stroke", "black")
 
-        this.applyThemeChanged(controller.darkmode);
+        this.applyThemeChanged(controller.darkmode, controller.blindsafe);
     }
 
-    applyThemeChanged(darkmode) {
-      if(darkmode) {
-        //Update boxplot's lines and area
-        d3.selectAll('.box-stroke')
-            .style('stroke', '#ffffff');
-
+    applyBlindSafe(darkmode, blindsafe) {
+      console.log(darkmode, blindsafe)
+      if(blindsafe) {
         d3.selectAll('.box-area')
-            .style('fill', '#255874')
-            .style('stroke', '#ffffff');
+            .style('fill', '#fb8072');
+      } else {
+        if(darkmode) {
+          d3.selectAll('.box-area')
+              .style('fill', '#255874');
+        } else {
+          d3.selectAll('.box-area')
+              .style('fill', '#69b3a2');
+        }
+      }
+    }
 
+    applyThemeChanged(darkmode, blindsafe) {
+      if(darkmode) {
         yAxis.select('path.domain')
               .style('stroke', '#ffffff');
 
@@ -101,15 +109,14 @@ class BoxPlot extends BorderedChart {
         yAxis.selectAll('g.tick')
               .selectAll('text')
               .style('fill', '#ffffff');
-      }else {
+
         //Update boxplot's lines and area
         d3.selectAll('.box-stroke')
-            .style('stroke', '#000000');
+            .style('stroke', '#ffffff');
 
         d3.selectAll('.box-area')
-            .style('fill', '#69b3a2')
-            .style('stroke', '#000000');
-
+              .style('stroke', '#ffffff');
+      } else {
         yAxis.selectAll('path.domain')
               .style('stroke', '#000000');
 
@@ -120,7 +127,14 @@ class BoxPlot extends BorderedChart {
         yAxis.selectAll('g.tick')
               .selectAll('text')
               .style('fill', '#000000');
+        //Update boxplot's lines and area
+        d3.selectAll('.box-stroke')
+            .style('stroke', '#000000');
+
+        d3.selectAll('.box-area')
+              .style('stroke', '#000000');
       }
+      this.applyBlindSafe(darkmode, blindsafe)
     }
 }
 
