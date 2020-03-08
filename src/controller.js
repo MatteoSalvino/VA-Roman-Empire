@@ -225,6 +225,8 @@ class Controller {
             this.updateFilteredBattles()
         })
 
+        var t = d3.transition().duration(750);
+
         var blindsafeBtn = d3.select('#blindsafeBtn'),
             darkModeBtn = d3.select('#darkModeBtn'),
             self = this;
@@ -232,7 +234,7 @@ class Controller {
         blindsafeBtn.on('click', function() {
             var bg = self.darkmode ? "light" : "dark"
             var blind = self.blindsafe ? "off" : "on"
-            d3.select(this).attr('src', './assets/' + bg + '-eye-' + blind + '.png ')
+            d3.select(this).transition(t).attr('src', './assets/' + bg + '-eye-' + blind + '.png ')
 
             self.blindsafe = !self.blindsafe
             self.applyDarkMode()
@@ -242,9 +244,9 @@ class Controller {
             var theme = self.darkmode ? "dark" : "light"
             var blind = self.blindsafe ? "on" : "off"
 
-            blindsafeBtn.attr('src', './assets/' + theme + '-eye-' + blind + '.png ')
+            blindsafeBtn.transition(t).attr('src', './assets/' + theme + '-eye-' + blind + '.png ')
 
-            d3.select(this).attr('src', './assets/' + theme + '-theme.png')
+            d3.select(this).transition(t).attr('src', './assets/' + theme + '-theme.png')
 
             //update self
             self.darkmode = !self.darkmode
@@ -270,50 +272,65 @@ class Controller {
         scatterPlot.applyThemeChanged(this.darkmode, this.blindsafe);
 
         //General changes
+        var t = d3.transition().duration(750)
+
         if (this.darkmode) {
             d3.selectAll('.svg-content-responsive')
+                .transition(t)
                 .style('background-color', '#4d4d4d')
 
             d3.selectAll('.container-fluid')
+                .transition(t)
                 .style('background-color', '#4d4d4d')
 
             d3.selectAll('div.row')
+                .transition(t)
                 .style('background-color', '#4d4d4d');
 
             //Update navbar with its items
             d3.select('.navbar')
                 .classed('bg-light', false)
+                .transition(t)
                 .style('background-color', '#808080');
 
             d3.select('.navbar-brand')
+                .transition(t)
                 .style('color', '#ffffff');
 
             d3.select('.navbar-toggler')
+                .transition(t)
                 .style('border-color', '#ffffff');
 
             d3.selectAll('.custom-control-label')
+                .transition(t)
                 .style('color', '#ffffff');
         } else {
             d3.selectAll('.svg-content-responsive')
+                .transition(t)
                 .style('background-color', '#ffffff')
 
             d3.selectAll('.container-fluid')
+                .transition(t)
                 .style('background-color', '#ffffff')
 
             d3.selectAll('div.row')
+                .transition(t)
                 .style('background-color', '#ffffff');
 
             //Update navbar with its items
+            d3.select('.navbar-brand')
+                .transition(t)
+                .style('color', '#000000');
+
             d3.select('.navbar')
                 .classed('bg-light', true);
 
-            d3.select('.navbar-brand')
-                .style('color', '#000000');
-
             d3.select('.navbar-toggler')
+                .transition(t)
                 .style('border-color', 'rgba(0, 0, 0, 0.1)');
 
             d3.selectAll('.custom-control-label')
+                .transition(t)
                 .style('color', '#000000');
         }
     }
