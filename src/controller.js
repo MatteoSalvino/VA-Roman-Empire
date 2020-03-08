@@ -105,6 +105,7 @@ class Controller {
             self.battles = data[1]
             self.filteredBattles = data[1]
             self.brushedLineData = self.battles
+            self.brushedMapData = self.battles
             self.wars = data[2]
             self.setupFilters()
             self.setupGraphs()

@@ -232,6 +232,7 @@ class LineChart extends BorderedChart {
             .on("click", function() {
                 self.clear()
                 self.drawChart()
+                controller.resetBrushedLineData()
             })
 
         this.chart
@@ -244,6 +245,7 @@ class LineChart extends BorderedChart {
             .on("click", function() {
                 self.clear()
                 self.drawCumulativeChart()
+                controller.resetBrushedLineData()
             })
 
         this.chart
