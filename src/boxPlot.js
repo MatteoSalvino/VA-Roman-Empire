@@ -82,7 +82,6 @@ class BoxPlot extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-        console.log(darkmode, blindsafe)
         if (blindsafe) {
             d3.selectAll('.box-area')
                 .style('fill', '#fb8072');

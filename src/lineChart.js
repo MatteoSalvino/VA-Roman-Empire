@@ -109,6 +109,7 @@ class LineChart extends BorderedChart {
 
             //reflects changes on map
             controller.resetBrushedLineData();
+            self.applyThemeChanged(controller.darkmode, controller.blindsafe)
         });
         this.applyThemeChanged(controller.darkmode, controller.blindsafe)
     }
@@ -183,6 +184,7 @@ class LineChart extends BorderedChart {
         this.setupLegend()
 
         //Reset zoom
+        var self = this
         this.chart.on('dblclick', function() {
             xScale.domain([-6, 6]);
             xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
@@ -204,6 +206,7 @@ class LineChart extends BorderedChart {
 
             //reflect changes on map
             controller.resetBrushedLineData();
+            self.applyThemeChanged(controller.darkmode, controller.blindsafe)
         });
         this.applyThemeChanged(controller.darkmode, controller.blindsafe)
     }
@@ -446,6 +449,8 @@ function zooming(self) {
     line.selectAll('.lost-line')
         .transition(transition)
         .attr('d', path);
+
+    self.applyThemeChanged(controller.darkmode, controller.blindsafe)
 }
 
 function getCentury(y) {
