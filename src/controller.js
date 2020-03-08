@@ -259,8 +259,8 @@ class Controller {
     loadData() {
         return Promise.all([
             d3.json('./assets/map.json'),
-            d3.csv('/assets/battles.csv'),
-            d3.csv('/assets/wars.csv')
+            d3.csv('./assets/battles.csv'),
+            d3.csv('./assets/wars.csv')
         ])
     }
 
