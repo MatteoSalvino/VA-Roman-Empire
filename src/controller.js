@@ -78,6 +78,9 @@ class Controller {
         boxplot.setWars(this.brushedWars)
         boxplot.notifyDataChanged()
 
+        scatterPlot.setBattles(this.brushedMapData)
+        scatterPlot.notifyDataChanged()
+
         this.notifyBarChart()
 
     }
@@ -134,6 +137,7 @@ class Controller {
         boxplot.setWars(this.wars)
         boxplot.notifyDataChanged()
 
+        scatterPlot.setBattles(this.battles)
         scatterPlot.notifyDataChanged()
     }
 
@@ -159,6 +163,9 @@ class Controller {
 
         lineChart.setBattles(this.filteredBattles)
         lineChart.notifyDataChanged()
+
+        scatterPlot.setBattles(this.filteredBattles)
+        scatterPlot.notifyDataChanged()
 
         this.notifyBarChart()
     }

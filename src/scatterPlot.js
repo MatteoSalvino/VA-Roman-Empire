@@ -8,9 +8,7 @@ class ScatterPlot extends BorderedChart {
     constructor() {
         super()
             //for testing purpose
-        this.battles = [{ x: 5, y: 4 }, { x: 10, y: 2.5 }, { x: 20, y: 12 },
-            { x: 1.2, y: 3.3 }, { x: 7.5, y: 2.3 }, { x: 12, y: 5.5 }
-        ]
+        this.battles = []
     }
 
     setBattles(battles) {
@@ -25,23 +23,23 @@ class ScatterPlot extends BorderedChart {
     drawChart() {
         //X and Y scales
         xScale = d3.scaleLinear()
-            .domain([0, d3.max(this.battles, function(d) { return d.x; })])
+            .domain([-0.5, 1.1 * d3.max(this.battles, function(d) { return d.y1 })])
             .range([this.margin.left, this.width - this.margin.right]);
 
         yScale = d3.scaleLinear()
-            .domain([0, d3.max(this.battles, function(d) { return d.x; })])
+            .domain([-1.5, 1.1 * d3.max(this.battles, function(d) { return d.y2 })])
             .range([this.height - this.margin.bottom, this.margin.top]);
 
         //X and Y axis
         xAxis = this.chart.append('g')
             .attr('class', 'x-axis')
             .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
-            .call(d3.axisBottom(xScale));
+            .call(d3.axisBottom(xScale))
 
         yAxis = this.chart.append('g')
             .attr('class', 'y-axis')
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
-            .call(d3.axisLeft(yScale));
+            .call(d3.axisLeft(yScale))
 
         //populate plot
         points = this.chart.append('g')
@@ -56,10 +54,10 @@ class ScatterPlot extends BorderedChart {
             .attr('class', 'point')
             .attr('r', 6)
             .attr('cx', function(d) {
-                return xScale(d.x);
+                return xScale(d.y1)
             })
             .attr('cy', function(d) {
-                return yScale(d.y);
+                return yScale(d.y2)
             })
             .attr('fill', '#159914');
 
