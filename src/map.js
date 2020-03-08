@@ -89,7 +89,7 @@ class Map extends BorderedChart {
             })
             .attr('r', 4)
             .attr('fill', 'blue')
-            .attr('pointer-events', 'all')
+            .attr('pointer-events', 'visible')
             .on('click', function(d) {
                 d3.selectAll('.selected')
                     .classed('selected', false);
