@@ -66,10 +66,10 @@ class ScatterPlot extends BorderedChart {
 
     onBrush() {
         var selection = d3.event.selection;
-        // To-Do : implement brushing on scatter plot
+        var echo = []
         if (selection) {
             points.selectAll('.point')
-                .each(function() {
+                .each(function(d) {
                     var cx = d3.select(this).attr('cx');
                     var cy = d3.select(this).attr('cy');
 
@@ -78,6 +78,7 @@ class ScatterPlot extends BorderedChart {
                         cy >= selection[0][1] && cy <= selection[1][1]);
 
                     if (isBrushed) {
+                        echo.push(+d.id)
                         d3.select(this)
                             .attr('stroke-width', 0.5)
                             .attr('stroke', 'black')
@@ -87,8 +88,9 @@ class ScatterPlot extends BorderedChart {
                             .attr('stroke-width', 0)
                             .attr('fill', '#159914');
                     }
-                });
+                })
         }
+        controller.setBrushedScatterData(echo)
     }
 
     applyBlindSafe(darkmode, blindsafe) {

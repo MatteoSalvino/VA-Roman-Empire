@@ -19,7 +19,17 @@ class Controller {
         this.filteredBattles = []
         this.blindsafe = false
         this.darkmode = false
+        this.scattered = []
     }
+
+    setBrushedScatterData(ids) {
+        //notify map only on data change
+        if (JSON.stringify(ids) != JSON.stringify(this.scattered)) {
+            mapChart.setScatterBattles(ids)
+            this.scattered = ids
+        }
+    }
+
 
     /**
      * Method to be called from within MapChart when the brush is interrupted

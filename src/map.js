@@ -13,6 +13,7 @@ class Map extends BorderedChart {
         super()
         this.map = []
         this.battles = []
+        this.scatterBattles = []
         this.resetPeriod()
     }
 
@@ -49,6 +50,15 @@ class Map extends BorderedChart {
         if (redraw)
             this.drawChart()
         else this.update()
+    }
+
+    setScatterBattles(ids = []) {
+        markerGroup.selectAll("circle")
+            .each(function(d) {
+                var ok = ids.includes(+d.id)
+                d3.select(this)
+                    .classed('scattered', ok)
+            })
     }
 
     drawChart() {
@@ -114,7 +124,6 @@ class Map extends BorderedChart {
         var selector = isBrushing ? ".brushed" : "circle"
         markerGroup.selectAll(selector)
             .each(function(d) {
-
                 var ok = self.battles.filter(b => b.id == d.id).length > 0
                 if (ok && +d.year >= self.period.min && +d.year <= self.period.max) {
                     points++
@@ -123,7 +132,8 @@ class Map extends BorderedChart {
                     d3.select(this)
                         .style('visibility', 'visible')
                         .attr('stroke-width', 0.5)
-                        .attr('stroke', 'white');
+                        .attr('stroke', 'white')
+                        .classed('scattered', self.scatterBattles.includes(d.id))
                     setLabel(d);
                 } else d3.select(this).style('visibility', 'hidden')
             });
