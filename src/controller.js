@@ -22,6 +22,13 @@ class Controller {
         this.scattered = []
     }
 
+    /**
+     * Method to be called from within ScatterPlot when a brush occurs.
+     * The controller stores, as cache, the last brushed data and notifies the
+     * map only if data really changes: this is done to avoid overloading.
+     * 
+     * @param {Array<number>} ids the identifiers of the battles 
+     */
     setBrushedScatterData(ids) {
         //notify map only on data change
         if (JSON.stringify(ids) != JSON.stringify(this.scattered)) {
@@ -29,7 +36,6 @@ class Controller {
             this.scattered = ids
         }
     }
-
 
     /**
      * Method to be called from within MapChart when the brush is interrupted
