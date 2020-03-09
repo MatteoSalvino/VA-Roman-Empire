@@ -13,7 +13,6 @@ class Map extends BorderedChart {
         super()
         this.map = []
         this.battles = []
-        this.scatterBattles = []
         this.resetPeriod()
     }
 
@@ -47,17 +46,21 @@ class Map extends BorderedChart {
     }
 
     notifyDataChanged(redraw = true) {
-        if (redraw)
-            this.drawChart()
+        if (redraw) this.drawChart()
         else this.update()
     }
 
+    /**
+     * It adds/remove the class **scattered** to the circles on the map,
+     * depending on their id. There is no cache management at this level.
+     * 
+     * @param {Array<number>} ids identifiers of the battles 
+     */
     setScatterBattles(ids = []) {
         markerGroup.selectAll("circle")
             .each(function(d) {
-                var ok = ids.includes(+d.id)
                 d3.select(this)
-                    .classed('scattered', ok)
+                    .classed('scattered', ids.includes(+d.id))
             })
     }
 
@@ -133,7 +136,6 @@ class Map extends BorderedChart {
                         .style('visibility', 'visible')
                         .attr('stroke-width', 0.5)
                         .attr('stroke', 'white')
-                        .classed('scattered', self.scatterBattles.includes(d.id))
                     setLabel(d);
                 } else d3.select(this).style('visibility', 'hidden')
             });
