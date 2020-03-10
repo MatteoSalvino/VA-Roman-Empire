@@ -32,6 +32,7 @@
     "webpack-dev-server": "3.9.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "bootstrap": "^4.4.1",
     "d3": "5.14.2",
     "normalize.css": "8.0.1"

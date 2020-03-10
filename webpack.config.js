@@ -53,7 +53,8 @@ const config = {
             { from: './src/assets/light-eye-on.png', to: './assets' },
             { from: './src/assets/dark-theme.png', to: './assets' },
             { from: './src/assets/light-theme.png', to: './assets' },
-            { from: './src/assets/github.svg', to: './assets' }
+            { from: './src/assets/github.svg', to: './assets' },
+            { from: './src/assets/github.png', to: './assets' }
         ])
     ]
 }

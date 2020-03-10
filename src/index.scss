@@ -104,3 +104,35 @@ svg .rect_b {
   stroke-width: 0.5;
   stroke: black;
 }
+
+#footer {
+  margin: 10px;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 20px;
+  color: #595959;
+}
+
+.links-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.links-list a,
+ a.author-link {
+  text-decoration: none;
+  color: #808080;
+}
+
+.links-list a:hover,
+a.author-link:hover {
+  color: #000000;
+}
+
+
+.footer-section hr {
+  margin: 20px 45px;
+  border-top-color: #595959;
+}
