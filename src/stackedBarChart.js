@@ -143,10 +143,6 @@ class StackedBarChart extends BorderedChart {
             .attr('x', 410)
             .attr('y', 30);
 
-        legend.append("rect")
-            .classed("rect_b", true)
-            .attr("width", 150)
-            .attr("height", 85);
 
         legend.selectAll('circle')
             .data(colors)

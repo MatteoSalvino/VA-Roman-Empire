@@ -53,8 +53,8 @@ class Map extends BorderedChart {
     /**
      * It adds/remove the class **scattered** to the circles on the map,
      * depending on their id. There is no cache management at this level.
-     * 
-     * @param {Array<number>} ids identifiers of the battles 
+     *
+     * @param {Array<number>} ids identifiers of the battles
      */
     setScatterBattles(ids = []) {
         markerGroup.selectAll("circle")
@@ -144,6 +144,9 @@ class Map extends BorderedChart {
     }
 
     onBrush() {
+        //reset previous scatter brush
+        this.setScatterBattles()
+
         var selection = d3.event.selection;
 
         var isClick = JSON.stringify(brushedArea) == JSON.stringify(selection)

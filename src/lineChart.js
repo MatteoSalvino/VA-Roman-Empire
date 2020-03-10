@@ -2,7 +2,7 @@ import controller from './controller'
 import BorderedChart from './borderedChart'
 const d3 = require('d3')
 
-var xScale, yScale, xAxis, yAxis, line, path, legend
+var xScale, yScale, xAxis, yAxis, line, path, legend, centuryBtn, cumulativeBtn
 
 class LineChart extends BorderedChart {
     constructor() {
@@ -85,6 +85,8 @@ class LineChart extends BorderedChart {
 
         //Legend
         this.setupLegend()
+        cumulativeBtn.style("fill", "#2a6789")
+        cumulativeBtn.style("stroke", "#b1d4e7")
 
         //Reset zoom
         var self = this
@@ -183,6 +185,9 @@ class LineChart extends BorderedChart {
 
         this.setupLegend()
 
+        centuryBtn.style("fill", "#2a6789")
+        centuryBtn.style("stroke", "#b1d4e7")
+
         //Reset zoom
         var self = this
         this.chart.on('dblclick', function() {
@@ -222,7 +227,7 @@ class LineChart extends BorderedChart {
     setupButtons() {
 
         var self = this
-        this.chart
+        centuryBtn = this.chart
             .append('rect')
             .attr("x", 400)
             .attr("width", "90")
@@ -235,7 +240,7 @@ class LineChart extends BorderedChart {
                 controller.resetBrushedLineData()
             })
 
-        this.chart
+        cumulativeBtn = this.chart
             .append('rect')
             .attr("x", 492)
             .attr("fill", "#b1d4e7")
@@ -260,6 +265,7 @@ class LineChart extends BorderedChart {
             .append('text')
             .attr('x', 498)
             .attr('y', 12)
+            .attr('class', 'cumulative-label')
             .text("cumulative")
             .attr("fill", "white")
             .style('alignment-baseline', 'middle')

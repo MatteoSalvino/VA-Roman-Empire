@@ -2,11 +2,11 @@ const d3 = require('d3')
 import BorderedChart from './borderedChart'
 import controller from './controller'
 
-var xScale, yScale, xAxis, yAxis, points
+var xScale, yScale, xAxis, yAxis, points, legend
 
 class ScatterPlot extends BorderedChart {
     constructor() {
-        super()
+        super({ width: 600, height: 400 }, { top: 30, bottom: 30, left: 30, right: 120 })
             //for testing purpose
         this.battles = []
     }
@@ -51,15 +51,25 @@ class ScatterPlot extends BorderedChart {
             .data(this.battles)
             .enter()
             .append('circle')
-            .attr('class', 'point')
+            .attr('class', function(d) {
+              if(d.outcome == 'W')
+                return 'won-point';
+              else if(d.outcome == 'L')
+                return 'lost-point';
+              else if(d.outcome == 'C')
+                return 'civil-point';
+              else
+                return 'uncertain-point';
+            })
             .attr('r', 6)
             .attr('cx', function(d) {
                 return xScale(d.y1)
             })
             .attr('cy', function(d) {
                 return yScale(d.y2)
-            })
-            .attr('fill', '#159914');
+            });
+
+        this.setupLegend()
 
         this.applyThemeChanged(controller.darkmode, controller.blindsafe);
     }
@@ -68,7 +78,7 @@ class ScatterPlot extends BorderedChart {
         var selection = d3.event.selection;
         var echo = []
         if (selection) {
-            points.selectAll('.point')
+            points.selectAll('circle')
                 .each(function(d) {
                     var cx = d3.select(this).attr('cx');
                     var cy = d3.select(this).attr('cy');
@@ -80,13 +90,17 @@ class ScatterPlot extends BorderedChart {
                     if (isBrushed) {
                         echo.push(+d.id)
                         d3.select(this)
+                          .classed('brushed', 'true')
                             .attr('stroke-width', 0.5)
-                            .attr('stroke', 'black')
-                            .attr('fill', '#996714');
+                            .attr('stroke', () => {
+                              if(controller.darkmode)
+                                return 'white'
+                              return 'black'
+                            });
                     } else {
                         d3.select(this)
-                            .attr('stroke-width', 0)
-                            .attr('fill', '#159914');
+                          .classed('brushed', false)
+                            .attr('stroke-width', 0);
                     }
                 })
         }
@@ -94,11 +108,97 @@ class ScatterPlot extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-        //To-Do : implements actions !
+      if(blindsafe) {
+        //Update scatter points
+        points.selectAll('.won-point')
+            .style('fill', '#33a02c');
+
+        points.selectAll('.lost-point')
+            .style('fill', '#1f78b4');
+
+        points.selectAll('.civil-point')
+            .style('fill', '#b2df8a');
+
+        points.selectAll('.uncertain-point')
+            .style('fill', '#a6cee3');
+
+        //Update legend indicators
+        legend.selectAll('.won-point')
+                .style('fill', '#33a02c');
+
+        legend.selectAll('.lost-point')
+                .style('fill', '#1f78b4');
+
+        legend.selectAll('.civil-point')
+                .style('fill', '#b2df8a');
+
+        legend.selectAll('.uncertain-point')
+                .style('fill', '#a6cee3');
+      } else {
+        if(darkmode) {
+          //Update scatter points
+          points.selectAll('.won-point')
+              .style('fill', '#1b9e77');
+
+          points.selectAll('.lost-point')
+              .style('fill', '#d95f02');
+
+          points.selectAll('.civil-point')
+              .style('fill', '#7570b3');
+
+          points.selectAll('.uncertain-point')
+              .style('fill', '#e7298a');
+
+          //Update legend indicators
+          legend.selectAll('.won-point')
+              .style('fill', '#1b9e77');
+
+          legend.selectAll('.lost-point')
+              .style('fill', '#d95f02');
+
+          legend.selectAll('.civil-point')
+              .style('fill', '#7570b3');
+
+          legend.selectAll('.uncertain-point')
+              .style('fill', '#e7298a');
+        } else {
+          //Update scatter points
+          points.selectAll('.won-point')
+              .style('fill', '#8dd3c7');
+
+          points.selectAll('.lost-point')
+              .style('fill', '#fb8072');
+
+          points.selectAll('.civil-point')
+              .style('fill', '#ffffb3');
+
+          points.selectAll('.uncertain-point')
+              .style('fill', '#bebada');
+
+          //Update legend indicators
+          legend.selectAll('.won-point')
+              .style('fill', '#8dd3c7');
+
+          legend.selectAll('.lost-point')
+              .style('fill', '#fb8072');
+
+          legend.selectAll('.civil-point')
+              .style('fill', '#ffffb3');
+
+          legend.selectAll('.uncertain-point')
+              .style('fill', '#bebada');
+        }
+      }
     }
 
     applyThemeChanged(darkmode, blindsafe) {
         if (darkmode) {
+            points.selectAll('circle.brushed')
+                  .attr('stroke', 'white');
+
+            legend.selectAll('text.legend-label')
+                  .style('fill', '#cccccc');
+
             //Update axis components
             xAxis.select('path.domain')
                 .style('stroke', '#ffffff');
@@ -122,6 +222,12 @@ class ScatterPlot extends BorderedChart {
                 .selectAll('text')
                 .style('fill', '#ffffff');
         } else {
+            points.selectAll('circle.brushed')
+                .attr('stroke', 'black ');
+
+            legend.selectAll('text.legend-label')
+                  .style('fill', '#808080');
+
             //Update axis components
             xAxis.select('path.domain')
                 .style('stroke', '#000000');
@@ -146,6 +252,44 @@ class ScatterPlot extends BorderedChart {
                 .style('fill', '#000000');
         }
         this.applyBlindSafe(darkmode, blindsafe);
+    }
+
+    setupLegend() {
+      var civil_flag = controller.filters.civil;
+      var labels = ['won', 'lost', 'civil', 'uncertain'].filter(function(d, i) {
+        return !(i == 2 && !civil_flag)
+      })
+
+      legend = this.chart.append("svg")
+            .attr("width", 90)
+            .attr("height", 90)
+              .attr('x', 480)
+              .attr('y', 30)
+
+      legend.selectAll('circle')
+            .data(labels)
+            .enter()
+            .append('circle')
+              .attr('class', function(d) {
+                return d + '-point';
+              })
+              .attr('cx', 10)
+              .attr('cy', function(_d, i) {
+                return 10 + i * 15;
+              })
+              .attr('r', 5);
+
+      legend.selectAll('text')
+            .data(labels)
+            .enter()
+            .append('text')
+              .attr('class', 'legend-label')
+              .attr('x', 25)
+              .attr('y', function(_, i) {
+                return 10 + i * 15;
+              })
+              .text(d => d)
+              .style('alignment-baseline', 'middle')
     }
 }
 export default new ScatterPlot()
