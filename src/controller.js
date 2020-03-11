@@ -26,8 +26,8 @@ class Controller {
      * Method to be called from within ScatterPlot when a brush occurs.
      * The controller stores, as cache, the last brushed data and notifies the
      * map only if data really changes: this is done to avoid overloading.
-     * 
-     * @param {Array<number>} ids the identifiers of the battles 
+     *
+     * @param {Array<number>} ids the identifiers of the battles
      */
     setBrushedScatterData(ids) {
         //notify map only on data change
@@ -321,6 +321,48 @@ class Controller {
             d3.selectAll('.custom-control-label')
                 .transition(t)
                 .style('color', '#ffffff');
+
+            d3.select('#footer')
+              .classed('bg-light', false)
+              .transition(t)
+              .style('background-color', '#808080');
+
+            d3.selectAll('.section-title')
+              .transition(t)
+              .style('color', '#bfbfbf');
+
+            d3.selectAll('.list-link')
+              .on('mouseover', function() {
+                d3.select(this)
+                  .style('color', '#ffffff');
+              })
+              .on('mouseout', function() {
+                d3.select(this)
+                  .style('color', '#d9d9d9');
+              })
+              .transition(t)
+              .style('color', '#d9d9d9');
+
+            d3.selectAll('.footer-section p')
+              .transition(t)
+              .style('color', '#ffffff');
+
+            d3.select('.footer-section hr')
+              .transition(t)
+              .style('border-top-color', '#bfbfbf');
+
+            d3.selectAll('i.fa')
+              .on('mouseover', function() {
+                d3.select(this)
+                  .style('color', '#ffffff');
+              })
+              .on('mouseout', function() {
+                d3.select(this)
+                  .style('color', '#d9d9d9');
+              })
+              .transition(t)
+              .style('color', '#d9d9d9');
+
         } else {
             d3.selectAll('.svg-content-responsive')
                 .transition(t)
@@ -349,6 +391,45 @@ class Controller {
             d3.selectAll('.custom-control-label')
                 .transition(t)
                 .style('color', '#000000');
+
+            d3.select('#footer')
+              .classed('bg-light', true)
+
+            d3.selectAll('.section-title')
+              .transition(t)
+              .style('color', '#595959');
+
+            d3.selectAll('.list-link')
+              .on('mouseover', function() {
+                d3.select(this)
+                  .style('color', '#000000');
+              })
+              .on('mouseout', function() {
+                d3.select(this)
+                  .style('color', '#808080');
+              })
+              .transition(t)
+              .style('color', '#808080');
+
+            d3.selectAll('.footer-section p')
+              .transition(t)
+              .style('color', '#000000');
+
+            d3.select('.footer-section hr')
+              .transition(t)
+              .style('border-top-color', '#595959');
+
+            d3.selectAll('i.fa')
+              .on('mouseover', function() {
+                d3.select(this)
+                  .style('color', '#000000');
+              })
+              .on('mouseout', function() {
+                d3.select(this)
+                  .style('color', '#808080');
+              })
+              .transition(t)
+              .style('color', '#808080');
         }
     }
 }

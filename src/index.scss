@@ -105,32 +105,51 @@ svg .rect_b {
   stroke: black;
 }
 
-#footer {
-  margin: 10px;
-}
-
 .section-title {
   font-weight: bold;
   font-size: 20px;
+  margin-left: 10px;
   color: #595959;
+}
+
+.footer-section p {
+  margin-left: 10px;
 }
 
 .links-list {
   list-style-type: none;
   padding: 0;
+  margin-left: 10px;
 }
 
-.links-list a,
- a.author-link {
+a.list-link {
   text-decoration: none;
   color: #808080;
 }
 
-.links-list a:hover,
-a.author-link:hover {
+a.list-link:hover {
   color: #000000;
 }
 
+.social-list {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+}
+
+.social-list li {
+  display: inline;
+  margin-left: 10px;
+}
+
+.social-list li a {
+  color: #808080;
+}
+
+.social-list li .fa:hover {
+  color: #000000;
+}
 
 .footer-section hr {
   margin: 20px 45px;
