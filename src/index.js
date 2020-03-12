@@ -4,8 +4,5 @@ import controller from './controller'
 
 const d3 = require('d3')
 
+// entry point
 controller.setup()
-
-var repository = "https://github.com/MatteoSalvino/VA-Roman-Empire"
-d3.select("#githubBtn")
-    .on("click", () => window.open(repository))
