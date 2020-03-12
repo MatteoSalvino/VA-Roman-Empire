@@ -51,7 +51,7 @@ class Map extends BorderedChart {
     }
 
     /**
-     * It adds/remove the class **scattered** to the circles on the map,
+     * It adds/removes the class **scattered** to the circles on the map,
      * depending on their id. There is no cache management at this level.
      *
      * @param {Array<number>} ids identifiers of the battles

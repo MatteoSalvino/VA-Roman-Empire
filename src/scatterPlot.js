@@ -52,14 +52,14 @@ class ScatterPlot extends BorderedChart {
             .enter()
             .append('circle')
             .attr('class', function(d) {
-              if(d.outcome == 'W')
-                return 'won-point';
-              else if(d.outcome == 'L')
-                return 'lost-point';
-              else if(d.outcome == 'C')
-                return 'civil-point';
-              else
-                return 'uncertain-point';
+                if (d.outcome == 'W')
+                    return 'won-point';
+                else if (d.outcome == 'L')
+                    return 'lost-point';
+                else if (d.outcome == 'C')
+                    return 'civil-point';
+                else
+                    return 'uncertain-point';
             })
             .attr('r', 6)
             .attr('cx', function(d) {
@@ -90,16 +90,16 @@ class ScatterPlot extends BorderedChart {
                     if (isBrushed) {
                         echo.push(+d.id)
                         d3.select(this)
-                          .classed('brushed', 'true')
+                            .classed('brushed', 'true')
                             .attr('stroke-width', 0.5)
                             .attr('stroke', () => {
-                              if(controller.darkmode)
-                                return 'white'
-                              return 'black'
+                                if (controller.darkmode)
+                                    return 'white'
+                                return 'black'
                             });
                     } else {
                         d3.select(this)
-                          .classed('brushed', false)
+                            .classed('brushed', false)
                             .attr('stroke-width', 0);
                     }
                 })
@@ -108,96 +108,96 @@ class ScatterPlot extends BorderedChart {
     }
 
     applyBlindSafe(darkmode, blindsafe) {
-      if(blindsafe) {
-        //Update scatter points
-        points.selectAll('.won-point')
-            .style('fill', '#33a02c');
-
-        points.selectAll('.lost-point')
-            .style('fill', '#1f78b4');
-
-        points.selectAll('.civil-point')
-            .style('fill', '#b2df8a');
-
-        points.selectAll('.uncertain-point')
-            .style('fill', '#a6cee3');
-
-        //Update legend indicators
-        legend.selectAll('.won-point')
+        if (blindsafe) {
+            //Update scatter points
+            points.selectAll('.won-point')
                 .style('fill', '#33a02c');
 
-        legend.selectAll('.lost-point')
+            points.selectAll('.lost-point')
                 .style('fill', '#1f78b4');
 
-        legend.selectAll('.civil-point')
+            points.selectAll('.civil-point')
                 .style('fill', '#b2df8a');
 
-        legend.selectAll('.uncertain-point')
+            points.selectAll('.uncertain-point')
                 .style('fill', '#a6cee3');
-      } else {
-        if(darkmode) {
-          //Update scatter points
-          points.selectAll('.won-point')
-              .style('fill', '#1b9e77');
 
-          points.selectAll('.lost-point')
-              .style('fill', '#d95f02');
+            //Update legend indicators
+            legend.selectAll('.won-point')
+                .style('fill', '#33a02c');
 
-          points.selectAll('.civil-point')
-              .style('fill', '#7570b3');
+            legend.selectAll('.lost-point')
+                .style('fill', '#1f78b4');
 
-          points.selectAll('.uncertain-point')
-              .style('fill', '#e7298a');
+            legend.selectAll('.civil-point')
+                .style('fill', '#b2df8a');
 
-          //Update legend indicators
-          legend.selectAll('.won-point')
-              .style('fill', '#1b9e77');
-
-          legend.selectAll('.lost-point')
-              .style('fill', '#d95f02');
-
-          legend.selectAll('.civil-point')
-              .style('fill', '#7570b3');
-
-          legend.selectAll('.uncertain-point')
-              .style('fill', '#e7298a');
+            legend.selectAll('.uncertain-point')
+                .style('fill', '#a6cee3');
         } else {
-          //Update scatter points
-          points.selectAll('.won-point')
-              .style('fill', '#8dd3c7');
+            if (darkmode) {
+                //Update scatter points
+                points.selectAll('.won-point')
+                    .style('fill', '#1b9e77');
 
-          points.selectAll('.lost-point')
-              .style('fill', '#fb8072');
+                points.selectAll('.lost-point')
+                    .style('fill', '#d95f02');
 
-          points.selectAll('.civil-point')
-              .style('fill', '#ffffb3');
+                points.selectAll('.civil-point')
+                    .style('fill', '#7570b3');
 
-          points.selectAll('.uncertain-point')
-              .style('fill', '#bebada');
+                points.selectAll('.uncertain-point')
+                    .style('fill', '#e7298a');
 
-          //Update legend indicators
-          legend.selectAll('.won-point')
-              .style('fill', '#8dd3c7');
+                //Update legend indicators
+                legend.selectAll('.won-point')
+                    .style('fill', '#1b9e77');
 
-          legend.selectAll('.lost-point')
-              .style('fill', '#fb8072');
+                legend.selectAll('.lost-point')
+                    .style('fill', '#d95f02');
 
-          legend.selectAll('.civil-point')
-              .style('fill', '#ffffb3');
+                legend.selectAll('.civil-point')
+                    .style('fill', '#7570b3');
 
-          legend.selectAll('.uncertain-point')
-              .style('fill', '#bebada');
+                legend.selectAll('.uncertain-point')
+                    .style('fill', '#e7298a');
+            } else {
+                //Update scatter points
+                points.selectAll('.won-point')
+                    .style('fill', '#8dd3c7');
+
+                points.selectAll('.lost-point')
+                    .style('fill', '#fb8072');
+
+                points.selectAll('.civil-point')
+                    .style('fill', '#ffffb3');
+
+                points.selectAll('.uncertain-point')
+                    .style('fill', '#bebada');
+
+                //Update legend indicators
+                legend.selectAll('.won-point')
+                    .style('fill', '#8dd3c7');
+
+                legend.selectAll('.lost-point')
+                    .style('fill', '#fb8072');
+
+                legend.selectAll('.civil-point')
+                    .style('fill', '#ffffb3');
+
+                legend.selectAll('.uncertain-point')
+                    .style('fill', '#bebada');
+            }
         }
-      }
     }
 
     applyThemeChanged(darkmode, blindsafe) {
         if (darkmode) {
             points.selectAll('circle.brushed')
-                  .attr('stroke', 'white');
+                .attr('stroke', 'white');
 
             legend.selectAll('text.legend-label')
-                  .style('fill', '#cccccc');
+                .style('fill', '#cccccc');
 
             //Update axis components
             xAxis.select('path.domain')
@@ -226,7 +226,7 @@ class ScatterPlot extends BorderedChart {
                 .attr('stroke', 'black ');
 
             legend.selectAll('text.legend-label')
-                  .style('fill', '#808080');
+                .style('fill', '#808080');
 
             //Update axis components
             xAxis.select('path.domain')
@@ -255,41 +255,41 @@ class ScatterPlot extends BorderedChart {
     }
 
     setupLegend() {
-      var civil_flag = controller.filters.civil;
-      var labels = ['won', 'lost', 'civil', 'uncertain'].filter(function(d, i) {
-        return !(i == 2 && !civil_flag)
-      })
+        var civil_flag = controller.filters.civil;
+        var labels = ['won', 'lost', 'civil', 'uncertain'].filter(function(d, i) {
+            return !(i == 2 && !civil_flag)
+        })
 
-      legend = this.chart.append("svg")
+        legend = this.chart.append("svg")
             .attr("width", 90)
             .attr("height", 90)
-              .attr('x', 480)
-              .attr('y', 30)
+            .attr('x', 480)
+            .attr('y', 30)
 
-      legend.selectAll('circle')
+        legend.selectAll('circle')
             .data(labels)
             .enter()
             .append('circle')
-              .attr('class', function(d) {
+            .attr('class', function(d) {
                 return d + '-point';
-              })
-              .attr('cx', 10)
-              .attr('cy', function(_d, i) {
+            })
+            .attr('cx', 10)
+            .attr('cy', function(_d, i) {
                 return 10 + i * 15;
-              })
-              .attr('r', 5);
+            })
+            .attr('r', 5);
 
-      legend.selectAll('text')
+        legend.selectAll('text')
             .data(labels)
             .enter()
             .append('text')
-              .attr('class', 'legend-label')
-              .attr('x', 25)
-              .attr('y', function(_, i) {
+            .attr('class', 'legend-label')
+            .attr('x', 25)
+            .attr('y', function(_, i) {
                 return 10 + i * 15;
-              })
-              .text(d => d)
-              .style('alignment-baseline', 'middle')
+            })
+            .text(d => d)
+            .style('alignment-baseline', 'middle')
     }
 }
 export default new ScatterPlot()
