@@ -23,11 +23,11 @@ class ScatterPlot extends BorderedChart {
     drawChart() {
         //X and Y scales
         xScale = d3.scaleLinear()
-            .domain([-0.5, 1.1 * d3.max(this.battles, function(d) { return d.y1 })])
+            .domain([0, 3])
             .range([this.margin.left, this.width - this.margin.right]);
 
         yScale = d3.scaleLinear()
-            .domain([-1.5, 1.1 * d3.max(this.battles, function(d) { return d.y2 })])
+            .domain([0, 3])
             .range([this.height - this.margin.bottom, this.margin.top]);
 
         //X and Y axis
