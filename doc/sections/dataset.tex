@@ -17,16 +17,16 @@ This table comes with different attributes:
     \item year - year of the event
     \item yearAU - year of the event, ab urbe condita
     \item relativeYear - year of the event, relative to roman phase
-    \item label - 
+    \item label - the name of the battle
     \item locationLabel - place of the battle
-    \item latitude 
-    \item longitude
-    \item outcome - win, loss, ...
-    \item civil -
-    \item naval -
-    \item siege -
-    \item sack -
-    \item final -
+    \item latitude - north–south position
+    \item longitude - east-west position
+    \item outcome - win, loss, \dots
+    \item civil - marks the battle as civil
+    \item naval - distinguishes between naval and ground battles
+    \item siege - indicates that the battle is actually a blockade
+    \item sack - indicates the event as a sack
+    \item final - marks the battle as decisive fight
     \item period - roman phase
 \end{itemize}
 
@@ -34,7 +34,7 @@ This table comes with different attributes:
 This table comes with different attributes:
 \begin{itemize}
     \item id - unique identifier of the war
-    \item label - 
+    \item label - name of the war
     \item startYear
     \item endYear
 \end{itemize}
@@ -57,7 +57,7 @@ and one extra attribute for wars
 Pleiades is a community-built gazetteer and graph of ancient places. It publishes authoritative information about ancient places and spaces, providing unique services for finding, displaying, and reusing that information under open license. It publishes not just for individual human users, but also for search engines and for the widening array of computational research and visualization tools that support humanities teaching and research.
 
 \todo[inline]{More details?}
-We downloaded on of their dumps in order to statically retrieve the place identifier and to adjust some latitude and longitude values. This allowed the visualization tool to properly render the position on the geographic map of an event. Moreover we adopted this strategy since it is more flexible. Indeed, binding an ancient place with a corresponding Pleiades entry allows many benefits, among them we remark:
+We downloaded one of their dumps in order to statically retrieve the place identifier and to adjust some latitude and longitude values. This allowed the visualization tool to properly render the position on the geographic map of an event. Moreover, we adopted this strategy since it is more flexible. Indeed, binding an ancient place to its corresponding Pleiades entry allows many benefits, among them we remark:
 \begin{itemize}
     \item we can fully exploit the Pleiades graph and its daily-basis update system
     \item it is simpler to detect errors and eventually fix them
@@ -65,7 +65,7 @@ We downloaded on of their dumps in order to statically retrieve the place identi
 
 \subsubsection{Reverse Geocoding}
 \todo[inline]{Add reference}
-Through reverse-goecoding we were able to add an attribute for each tuple in the battles dataset. We used the reverse\_geocoder Python library to do that. The script is available as a Jupyter Notebook project, named rg.ipynb. 
+Through reverse goecoding we were able to add an attribute for each tuple in the battles dataset. We used the reverse\_geocoder Python library to do that. The script is available as a Jupyter Notebook project, named rg.ipynb. 
 
 \subsubsection{MCA}
 \todo[inline]{Add reference}
@@ -73,12 +73,12 @@ Finally, we run a Multiple Correspondence Analysis (\textbf{MCA}) on the tuples 
 
 Roughly speaking, MCA is an extension of the well-known Correspondence Analysis (CA): the idea behind it is to simply compute the one-hot encoded version of a dataset and apply CA on it; we decided to run this analysis because most of the variables are categorical.
 
-The MCA was executed on a subset of the attributes: indeed we have excluded attributes like "id", since they are just used to properly represent the ER schema.
+The MCA was executed on a subset of the attributes: indeed we have excluded attributes like "id", since they are just used to properly represent the ER schema, but carry no meaningful information for the analysis.
 
 Note that MCA has been executed only once: the coordinates associated to each battle are static and bound to each tuple before running the visualization and analytics tool.
 
 \subsubsection{Wikidata binding}
-We also used the MediaWiki API in order to retrieve the Wikidata unique identifier associated to each war: this identifier is appended to each tuple in the column "wikidata".
+We also used the MediaWiki API in order to retrieve the Wikidata unique id associated to each war: this identifier is appended to each tuple in the column "wikidata".
 
 Through this identifier it is possible to access the pages of MediaWiki projects (e.g. en.wiki, itwiki, etc.): this allows the analyst to explore the details of the events. Again, as already stated above, we are sure that this approach empowers the flexibility because in case of errors it is simpler to fix them.
 \todo[inline]{Explain why we need Wikidata item}
