@@ -1,73 +1,73 @@
 id,label,startYear,endYear,wikidata
 1,Roman–Etruscan Wars,,,Q3119190
-2,Roman–Latin wars,,,
-3,Roman–Sabine wars,,,
-4,First Latin War,-498,-493,
-5,War with the Volsci and the Aequi,,,
-6,First Samnite War,-343,-341,
-7,Latin War,-340,-338,
-8,Second Samnite War,-326,-304,
-9,Third Samnite War,-298,-290,
+2,Roman–Latin wars,,,Q737907
+3,Roman–Sabine wars,,,Q16932320
+4,First Latin War,-498,-493,Q16932145
+5,War with the Volsci and the Aequi,,,Q3940478
+6,First Samnite War,-343,-341,Q109251
+7,Latin War,-340,-338,Q15013125
+8,Second Samnite War,-326,-304,Q109251
+9,Third Samnite War,-298,-290,Q109251
 10,Wars with Gauls and Etruscans,-285,-282,
-11,Pyrrhic War,-280,-275,
-12,First Punic War ,-264,-241,
-13,Second Punic War ,-218,-201,
-14,Roman-Gallic wars,-225,-200,
-15,First Macedonian War ,-214,-205,
-16,First Illyrian War ,-229,-228,
-17,Second Macedonian War ,-214,-205,
-18,Roman-Spartan War ,-195,-195,
-19,Roman-Seleucid War ,-192,-188,
-20,Galatian War ,-189,-189,
-21,First Celtiberian War ,-181,-179,
-22,Third Macedonian War ,-171,-168,
-23,Numentine\Second Celtiberian War ,-154,-133,
-24,Fourth Macedonian War ,-150,-148,
-25,Third Punic War ,-149,-146,
-26,Achaean War ,-146,-146,
-27,Cimbrian War ,-113,-101,
-28,Jugurthine War ,-112,-105,
-29,Social War ,-91,-88,
-30,First Mithridatic War ,-90,-85,
-31,First Marian-Sullan Civil War ,-88,-87,
-32,Second Mithridatic War ,-83,-82,
-33,Sertorian War ,-80,-72,
-34,Second Marian-Sullan Civil War ,-82,-81,
-35,Third Mithridatic War ,-73,-63,
-36,Third Servile War ,-73,-71,
-37,Catilinarian Civil War ,-63,-62,
-38,Gallic Wars ,-59,-51,
-39,War with the Parthian Empire ,-53,-53,
-40,Caesar's Civil War ,-49,-45,
+11,Pyrrhic War,-280,-275,Q596373
+12,First Punic War ,-264,-241,Q6286
+13,Second Punic War ,-218,-201,Q6271
+14,Roman-Gallic wars,-225,-200,Q7361563
+15,First Macedonian War ,-214,-205,Q75626
+16,First Illyrian War ,-229,-228,Q154552
+17,Second Macedonian War ,-214,-205,Q75665
+18,Roman-Spartan War ,-195,-195,Q2073517
+19,Roman-Seleucid War ,-192,-188,Q486831
+20,Galatian War ,-189,-189,Q2556352
+21,First Celtiberian War ,-181,-179,Q1230787
+22,Third Macedonian War ,-171,-168,Q76118
+23,Numentine\Second Celtiberian War ,-154,-133,Q1503611
+24,Fourth Macedonian War ,-150,-148,Q552373
+25,Third Punic War ,-149,-146,Q6334
+26,Achaean War ,-146,-146,Q6861027
+27,Cimbrian War ,-113,-101,Q903199
+28,Jugurthine War ,-112,-105,Q827612
+29,Social War ,-91,-88,Q677316
+30,First Mithridatic War ,-90,-85,Q1647768
+31,First Marian-Sullan Civil War ,-88,-87,Q2734925
+32,Second Mithridatic War ,-83,-82,Q1991765
+33,Sertorian War ,-80,-72,Q3778726
+34,Second Marian-Sullan Civil War ,-82,-81,Q521868
+35,Third Mithridatic War ,-73,-63,Q1764124
+36,Third Servile War ,-73,-71,Q194378
+37,Catilinarian Civil War ,-63,-62,Q1051202
+38,Gallic Wars ,-59,-51,Q202161
+39,War with the Parthian Empire ,-53,-53,Q1192043
+40,Caesar's Civil War ,-49,-45,Q1238338
 41,War with Pontus,,,
-42,Liberators' civil war,-44,-42,
-43,Sicilian revolt ,-44,-36,
-44,Fulvia's civil war (Perusine War) ,-41,-40,
-45,Final War of the Roman Republic ,-32,-30,
-46,Cantabrian Wars ,-29,-19,
+42,Liberators' civil war,-44,-42,Q2583092
+43,Sicilian revolt ,-44,-36,Q2730371
+44,Fulvia's civil war (Perusine War) ,-41,-40,Q643987
+45,Final War of the Roman Republic ,-32,-30,Q2116320
+46,Cantabrian Wars ,-29,-19,Q1340107
 47,Germanic Battles ,-16,-11,
-48,Roman conquest of Britain ,43,96,
-49,Roman–Parthian War,58,63,
+48,Roman conquest of Britain ,43,96,Q1258062
+49,Roman–Parthian War,58,63,Q1533828
 50,Boudica's uprising ,60,61,
-51,First Jewish–Roman War ,66,73,
+51,First Jewish–Roman War ,66,73,Q202578
 52,Roman Civil War,68,69,
-53,Domitian's Dacian War ,86,88,
-54,First Dacian War ,101,102,
-55,Second Dacian War ,105,106,
-56,Roman-Persian Wars,,,
-57,Kitos War ,115,117,
-58,Second Jewish Revolt ,132,136,
-59,Marcomannic Wars ,166,180,
+53,Domitian's Dacian War ,86,88,Q13403337
+54,First Dacian War ,101,102,Q4349810
+55,Second Dacian War ,105,106,Q2078442
+56,Roman-Persian Wars,,,Q500409
+57,Kitos War ,115,117,Q6254
+58,Second Jewish Revolt ,132,136,Q334502
+59,Marcomannic Wars ,166,180,Q933963
 60,Roman Civil War,193,197,
 61,Persian wars,,,
 62,Civil wars,,,
 63,Gothic and Alemannic wars,,,
 64,Palmyrene war,,,
-65,Civil Wars of the Tetrarchy,306,324,
-66,Wars with Persia,344,363,
-67,Civil War,350,353,
+65,Civil Wars of the Tetrarchy,306,324,Q759835
+66,Wars with Persia,344,363,Q500409
+67,Civil War,350,353,Q3778588
 68,Wars with Alemanni,356,368,
-69,Gothic War,376,382,
+69,Gothic War,376,382,Q1366196
 70,Wars with Gothic Tribes,402,419,
 71,War with Visigoths,,,
 72,War with the Huns,447,451,
