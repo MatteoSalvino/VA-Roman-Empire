@@ -1,11 +1,11 @@
 \section{Dataset}
 
-\lettrine[nindent=0em,lines=3]{T} he dataset used in this project has been generated starting from the (english) Wikipedia article \textbf{List of Roman wars and battles}. As all the Wikipedia pages, this article is written using the wikitext, a special hypertext markup used by the MediaWiki software as default formatter. In order to acquire the necessary information, we have used some script to scrap the content of the page and produce ER-tables: this is a much more flexible way to represent data, with respect to the wikitext, and in particular makes it possible to export as csv file the entire dataset.
+\lettrine[nindent=0em,lines=3]{T} he dataset used in this project has been generated starting from the (english) Wikipedia article \textbf{List of Roman wars and battles}. As all the Wikipedia pages, this article is written using the wikitext, a special hypertext markup used by the MediaWiki software as default formatter. In order to acquire the necessary information, we have used some script to scrap the content of the page and produce ER-tables: this is a much more flexible way to represent data, with respect to the wikitext, and in particular makes it possible to export as comma-separated values (\textbf{csv}) file the entire dataset.
 \todo[inline]{Explain why ER will allow to improve the dataset over the time}
 \todo[inline]{Add reference to ER}
 
 \subsection{Tables}
-We finally obtained two main tables: the former for the battles and the latter for the wars.
+We finally obtained two main tables: the former for the battles and the latter for the wars, both available as csv files and hosted on the repository.
 \todo[inline]{Further tables will be supported!}
 
 \subsubsection{Battles}
@@ -43,7 +43,7 @@ This table comes with different attributes:
 The dataset already offers many attributes; however, we decided to perform some preprocessing in order to enhance it. The preprocessing phase consisted of adding four extra attributes for battles
 \begin{itemize}
     \item currentCountry - the current country in which the battle took place
-    \item stoaId - stoa identifier of the ancient place
+    \item stoaId - Pleiades identifier
     \item y1, y2 - the result of a static MCA
 \end{itemize}
 
@@ -52,11 +52,33 @@ and one extra attribute for wars
     \item wikidata - Wikidata item identifier
 \end{itemize}
 
-\subsubsection{Stoa Identifier}
-\todo[inline]{Describe STOA}
+\subsubsection{Pleiades Identifier}
+\todo[inline]{Add reference}
+Pleiades is a community-built gazetteer and graph of ancient places. It publishes authoritative information about ancient places and spaces, providing unique services for finding, displaying, and reusing that information under open license. It publishes not just for individual human users, but also for search engines and for the widening array of computational research and visualization tools that support humanities teaching and research.
+
+\todo[inline]{More details?}
+We downloaded on of their dumps in order to statically retrieve the place identifier and to adjust some latitude and longitude values. This allowed the visualization tool to properly render the position on the geographic map of an event. Moreover we adopted this strategy since it is more flexible. Indeed, binding an ancient place with a corresponding Pleiades entry allows many benefits, among them we remark:
+\begin{itemize}
+    \item we can fully exploit the Pleiades graph and its daily-basis update system
+    \item it is simpler to detect errors and eventually fix them
+\end{itemize}
+
 \subsubsection{Reverse Geocoding}
-\todo[inline]{Describe the use of rg for countries}
+\todo[inline]{Add reference}
+Through reverse-goecoding we were able to add an attribute for each tuple in the battles dataset. We used the reverse\_geocoder Python library to do that. The script is available as a Jupyter Notebook project, named rg.ipynb. 
+
 \subsubsection{MCA}
-\todo[inline]{Explain the use of MCA}
+\todo[inline]{Add reference}
+Finally, we run a Multiple Correspondence Analysis (\textbf{MCA}) on the tuples of battles dataset, and we stored the two principal components by appending them to the input data: we named these two coordinates $y_1$ and $y_2$ and we have used them in the scatterplot view to give a 2D representation of the battles.
+
+Roughly speaking, MCA is an extension of the well-known Correspondence Analysis (CA): the idea behind it is to simply compute the one-hot encoded version of a dataset and apply CA on it; we decided to run this analysis because most of the variables are categorical.
+
+The MCA was executed on a subset of the attributes: indeed we have excluded attributes like "id", since they are just used to properly represent the ER schema.
+
+Note that MCA has been executed only once: the coordinates associated to each battle are static and bound to each tuple before running the visualization and analytics tool.
+
 \subsubsection{Wikidata binding}
+We also used the MediaWiki API in order to retrieve the Wikidata unique identifier associated to each war: this identifier is appended to each tuple in the column "wikidata".
+
+Through this identifier it is possible to access the pages of MediaWiki projects (e.g. en.wiki, itwiki, etc.): this allows the analyst to explore the details of the events. Again, as already stated above, we are sure that this approach empowers the flexibility because in case of errors it is simpler to fix them.
 \todo[inline]{Explain why we need Wikidata item}
