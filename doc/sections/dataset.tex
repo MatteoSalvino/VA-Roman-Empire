@@ -1,10 +1,62 @@
 \section{Dataset}
 
-\todo[inline]{Describe how the dataset has been generated}
-\todo[inline]{List the attributes of the dataset}
-\blindtext
+\lettrine[nindent=0em,lines=3]{T} he dataset used in this project has been generated starting from the (english) Wikipedia article \textbf{List of Roman wars and battles}. As all the Wikipedia pages, this article is written using the wikitext, a special hypertext markup used by the MediaWiki software as default formatter. In order to acquire the necessary information, we have used some script to scrap the content of the page and produce ER-tables: this is a much more flexible way to represent data, with respect to the wikitext, and in particular makes it possible to export as csv file the entire dataset.
+\todo[inline]{Explain why ER will allow to improve the dataset over the time}
+\todo[inline]{Add reference to ER}
+
+\subsection{Tables}
+We finally obtained two main tables: the former for the battles and the latter for the wars.
+\todo[inline]{Further tables will be supported!}
+
+\subsubsection{Battles}
+\todo[inline]{Organize by category and improve description}
+This table comes with different attributes:
+\begin{itemize}
+    \item id - unique identifier of the battle
+    \item warId - identifier of the corresponding war (if any)
+    \item year - year of the event
+    \item yearAU - year of the event, ab urbe condita
+    \item relativeYear - year of the event, relative to roman phase
+    \item label - 
+    \item locationLabel - place of the battle
+    \item latitude 
+    \item longitude
+    \item outcome - win, loss, ...
+    \item civil -
+    \item naval -
+    \item siege -
+    \item sack -
+    \item final -
+    \item period - roman phase
+\end{itemize}
+
+\subsubsection{Wars}
+This table comes with different attributes:
+\begin{itemize}
+    \item id - unique identifier of the war
+    \item label - 
+    \item startYear
+    \item endYear
+\end{itemize}
 
 \subsection{Preprocessing}
-\todo[inline]{Explain the use of MCA}
+The dataset already offers many attributes; however, we decided to perform some preprocessing in order to enhance it. The preprocessing phase consisted of adding four extra attributes for battles
+\begin{itemize}
+    \item currentCountry - the current country in which the battle took place
+    \item stoaId - stoa identifier of the ancient place
+    \item y1, y2 - the result of a static MCA
+\end{itemize}
+
+and one extra attribute for wars
+\begin{itemize}
+    \item wikidata - Wikidata item identifier
+\end{itemize}
+
+\subsubsection{Stoa Identifier}
+\todo[inline]{Describe STOA}
+\subsubsection{Reverse Geocoding}
 \todo[inline]{Describe the use of rg for countries}
-\blindtext
+\subsubsection{MCA}
+\todo[inline]{Explain the use of MCA}
+\subsubsection{Wikidata binding}
+\todo[inline]{Explain why we need Wikidata item}
