@@ -1,4 +1,21 @@
 \section{Visualization}
+
+\begin{table}[h]
+    \caption{Relationship between charts and ER-tables.}
+    \centering
+    \begin{tabular}{ll}
+    \toprule
+    ER-Table & Chart \\
+    \midrule
+    Battles & Geographic Map \\
+            & Line Chart \\
+            & Stacked Bar Chart \\
+            & Scatter plot \\
+    Wars    & Box Plot \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsection{Geographic Map}
 The first component of our visualization tool is the geographic map, whose goal is to show to the end customer the precise projected point (using longitude and latitude attributes) where a particular battle occurred. In particular, we took an European continent picture with its respective countries boundaries information, and projected the real battles coordinates over it, in order to properly fit them to our figure. We represented each battle with a clickable circle, whose color depends on the battle outcome (e.g. won, lost, \dots). In order to improve the quality of the analysis, we offer the possibility to know some details about the currently selected battle: indeed, we have provided a small legend which summarizes some useful information such as battle name, the year, the coordinates and its outcome. Furthermore, it is possible to select multiple battles via the brushing approach. In fact, when a number $n > 2$ of battles is selected, the legend will show that $n$ battles have been selected and also the range (of years) in which they have been occurred. Note that, when brushing, the unselected battles are hidden.
 
@@ -35,15 +52,17 @@ In case of doubts about the actual number of battles outcome with a particular t
 \end{figure}
 
 \subsection{Box Plot}
-\todo[inline]{Describe the visualization component}
+The Box Plot is another component of our visualization tool: it aims at giving a visual representation of the Roman wars, rather than the battles, as the other charts.
+
+A unique box plot, indeed, is drawn to graphically render the duration of the wars, expressed in years, through quantiles: these quantiles are dinamycally computed, since the user interacting with the other views intrinsically filters some battles and their corresponding wars.
 \missingfigure{Box Plot}
 
 \subsection{Scatter Plot}
-
+\todo[inline]{Describe the visualization component}
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.30]{./images/scatter_plot.png}
-\caption{Line chart}
+\caption{Scatter plot}
 \end{figure}
 
 \subsection{Filters - Header}
