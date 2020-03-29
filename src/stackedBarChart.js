@@ -97,7 +97,7 @@ class StackedBarChart extends BorderedChart {
 
         tooltip.append('text')
             .attr('x', 15)
-            .attr('y', 10)
+            .attr('y', 13)
             .attr('font-size', '12px')
             .attr('font-weight', 'bold')
             .style('text-anchor', 'middle');

@@ -40,6 +40,14 @@ class BoxPlot extends BorderedChart {
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
             .call(d3.axisLeft(y));
 
+        this.chart.append('text')
+          .attr('class', 'axis-label')
+          .attr("transform", "rotate(-90)")
+          .attr("x", - (this.height / 2))
+          .attr("y", 12)
+          .style("text-anchor", "middle")
+          .text("Year duration");
+
         // a few features for the box
         var center = this.width / 2
         var boxWidth = 100
@@ -109,6 +117,9 @@ class BoxPlot extends BorderedChart {
                 .selectAll('text')
                 .style('fill', '#ffffff');
 
+            d3.select('text.axis-label')
+              .attr('fill', '#ffffff');
+
             //Update boxplot's lines and area
             d3.selectAll('.box-stroke')
                 .style('stroke', '#ffffff');
@@ -126,6 +137,10 @@ class BoxPlot extends BorderedChart {
             yAxis.selectAll('g.tick')
                 .selectAll('text')
                 .style('fill', '#000000');
+
+            d3.select('text.axis-label')
+                .attr('fill', '#000000');
+
             //Update boxplot's lines and area
             d3.selectAll('.box-stroke')
                 .style('stroke', '#000000');
