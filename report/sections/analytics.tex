@@ -7,3 +7,8 @@ As we have previously mentioned, in our visualization play a fundamental role th
     \item \textbf{box plot} $\rightarrow$ null: this chart does not provide any interaction as well, but it is updated by others.
     \item \textbf{scatter plot} $\rightarrow$ \textbf{geographic map}: in this chart we have used the brushing approach to select a group of battles that will be highlighted with a dark border in case of light theme (resp. with a white border in case of dark theme). This action also triggers another run time function, which is responsible to highlight the selected battles also in the geographic map. 
 \end{itemize}
+The analytics part is constituted by two main functions :
+\begin{itemize}
+\item \textbf{Percentage of ground / naval / civil / not civil battles} : at run time will be triggered a function that computes the exact amount of each type of battles reported above, that will be displayed nearby the corresponding battle type label.
+\item \textbf{Box plot quantiles} : they are the principal components of this chart, which are computed at run time.
+\end{itemize}

@@ -44,7 +44,7 @@ The stacked bar chart is another component of our visualization that offers a di
 
 This chart is not able to update the other ones, but can be updated with a selection performed in the geographic map, in the line chart or over both of them.
 
-In case of doubts about the actual number of battles outcome with a particular type, the user can simply move the mouse pointer over that specific layer, thus producing a a small label (tooltip) showing the exact number: this can be extremely useful because of the intrinsic nature of the stacked bar chart and its bars displayed one on top of the other.
+In case of doubts about the actual number of battles outcome with a particular type, the user can simply move the mouse pointer over that specific layer, thus producing a small label (tooltip) showing the exact number: this can be extremely useful because of the intrinsic nature of the stacked bar chart and its bars displayed one on top of the other.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.30]{./images/stacked_bar_chart.png}
@@ -72,3 +72,7 @@ Another main component of our project is the header. Indeed, in order to allow t
 \includegraphics[scale=0.32]{./images/header_filters.png}
 \caption{Header filters}
 \end{figure}
+
+\subsection{Dark theme and blind safe mode}
+Other additional features available in our visualization to allow the analyst to feel comfortable are the \textbf{dark theme} and \textbf{blind safe mode}. We decided to introduce the first one, since a human in different time periods of the day can be mentally tired, and couldn't pay so much attention to several visualization information. In order to reduce this issue, we decided to provided a more relaxing colors combination for the eyes, thanks to ColorBrewer support. \todo[inline]{insert a reference to it} The default theme is the light one, which uses a colors combination more brighter and lighter with respect to the one used for the dark theme. Another problem that could arise is referred to the daltonic people. In fact, these people see particular colors in different ways, for example a green color can be seen as brown one. For this reason, we decided to introduce also a blind safe mode, always supported by ColorBrewer, which uses a colors combination that have been scientifically chosen in order to reduce the confusion likelihood as much as possible.
+We want to underline that we have used the same blind safe colors combination for both themes.
