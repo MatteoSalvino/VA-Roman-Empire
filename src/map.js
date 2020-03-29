@@ -203,7 +203,7 @@ class Map extends BorderedChart {
     setupLegend() {
         var legend = this.chart.append("svg")
             .attr("width", 200)
-            .attr("height", 100)
+            .attr("height", 120)
             .attr('x', 400)
             .attr('y', 10);
 
@@ -241,9 +241,27 @@ class Map extends BorderedChart {
             .attr('class', 'legend-label')
             .attr('x', 5)
             .attr('y', 100)
-            .attr('font-size', 10);
-
+            .attr('font-size', 10)
+        this.setupInfoButton(legend)
         return legend;
+    }
+
+    setupInfoButton(legend) {
+        legend.append('circle')
+            .attr('id', 'war-info-btn')
+            .style("stroke", "black")
+            .style("fill", "gray")
+            .attr("r", 6)
+            .attr("cx", 10)
+            .attr("cy", 112)
+
+        legend.append('text')
+            .attr('id', 'war-info-label')
+            .attr("fill", "white")
+            .attr('x', 9)
+            .text("i")
+            .attr('y', 115)
+            .attr('font-size', 10)
     }
 
     applyThemeChanged(darkmode, blindsafe) {
@@ -328,9 +346,15 @@ class Map extends BorderedChart {
 }
 
 function updateLegend(numBattles, min, max) {
-    if (numBattles == 1) return;
+    if (numBattles == 1) {
+        legend.select('#war-info-btn')
+            .style('visibility', 'visible')
+        legend.select('#war-info-label')
+            .style('visibility', 'visible')
+        return;
+    }
 
-    resetLegend();
+    resetLegend()
     if (numBattles != 0) {
         legend.select('#battle_label')
             .text(numBattles + " battles selected");
@@ -357,18 +381,22 @@ function setLabel(self, d) {
     legend.select('#battle_outcome')
         .text('Outcome: ' + d.outcome);
 
-    var war = self.wars.filter(x => d.warId === x.id);
+    var war = self.wars.filter(x => d.warId === x.id)
 
     legend.select('#battle_war')
         .text(function() {
-          return 'War: ' + (war.length == 0 || war == null ? '-' : war[0].label);
+            return 'War: ' + (war.length == 0 || war == null ? '-' : war[0].label);
         })
-        .on('click', function() {
-          if(war != null && war.length > 0){
-            if(war[0].wikidata != '')
-              window.open("https://www.wikidata.org/wiki/" + war[0].wikidata);
-          }
-        })
+
+    if (war != null && war.length > 0 && war[0].wikidata != '') {
+        legend.select('#war-info-btn')
+            .style('visibility', 'visible')
+            .on('click', function() {
+                window.open("https://www.wikidata.org/wiki/" + war[0].wikidata)
+            })
+        legend.select('#war-info-label')
+            .style('visibility', 'visible')
+    }
 }
 
 function resetLegend() {
@@ -382,6 +410,10 @@ function resetLegend() {
         .text('');
     legend.select('#battle_war')
         .text('')
+    legend.select('#war-info-btn')
+        .style('visibility', 'hidden')
+    legend.select('#war-info-label')
+        .style('visibility', 'hidden')
 }
 
 export default new Map()
