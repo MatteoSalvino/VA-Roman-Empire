@@ -150,7 +150,7 @@ class Controller {
 
     /**
      * Draws all the charts and makes the proper bindings.
-     * 
+     *
      * In particular it draws the following:
      * - a Map chart
      * - a BoxPlot
@@ -167,6 +167,7 @@ class Controller {
 
         mapChart.setMap(this.map)
         mapChart.setBattles(this.battles)
+        mapChart.setWars(this.wars)
         mapChart.notifyDataChanged(true)
 
         lineChart.setBattles(this.battles)
@@ -339,7 +340,7 @@ class Controller {
 
     /**
      * Method to be called from within **ScatterPlot** when a brush occurs.
-     * 
+     *
      * The controller stores, as cache, the last brushed data and notifies the
      * map only if data really changes: this is done to avoid overloading.
      *
@@ -356,7 +357,7 @@ class Controller {
     /**
      * Method to be called from within **MapChart** when the brush is
      * interrupted by the user. It updates all the other views.
-     * 
+     *
      * @see onBrushedMapDataChanged
      */
     resetBrushedMapData() {
@@ -367,9 +368,9 @@ class Controller {
     /**
      * Method to be called from within **MapChart** when a brush is performed.
      * It updates all the other views
-     * 
+     *
      * @param {Array} battles - the battles inside the brush
-     * 
+     *
      * @see onBrushedMapDataChanged
      */
     setBrushedMapData(battles) {

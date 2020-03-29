@@ -13,6 +13,7 @@ class Map extends BorderedChart {
         super()
         this.map = []
         this.battles = []
+        this.wars = []
         this.resetPeriod()
     }
 
@@ -27,6 +28,8 @@ class Map extends BorderedChart {
     setMap(map) { this.map = map }
 
     setBattles(battles) { this.battles = battles }
+
+    setWars(wars) { this.wars = wars }
 
     resetPeriod(min = -Infinity, max = Infinity) {
         this.period = { min: min, max: max }
@@ -79,6 +82,7 @@ class Map extends BorderedChart {
             .attr('class', 'brush')
             .call(this.brush);
 
+        var self = this;
         markerGroup.append('g')
             .selectAll('circle')
             .data(this.battles)
@@ -109,7 +113,7 @@ class Map extends BorderedChart {
 
                 d3.select(this)
                     .classed('selected', true);
-                setLabel(d)
+                setLabel(self, d)
             })
             .style('visibility', 'visible');
 
@@ -136,7 +140,7 @@ class Map extends BorderedChart {
                         .style('visibility', 'visible')
                         .attr('stroke-width', 0.5)
                         .attr('stroke', 'white')
-                    setLabel(d);
+                    setLabel(self, d);
                 } else d3.select(this).style('visibility', 'hidden')
             });
 
@@ -146,7 +150,7 @@ class Map extends BorderedChart {
     onBrush() {
         //reset previous scatter brush
         this.setScatterBattles()
-
+        var self = this
         var selection = d3.event.selection;
 
         var isClick = JSON.stringify(brushedArea) == JSON.stringify(selection)
@@ -178,7 +182,7 @@ class Map extends BorderedChart {
                                 .attr('stroke-width', 0.5)
                                 .attr('stroke', 'white');
 
-                            setLabel(d);
+                            setLabel(self, d);
                             return 'visible';
                         }
                         d3.select(this).attr('stroke-width', 0).classed('brushed', false);
@@ -231,6 +235,14 @@ class Map extends BorderedChart {
             .attr('x', 5)
             .attr('y', 80)
             .attr('font-size', 10);
+
+        legend.append('text')
+            .attr('id', 'battle_war')
+            .attr('class', 'legend-label')
+            .attr('x', 5)
+            .attr('y', 100)
+            .attr('font-size', 10);
+
         return legend;
     }
 
@@ -324,6 +336,8 @@ function updateLegend(numBattles, min, max) {
             .text(numBattles + " battles selected");
         legend.select('#battle_year')
             .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)));
+        legend.select('#battle_war')
+            .text('')
     }
 }
 
@@ -333,7 +347,7 @@ function parseRoman(y) {
     return y + "AD"
 }
 
-function setLabel(d) {
+function setLabel(self, d) {
     legend.select('#battle_label')
         .text(d.label);
     legend.select('#battle_year')
@@ -342,6 +356,19 @@ function setLabel(d) {
         .text('Coordinates: (' + d.latitude + ',' + d.longitude + ')');
     legend.select('#battle_outcome')
         .text('Outcome: ' + d.outcome);
+
+    var war = self.wars.filter(x => d.warId === x.id);
+
+    legend.select('#battle_war')
+        .text(function() {
+          return 'War: ' + (war.length == 0 || war == null ? '-' : war[0].label);
+        })
+        .on('click', function() {
+          if(war != null && war.length > 0){
+            if(war[0].wikidata != '')
+              window.open("https://www.wikidata.org/wiki/" + war[0].wikidata);
+          }
+        })
 }
 
 function resetLegend() {
@@ -353,6 +380,8 @@ function resetLegend() {
         .text('');
     legend.select('#battle_outcome')
         .text('');
+    legend.select('#battle_war')
+        .text('')
 }
 
 export default new Map()
