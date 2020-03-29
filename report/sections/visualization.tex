@@ -58,7 +58,18 @@ A unique box plot, indeed, is drawn to graphically render the duration of the wa
 \missingfigure{Box Plot}
 
 \subsection{Scatter Plot}
-\todo[inline]{Describe the visualization component}
+The scatter plot is one more component of our dashboard, used to represent the roman battles after a dimensionality reduction on two dimensions.
+
+In particular, this chart represents the first two components, $y_1$ and $y_2$, obtained after the execution of a static MCA on the battles. This chart allows the user to:
+\begin{itemize}
+    \item find similar events, taking into account the distance between the points
+    \item individuating clusters
+    \item discover outliers
+\end{itemize}
+
+We have decided to add a chromatic encoding of the points, associating to each color a different outcome: the colors are the same used in the geographic map.
+
+The user is also given the possibility to brush a zone of interest on the graph: the points within the zone are highlighted in the geographic map as well.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.30]{./images/scatter_plot.png}
