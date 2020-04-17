@@ -48,6 +48,8 @@ class BoxPlot extends BorderedChart {
             .style("text-anchor", "middle")
             .text("Year duration");
 
+        if (data.length == 0) return
+
         // a few features for the box
         var center = this.width / 2
         var boxWidth = 100
