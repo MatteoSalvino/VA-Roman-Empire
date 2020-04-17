@@ -392,6 +392,7 @@ class Controller {
         mapChart.notifyDataChanged(false)
         this.notifyScatterPlot()
         this.notifyBarChart()
+        this.notifyBoxPlot(this.brushedLineData)
 
         mapChart.setScatterBattles()
     }
@@ -406,7 +407,7 @@ class Controller {
         mapChart.notifyDataChanged(false)
         this.notifyBarChart()
         this.notifyScatterPlot()
-
+        this.notifyBoxPlot(this.brushedLineData)
         mapChart.setScatterBattles()
     }
 
@@ -414,13 +415,16 @@ class Controller {
         lineChart.setBattles(this.brushedMapData)
         lineChart.notifyDataChanged()
 
-        this.brushedWars = this.wars.filter(w => this.brushedMapData.map(x => x.warId).includes(w.id))
+        this.notifyBoxPlot(this.brushedMapData)
+        this.notifyScatterPlot()
+        this.notifyBarChart()
+    }
+
+    notifyBoxPlot(battles) {
+        this.brushedWars = this.wars.filter(w => battles.map(x => x.warId).includes(w.id))
 
         boxplot.setWars(this.brushedWars)
         boxplot.notifyDataChanged()
-
-        this.notifyScatterPlot()
-        this.notifyBarChart()
     }
 
     notifyBarChart() {
@@ -457,6 +461,7 @@ class Controller {
         lineChart.setBattles(this.filteredBattles)
         lineChart.notifyDataChanged()
 
+        this.notifyBoxPlot(this.filteredBattles)
         this.notifyScatterPlot()
         this.notifyBarChart()
     }
