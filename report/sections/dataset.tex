@@ -3,7 +3,23 @@
 The dataset used in this project has been generated starting from the (english) Wikipedia article \href{https://en.wikipedia.org/w/index.php?title=List_of_Roman_wars_and_battles}{List of Roman wars and battles}. As all the Wikipedia pages, this article is written using the wikitext, a special hypertext markup used by the MediaWiki software as default formatter. In order to acquire the necessary information, we have used some script to scrap the content of the page and produce ER-tables: this is a much more flexible way to represent data \cite{Chen76}, with respect to the wikitext, and in particular makes it possible to export as comma-separated values (\textbf{csv}) file the entire dataset.
 
 \subsection{ER Tables}
-We finally obtained two main tables: the former for the battles and the latter for the wars, both available as csv files and hosted on the repository. In the future, some additional tables will be supported (see \ref{sec:conclusions}).
+We obtained ten different tables:
+\begin{itemize}
+    \item Battles info
+    \item Battles type
+    \item Battles outcome
+    \item Battles places
+    \item Battles allies
+    \item Battle commanders
+    \item Battles period
+    \item Wars info
+    \item Wars period
+    \item Wars bibliographical sources
+\end{itemize}
+
+However, we decided to focus only on a subset of them for this project.
+For sake of simplicity and to avoid to compute joins on tables at runtime, we organized the final (i.e. the one passed in input to the visualization tool) dataset into two main tables: the former for the battles and the latter for the wars, both available as csv files and hosted on the project repository.
+In the future, our tool will support the other tables as well (see \ref{sec:conclusions}).
 
 \subsubsection{Battles}
 This table comes with different attributes:
