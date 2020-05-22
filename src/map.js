@@ -401,77 +401,80 @@ function setLabel(self, d) {
     var modal_container = d3.select('#modal_container')
 
     modal_container.select('.modal-title')
-                    .text(d.label)
+        .text(d.label)
 
     modal_container.select('#romanCommanders')
-                   .text(function(){
-                     if(commanders[0].RomanCommanders == "")
-                        return "-"
-                     return commanders[0].RomanCommanders
-                   })
+        .text(function() {
+            if (commanders[0].RomanCommanders == "")
+                return "-"
+            return commanders[0].RomanCommanders
+        })
 
     modal_container.select('#enemyCommanders')
-                   .text(function(){
-                     if(commanders[0].EnemyCommanders == "")
-                        return "-"
-                     return commanders[0].EnemyCommanders
-                   })
+        .text(function() {
+            if (commanders[0].EnemyCommanders == "")
+                return "-"
+            return commanders[0].EnemyCommanders
+        })
 
     modal_container.select('#romanAllies')
-                   .text(function(){
-                     if(allies[0].RomanAllies == "")
-                        return "-"
-                     return allies[0].RomanAllies
-                   })
+        .text(function() {
+            if (allies[0].RomanAllies == "")
+                return "-"
+            return allies[0].RomanAllies
+        })
 
     modal_container.select('#enemyAllies')
-                   .text(function(){
-                     if(allies[0].EnemyAllies == "")
-                        return "-"
-                     return allies[0].EnemyAllies
-                   })
+        .text(function() {
+            if (allies[0].EnemyAllies == "")
+                return "-"
+            return allies[0].EnemyAllies
+        })
 
     modal_container.select('#romanStatistics')
-                   .text(function(){
-                     var to_ret = ""
-                     if(allies[0].RomanStrength == "")
-                        to_ret +="Roman strength : -"
-                     to_ret += "Roman strength:" + allies[0].RomanStrength
+        .text(function() {
+            var to_ret = ""
+            if (allies[0].RomanStrength == "")
+                to_ret += "Roman strength : -"
+            to_ret += "Roman strength:" + allies[0].RomanStrength
 
-                     if(allies[0].RomanLosses == "")
-                        to_ret +=", Roman losses : -"
-                     to_ret += ", Roman losses:" + allies[0].RomanLosses
+            if (allies[0].RomanLosses == "")
+                to_ret += ", Roman losses : -"
+            to_ret += ", Roman losses:" + allies[0].RomanLosses
 
-                     return to_ret
-                   })
+            return to_ret
+        })
 
     modal_container.select('#enemyStatistics')
-                   .text(function(){
-                     var to_ret = ""
-                     if(allies[0].EnemyStrength == "")
-                        to_ret +="Enemy strength : -"
-                     to_ret += "Enemy strength:" + allies[0].EnemyStrength
+        .text(function() {
+            var to_ret = ""
+            if (allies[0].EnemyStrength == "")
+                to_ret += "Enemy strength : -"
+            to_ret += "Enemy strength:" + allies[0].EnemyStrength
 
-                     if(allies[0].EnemyLosses == "")
-                        to_ret +=", Enemy losses : -"
-                     to_ret += ", Enemy losses:" + allies[0].EnemyLosses
+            if (allies[0].EnemyLosses == "")
+                to_ret += ", Enemy losses : -"
+            to_ret += ", Enemy losses:" + allies[0].EnemyLosses
 
-                     return to_ret
-                   })
+            return to_ret
+        })
 
 
+    var modalOnClick = function() {}
     if (war != null && war.length > 0 && war[0].wikidata != '') {
-        legend.select('#war-info-btn')
-            .style('visibility', 'visible')
 
-            modal_container.select('#explore-btn')
-                           .on('click', function() {
-                                window.open("https://www.wikidata.org/wiki/" + war[0].wikidata)
-                           })
-
-        legend.select('#war-info-label')
-            .style('visibility', 'visible')
+        modalOnClick = function() {
+            window.open("https://www.wikidata.org/wiki/" + war[0].wikidata)
+        }
     }
+
+    modal_container.select('#explore-btn')
+        .on('click', modalOnClick)
+
+    legend.select('#war-info-btn')
+        .style('visibility', 'visible')
+    legend.select('#war-info-label')
+        .style('visibility', 'visible')
 }
 
 function resetLegend() {
