@@ -6,7 +6,7 @@ const d3 = require('d3');
 var isBrushing = false,
     brushedArea = undefined
 
-var legend, projection, path, markerGroup
+var legend, projection, path, markerGroup, modal
 
 class Map extends BorderedChart {
     constructor() {
@@ -117,7 +117,9 @@ class Map extends BorderedChart {
             })
             .style('visibility', 'visible');
 
+        modal = this.setupModal()
         legend = this.setupLegend()
+
 
         this.applyThemeChanged(controller.darkmode, controller.blindsafe)
     }
@@ -243,6 +245,7 @@ class Map extends BorderedChart {
             .attr('y', 100)
             .attr('font-size', 10)
         this.setupInfoButton(legend)
+
         return legend;
     }
 
@@ -254,6 +257,10 @@ class Map extends BorderedChart {
             .attr("r", 6)
             .attr("cx", 10)
             .attr("cy", 112)
+            .attr('data-toggle', 'modal')
+            .attr('data-target', '#example-modal')
+            .style('cursor', 'pointer')
+
 
         legend.append('text')
             .attr('id', 'war-info-label')
@@ -262,6 +269,53 @@ class Map extends BorderedChart {
             .text("i")
             .attr('y', 115)
             .attr('font-size', 10)
+    }
+
+    setupModal(){
+      var modal = this.chart.append('div')
+          .attr('id', 'example-modal')
+          .attr('class', 'modal fade')
+          .attr('tabindex', '-1')
+          .attr('role', 'dialog')
+
+      var modal_content = modal.append('div')
+          .attr('class','modal-dialog')
+          .append('div')
+          .attr('class', 'modal-content')
+
+      var modal_header = modal_content.append('div')
+            .attr('class','modal-header')
+            .append('h5')
+            .attr('class', 'modal-title')
+            .attr('id', 'exampleModalLabel')
+            .text('Modal title')
+
+      modal_header.append('button')
+           .attr('class', 'close')
+           .attr('data-dismiss', 'modal')
+           .attr('aria-label', 'Close')
+           .text('&times;')
+
+      var modal_body = modal_content.append('div')
+           .attr('class', 'modal-body')
+
+      modal_body.append('div')
+           .text('Modal text !')
+
+
+      var modal_footer = modal_content.append('div')
+          .attr('class', 'modal-footer')
+
+      modal_footer.append('button')
+           .attr('class', 'btn btn-secondary')
+           .attr('data-dismiss', 'modal')
+           .text('Close')
+
+      modal_footer.append('button')
+           .attr('class', 'btn btn-primary')
+           .text('Save changes')
+
+      return modal
     }
 
     applyThemeChanged(darkmode, blindsafe) {
@@ -391,9 +445,11 @@ function setLabel(self, d) {
     if (war != null && war.length > 0 && war[0].wikidata != '') {
         legend.select('#war-info-btn')
             .style('visibility', 'visible')
-            .on('click', function() {
+            /*.on('click', function() {
                 window.open("https://www.wikidata.org/wiki/" + war[0].wikidata)
             })
+            */
+
         legend.select('#war-info-label')
             .style('visibility', 'visible')
     }
