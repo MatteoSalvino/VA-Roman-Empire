@@ -37,6 +37,8 @@ class Controller {
             self.brushedLineData = self.battles
             self.brushedMapData = self.battles
             self.wars = data[2]
+            self.allies = data[3]
+            self.commanders = data[4]
             self.setupFilters()
             self.setupGraphs()
         }).catch(function(error) {
@@ -56,7 +58,9 @@ class Controller {
         return Promise.all([
             d3.json('./assets/map.json'),
             d3.csv('./assets/battles.csv'),
-            d3.csv('./assets/wars.csv')
+            d3.csv('./assets/wars.csv'),
+            d3.csv('./assets/allies.csv'),
+            d3.csv('./assets/commanders.csv')
         ])
     }
 
