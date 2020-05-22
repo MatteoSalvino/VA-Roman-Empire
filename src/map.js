@@ -6,7 +6,7 @@ const d3 = require('d3');
 var isBrushing = false,
     brushedArea = undefined
 
-var legend, projection, path, markerGroup, modal
+var legend, projection, path, markerGroup
 
 class Map extends BorderedChart {
     constructor() {
@@ -117,7 +117,6 @@ class Map extends BorderedChart {
             })
             .style('visibility', 'visible');
 
-        modal = this.setupModal()
         legend = this.setupLegend()
 
 
@@ -258,7 +257,7 @@ class Map extends BorderedChart {
             .attr("cx", 10)
             .attr("cy", 112)
             .attr('data-toggle', 'modal')
-            .attr('data-target', '#example-modal')
+            .attr('data-target', '#modal_container')
             .style('cursor', 'pointer')
 
 
@@ -271,52 +270,6 @@ class Map extends BorderedChart {
             .attr('font-size', 10)
     }
 
-    setupModal(){
-      var modal = this.chart.append('div')
-          .attr('id', 'example-modal')
-          .attr('class', 'modal fade')
-          .attr('tabindex', '-1')
-          .attr('role', 'dialog')
-
-      var modal_content = modal.append('div')
-          .attr('class','modal-dialog')
-          .append('div')
-          .attr('class', 'modal-content')
-
-      var modal_header = modal_content.append('div')
-            .attr('class','modal-header')
-            .append('h5')
-            .attr('class', 'modal-title')
-            .attr('id', 'exampleModalLabel')
-            .text('Modal title')
-
-      modal_header.append('button')
-           .attr('class', 'close')
-           .attr('data-dismiss', 'modal')
-           .attr('aria-label', 'Close')
-           .text('&times;')
-
-      var modal_body = modal_content.append('div')
-           .attr('class', 'modal-body')
-
-      modal_body.append('div')
-           .text('Modal text !')
-
-
-      var modal_footer = modal_content.append('div')
-          .attr('class', 'modal-footer')
-
-      modal_footer.append('button')
-           .attr('class', 'btn btn-secondary')
-           .attr('data-dismiss', 'modal')
-           .text('Close')
-
-      modal_footer.append('button')
-           .attr('class', 'btn btn-primary')
-           .text('Save changes')
-
-      return modal
-    }
 
     applyThemeChanged(darkmode, blindsafe) {
         if (darkmode && !blindsafe) {
