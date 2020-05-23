@@ -262,7 +262,8 @@ class Controller {
                 .transition(t)
                 .style('border-top-color', '#bfbfbf');
 
-            d3.selectAll('i.fa')
+            d3.select('.social-list')
+              .selectAll('i.fa')
                 .on('mouseover', function() {
                     d3.select(this)
                         .style('color', '#ffffff');
@@ -273,6 +274,57 @@ class Controller {
                 })
                 .transition(t)
                 .style('color', '#d9d9d9');
+
+            //Update modal
+            d3.select('.modal-header')
+              .transition(t)
+              .style('background-color', '#4d4d4d')
+
+            d3.select('#modalLabel')
+                .transition(t)
+                .style('color', '#ffffff')
+
+            d3.select('.modal-btn')
+              .transition(t)
+              .style('color', '#ffffff')
+
+            d3.select('.modal-body')
+                .transition(t)
+                .style('background-color', '#4d4d4d')
+
+            d3.select('.modal-body')
+              .selectAll('hr')
+              .transition(t)
+              .style('background-color', '#dee2e6')
+
+            d3.selectAll('.modal-section')
+              .transition(t)
+              .style('color','#c2c2c2')
+
+            d3.selectAll('.modal-info')
+              .transition(t)
+              .style('color', '#ffffff')
+
+            d3.selectAll('.modal-data')
+              .transition(t)
+              .style('color', '#ffffff')
+
+
+            d3.selectAll('.modal-link')
+                .on('mouseover', function() {
+                    d3.select(this)
+                        .style('color', '#ffffff');
+                })
+                .on('mouseout', function() {
+                    d3.select(this)
+                        .style('color', '#d9d9d9');
+                })
+                .transition(t)
+                .style('color', '#d9d9d9');
+
+            d3.select('.modal-footer')
+                .transition(t)
+                .style('background-color', '#4d4d4d')
 
         } else {
             d3.selectAll('.svg-content-responsive')
@@ -330,7 +382,8 @@ class Controller {
                 .transition(t)
                 .style('border-top-color', '#595959');
 
-            d3.selectAll('i.fa')
+            d3.select('.social-list')
+              .selectAll('i.fa')
                 .on('mouseover', function() {
                     d3.select(this)
                         .style('color', '#000000');
@@ -341,6 +394,57 @@ class Controller {
                 })
                 .transition(t)
                 .style('color', '#808080');
+
+            //Update modal
+            d3.select('.modal-header')
+              .transition(t)
+              .style('background-color', '#ffffff')
+
+            d3.select('#modalLabel')
+              .transition(t)
+              .style('color', '#000000')
+
+            d3.select('.modal-btn')
+              .transition(t)
+              .style('color', '#000000')
+
+            d3.select('.modal-body')
+              .transition(t)
+              .style('background-color', '#ffffff')
+
+            d3.select('.modal-body')
+              .selectAll('hr')
+              .transition(t)
+              .style('background-color', '#dee2e6')
+
+            d3.selectAll('.modal-section')
+              .transition(t)
+              .style('color', '#6c757d')
+
+            d3.selectAll('.modal-info')
+              .transition(t)
+              .style('color', '#000000')
+
+            d3.selectAll('.modal-data')
+              .transition(t)
+              .style('color', '#000000')
+
+
+            d3.selectAll('.modal-link')
+                .on('mouseover', function() {
+                    d3.select(this)
+                      .style('color', '#000000');
+                })
+                .on('mouseout', function() {
+                    d3.select(this)
+                      .style('color', '#9e988d');
+                })
+                .transition(t)
+                .style('color', '#9e988d');
+
+            d3.select('.modal-footer')
+              .transition(t)
+              .style('background-color', '#ffffff')
         }
     }
 
