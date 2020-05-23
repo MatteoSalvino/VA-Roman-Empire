@@ -26,6 +26,7 @@ rect {
     text-align: center;
 }
 
+
 #battle_date,
 #battle_location,
 #battle_war,
@@ -34,8 +35,15 @@ rect {
 }
 
 .modal-info {
-    text-align: end;
+    text-align: center;
     font-weight: 700!important;
+}
+
+.modal-link {
+  color: #9e988d;
+  &:hover {
+    color: #000000;
+  }
 }
 
 .inactive-link {

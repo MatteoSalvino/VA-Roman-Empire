@@ -104,8 +104,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+                      <span aria-hidden="true" class="modal-btn">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -122,88 +122,76 @@
 
                         <div class="row">
                             <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3  modal-info">Date</div>
-                            <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9" id="battle_date"></div>
+                            <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 modal-data" id="battle_date"></div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-info">Location</div>
                             <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9" style="text-align: left;">
-                                <a href="" id=battle_location target='_blank'></a>
+                                <a href="" class="modal-link" id=battle_location target='_blank'></a>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-info">War</div>
-                            <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9" id="battle_war"></div>
+                            <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 modal-data" id="battle_war"></div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-info">Outcome</div>
-                            <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9" id="battle_outcome"></div>
+                            <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 modal-data" id="battle_outcome"></div>
                         </div>
 
                         <hr>
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-                                <p class="text-muted">
-                                    Commanders
-                                </p>
-                            </div>
+                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 modal-section">Commanders</div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold">Rome</div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold modal-info">Rome</div>
                             <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4"></div>
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold">Enemies</div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold modal-info">Enemies</div>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4" id="romanCommanders"></div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 modal-data" id="romanCommanders"></div>
                             <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4"></div>
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4" id="enemyCommanders"></div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 modal-data" id="enemyCommanders"></div>
                         </div>
 
                         <hr>
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-                                <p class="text-muted">
-                                    Allies
-                                </p>
-                            </div>
+                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 modal-section">Allies</div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold">Rome</div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold modal-info">Rome</div>
                             <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4"></div>
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold">Enemies</div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 font-weight-bold modal-info">Enemies</div>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4" id="romanAllies"></div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 modal-data" id="romanAllies"></div>
                             <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4"></div>
-                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4" id="enemyAllies"></div>
+                            <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4 modal-data" id="enemyAllies"></div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-                                <p class="text-muted">
-                                    Strength and losses
-                                </p>
-                            </div>
+                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 modal-section">Strength and losses</div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1"><i class="fa fa-users fa-2x"></i></div>
-                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3" id="romanStrength"></div>
+                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1 modal-info"><i class="fa fa-users fa-2x"></i></div>
+                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-data" id="romanStrength"></div>
                             <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4"></div>
-                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1"><i class="fa fa-users fa-2x"></i></div>
-                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3" id="enemyStrength"></div>
+                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1 modal-info"><i class="fa fa-users fa-2x"></i></div>
+                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-data" id="enemyStrength"></div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1"><i class="fa fa-times fa-2x"></i></div>
-                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3" id="romanLosses"></div>
+                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1 modal-info"><i class="fa fa-times fa-2x"></i></div>
+                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-data" id="romanLosses"></div>
                             <div class="col-xs-4 col-md-4 col-lg-4 col-xl-4"></div>
-                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1"><i class="fa fa-times fa-2x"></i></div>
-                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3" id="enemyLosses"></div>
+                            <div class="col-xs-1 col-md-1 col-lg-1 col-xl-1 modal-info"><i class="fa fa-times fa-2x"></i></div>
+                            <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 modal-data" id="enemyLosses"></div>
                         </div>
                     </div>
                 </div>
