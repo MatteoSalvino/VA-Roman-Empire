@@ -1,7 +1,7 @@
 id,warId,year,yearAU,relativeYear,label,locationLabel,latitude,longitude,stoaId,currentCountry,outcome,civil,naval,siege,sack,final,period,y1,y2
 1,1,-509,244,1,Battle of Silva Arsia,Silva Arsia,41.9,12.5,26347394,IT,W,n,n,n,n,,R,2.662837518,1.524508735
 2,2,-502,251,8,Battle of Pometia,Pometia,41.594438,12.826351,438841,IT,W,n,n,n,n,,R,2.831871438,1.466612953
-3,4,-496,257,14,Battle of Lake Regilius,Lake Regilius,,,-,-,W,n,n,n,n,,R,1.937753793,0.06715798785
+3,4,-496,257,14,Battle of Lake Regilius,Lake Regilius,41.808056,12.737222,-,-,W,n,n,n,n,,R,1.937753793,0.06715798785
 4,,-495,258,15,Battle of Aricia,Aricia,41.72139965,12.67334715,422844,IT,W,n,n,n,n,,R,2.244075661,1.266152245
 5,5,-482,271,28,Battle of Antium,Antium,41.44795,12.628995,422837,IT,L,n,n,n,n,,R,1.949410478,1.317354042
 6,5,-482,271,28,Battle of Longula,Longula,41.5286695,12.5880115,438775,IT,W,n,n,n,n,,R,1.908035903,1.450211151
