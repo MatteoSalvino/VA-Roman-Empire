@@ -38,6 +38,11 @@ rect {
     font-weight: 700!important;
 }
 
+.inactive-link {
+    pointer-events: none;
+    cursor: default;
+}
+
 #cumulativeBtn,
 #centuriesBtn {
     margin: 5px;

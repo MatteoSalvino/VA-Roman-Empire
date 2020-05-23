@@ -386,27 +386,11 @@ function parseRoman(y) {
 }
 
 function setLabel(self, d) {
-    /*
-      legend.select('#battle_label')
-          .text(d.label);
-      legend.select('#battle_year')
-          .text('Year: ' + parseRoman(d.year));
-      legend.select('#battle_coordinate')
-          .text('Coordinates: (' + d.latitude + ',' + d.longitude + ')');
-      legend.select('#battle_outcome')
-          .text('Outcome: ' + d.outcome);
-    */
+
     var war = self.wars.filter(x => d.warId === x.id)
     var commanders = controller.commanders.filter(x => d.id === x.id)
     var allies = controller.allies.filter(x => d.id === x.id)
     var image = controller.images.filter(x => d.id === x.id)[0].img
-        /*
-    legend.select('#battle_war')
-        .text(function() {
-            return 'War: ' + (war.length == 0 || war == null ? '-' : war[0].label);
-        })
- */
-        //update modal fields
     var modal_container = d3.select('#modal_container')
 
     modal_container.select('#modalImg').style('visibility', image == '' ? 'hidden' : 'visible').attr('src', image)
@@ -419,6 +403,8 @@ function setLabel(self, d) {
 
     modal_container.select('#battle_location')
         .text(d.locationLabel)
+        .attr('href', 'https://pleiades.stoa.org/places/' + d.stoaId)
+        .classed('inactive-link', () => d.stoaId == '-')
 
     modal_container.select('#battle_war')
         .text("-")
@@ -497,13 +483,6 @@ function setLabel(self, d) {
 
     modal_container.select('#explore-btn')
         .on('click', modalOnClick)
-
-    /*
-    legend.select('#war-info-btn')
-        .style('visibility', 'visible')
-    legend.select('#war-info-label')
-        .style('visibility', 'visible')
-    */
 }
 
 function resetLegend() {
