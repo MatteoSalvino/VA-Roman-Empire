@@ -1,6 +1,6 @@
 id,RomanAllies,EnemyAllies,RomanStrength,EnemyStrength,RomanLosses,EnemyLosses
 1,Rome,Tarquinii Veii,,,,
-2,,,,,,
+2,Rome,Pometia; Cora,-,-,heavy,heavy
 3,Roman Republic,Latin League,,,,
 4,,,,,,
 5,,,,,,
@@ -15,7 +15,7 @@ id,RomanAllies,EnemyAllies,RomanStrength,EnemyStrength,RomanLosses,EnemyLosses
 14,Roman Republic,Gauls,around 24 000 warriors,around 12 000 warriors,,
 15,Roman Republic,Samnium,,,,
 16,,,,,,
-17,Latins,Roman Republic,2000,1 200,over 1 000,less than 500
+17,Roman Republic,Latins,1200,2000,500,1000
 18,Roman Republic,Latins,,,,
 19,Roman Republic,Samnium,Unknown,Unknown,Insignificant,Insignificant
 20,Roman Republic,Samnium,,,,
@@ -32,7 +32,7 @@ id,RomanAllies,EnemyAllies,RomanStrength,EnemyStrength,RomanLosses,EnemyLosses
 31,Roman Republic,Epirus; Magna Graecia,40 000 cavalry and infantry; 300 anti-elephant devices,40 000 cavalry and infantry; 20 war elephants,8 000 killed,3 000 killed
 32,Roman Republic,Epirus; Magna Graecia,17 000 infantry; 1 200 cavalry,20 000 infantry; 3 000 cavalry; 20 elephants,9 000 killed,11 000 killed
 33,Roman Republic,Carthage,40 000,50 000 Plus the garrison of Agrigentum,1200,3000
-34,Carthage,Roman Republic,About 20 ships,About 17 ships,4 ships,Fleet captured
+34,Roman Republic,Carthage,About 17 ships,About 20 ships,fleet captured,4 ships
 35,Roman Republic,Carthage,90 ships,130 ships,11 ships,50 ships
 36,Roman Republic,Carthage,,,,
 37,Rome,Carthage,,,,
@@ -41,56 +41,56 @@ id,RomanAllies,EnemyAllies,RomanStrength,EnemyStrength,RomanLosses,EnemyLosses
 40,Roman Republic,Carthage,15 000 infrantry 500 Cavalry,12 000 Infantry 4 000 Cavalry 100 Elephants,12 000 dead 500 captured,800 dead (According to Polybios)
 41,Rome,Carthage,60 000,21 000,2 500,11 000
 42,,,,,,
-43,Carthage,Roman Republic,About 120 ships,About 120 ships,None,93 ships captured or sunk
+43,Roman Republic,Carthage,About 120 ships,About 120 ships,93 ships captured or sunk,None
 44,Roman Republic,Carthage,About 200 ships,About 250 ships,30 ships sunk,50 ships sunk 70 ships captured
 45,,,,,,
 46,Roman Republic,Gauls,,~10 000,~6 000,
 47,Roman Republic,Gauls,70 000 infantry; 5 400 cavalry,50 000 infantry; 20 000 cavalry,10 000 killed,40 000 killed; 10 000 captured
 48,Roman Republic,Gauls,,,,
-49,Carthage,Roman Republic,35 Quinqueremes,20 Quinqueremes and Triremes,7 ships captured,Unknown
-50,Carthage,Roman Republic,10 000 infantry; 1 000 cavalry,20 000 infantry; 2 200 cavalry,6 000 killed; 2 000 captured,unknown
-51,Carthage,Roman Republic,6 000 cavalry,3 100 cavalry 7 200 velites,minimal,2300
-52,Carthage,Roman Republic,30 000 men: (20 000 heavy infantry 10 000 cavalry; 2 war elephants),42 000 men: (18 000 legionaries; 20 000 Italian allies; 4 000 cavalry,4-5 000 of his best Libyan and Celtic troops (perhaps 3 000 Libyans and 2 000 Gauls),26 000 - 28 000; up to 32 000 total casualties
-53,Carthage,Roman Republic,40 Quinqueremes,55 Quinqueremes and Triremes,4 sunk; 25 captured,Unknown
-54,Carthage,Roman Republic,2 000 infantry; 2 000 Oxen; 2 000 Camp Followers,4 000 infantry; plus reserves,Light,1 000+
-55,Carthage,Roman Republic,50 000+ soldiers,40 000 soldiers,2 000 killed and many dead from wounds,15 000 killed
-56,Carthaginian Republic Allied African; Spanish; and Gallic tribes,Roman Republic Allied Italian states,50 000: 32 000 heavy infantry; 8 000 light infantry; 10 000 cavalry,86 400: 40 000 Roman infantry; 40 000 Allied infantry; 2 400 Roman cavalry; 4 000 Allied cavalry,Killed: 8 000 (Livy) 5 700 (Polybius) * 4 000 Gallic * 1 000 Spanish and African * 200 cavalry,Killed: (Livy) 45 000 Romans and allied infantry 2 700 Roman and allied cavalry Captured: 3 000 Roman and allied infantry 1 000 Roman and allied cavalry
-57,Carthage,Roman Republic,,,,
-58,Carthage,Roman Republic,,,,
-59,Carthage,Roman Republic,,,,
-60,Carthage,Roman Republic,20 000 and approximately 2000 Numidians plus Capuan allies,8 Legions; approximately 40 000,minimal,unknown
-61,Carthage,Roman Republic,20 000 - 30 000,18 000,Minimal,16000
-62,Carthage,Roman Republic,25 000 - 30 000,16 000,moderate (probably several Thousand),15 000 killed; 1 000 wounded or captured
-63,Carthage; Capua,Roman Republic,,,,
-64,Carthage,Roman Republic,35 000 infantry; 3 000+ cavalry; 3 000 Numidians; 7 000 Iberian tribals,30 000 infantry; 3 000 cavalry; 20 000 Celt-Iberian mercenaries,Unknown,About 22 000
-65,Carthage,Roman Republic,approximately 25 000,less than 20 000,minimal,up to 13 000 killed
-66,Carthage,Roman Republic,,,,
+49,Roman Republic,Carthage,20 Quinqueremes and Triremes,35 Quinqueremes,Unknown,7 ships captured
+50,Roman Republic,Carthage,20 000 infantry; 2 200 cavalry,10 000 infantry; 1 000 cavalry,unknown,6 000 killed; 2 000 captured
+51,Roman Republic,Carthage,3 100 cavalry 7 200 velites,6 000 cavalry,2300,minimal
+52,Roman Republic,Carthage,42 000 men: (18 000 legionaries; 20 000 Italian allies; 4 000 cavalry,30 000 men: (20 000 heavy infantry 10 000 cavalry; 2 war elephants),26 000 - 28 000; up to 32 000 total casualties,4-5 000 of his best Libyan and Celtic troops (perhaps 3 000 Libyans and 2 000 Gauls)
+53,Roman Republic,Carthage,55 Quinqueremes and Triremes,40 Quinqueremes,Unknown,4 sunk; 25 captured
+54,Roman Republic,Carthage,4 000 infantry; plus reserves,2 000 infantry; 2 000 Oxen; 2 000 Camp Followers,1 000+,Light
+55,Roman Republic,Carthage,40 000 soldiers,50 000+ soldiers,15 000 killed,2 000 killed and many dead from wounds
+56,Roman Republic Allied Italian states,Carthaginian Republic Allied African; Spanish; and Gallic tribes,86 400: 40 000 Roman infantry; 40 000 Allied infantry; 2 400 Roman cavalry; 4 000 Allied cavalry,50 000: 32 000 heavy infantry; 8 000 light infantry; 10 000 cavalry,Killed: (Livy) 45 000 Romans and allied infantry 2 700 Roman and allied cavalry Captured: 3 000 Roman and allied infantry 1 000 Roman and allied cavalry,Killed: 8 000 (Livy) 5 700 (Polybius) * 4 000 Gallic * 1 000 Spanish and African * 200 cavalry
+57,Roman Republic,Carthage,,,,
+58,Roman Republic,Carthage,,,,
+59,Roman Republic,Carthage,,,,
+60,Roman Republic,Carthage,8 Legions; approximately 40 000,20 000 and approximately 2000 Numidians plus Capuan allies,unknown,minimal
+61,Roman Republic,Carthage,18 000,20 000 - 30 000,16000,Minimal
+62,Roman Republic,Carthage,16 000,25 000 - 30 000,15 000 killed; 1 000 wounded or captured,moderate (probably several Thousand)
+63,Roman Republic,Carthage; Capua,,,,
+64,Roman Republic,Carthage,30 000 infantry; 3 000 cavalry; 20 000 Celt-Iberian mercenaries,35 000 infantry; 3 000+ cavalry; 3 000 Numidians; 7 000 Iberian tribals,About 22 000,Unknown
+65,Roman Republic,Carthage,less than 20 000,approximately 25 000,up to 13 000 killed,minimal
+66,Roman Republic,Carthage,,,,
 67,,,,,,
-68,Carthage,Roman Republic,25 000 men + Iberian allies,35 000 men,About 6 000 killed; 10 000 captured,2 000
-69,Carthage,Roman Republic,70 000 foot; 5 000 horse; 36 elephants,approximately 20 000 foot and 1 000 horse,15 000 killed,800 killed
-70,Carthage,Roman Republic,5 000,6 000 infantry 600 calvary,800 killed; 700 captured,500 killed
-71,Carthage,Roman Republic,~30 000 soldiers: (25 000 infantry and 5 000 cavalry) and 15 war elephants,47 000 soldiers: (8 Roman legions plus Nero's reinforcements of 7 000),20 000 (10 000 killed and 10 000 captured; according to the Greek Historian Polybios),2 000 killed (according to Polybios)
+68,Roman Republic,Carthage,35 000 men,25 000 men + Iberian allies,2 000,About 6 000 killed; 10 000 captured
+69,Roman Republic,Carthage,approximately 20 000 foot and 1 000 horse,70 000 foot; 5 000 horse; 36 elephants,800 killed,15 000 killed
+70,Roman Republic,Carthage,6 000 infantry 600 calvary,5 000,500 killed,800 killed; 700 captured
+71,Roman Republic,Carthage,47 000 soldiers: (8 Roman legions plus Nero's reinforcements of 7 000),~30 000 soldiers: (25 000 infantry and 5 000 cavalry) and 15 war elephants,2 000 killed (according to Polybios),20 000 (10 000 killed and 10 000 captured; according to the Greek Historian Polybios)
 72,,,,,,
 73,,,,,,
-74,Carthage,Roman Republic,54 000 men (50 000 infantry and 4 000 cavalry)+ 32 war Elephants,48 000 men (45 000 infantry and 3 000 cavalry),48 000 killed or captured (6 000 soldiers escaped),approx. 7 000 killed
-75,Carthage,Roman Republic,unknown,four legions,,
+74,Roman Republic,Carthage,48 000 men (45 000 infantry and 3 000 cavalry),54 000 men (50 000 infantry and 4 000 cavalry)+ 32 war Elephants,approx. 7 000 killed,48 000 killed or captured (6 000 soldiers escaped)
+75,Roman Republic,Carthage,four legions,unknown,,
 76,Roman Republic,Carthage,Unknown,30 000,Unknown,Rout of whole army
-77,Carthage,Roman Republic,51 000: 45 000 infantry 6 000 cavalry 80 war elephants,40 000: 34 000 infantry 6 000 cavalry,20 000 killed 20 000 captured,5 500
+77,Roman Republic,Carthage,40 000: 34 000 infantry 6 000 cavalry,51 000: 45 000 infantry 6 000 cavalry 80 war elephants,5 500,20 000 killed 20 000 captured
 78,Roman Republic and allies,Gauls,,40 000,2000,more than 35 000
 79,,,,,,
 80,Roman Republic Aetolian League allies,Macedon,about 33 400 men or about the same number as the Romans according to Plutarch,25 000 men according to Plutarch,about 2 000 killed or wounded,8 000 killed; 5 000 captured
-81,Sparta,Rome; Achaean League; Rhodes; Pergamum; Macedon,-,About 50 000 men,-,-
+81,Rome; Achaean League; Rhodes; Pergamum; Macedon,Sparta,About 50 000 men,-,-,-
 82,Roman Republic,Boii,,,,
 83,Roman Republic,Boii,,,,
 84,Roman Republic,Seleucid Empire,22 000 and a few elephants,10 000 and some allies,According to traditional accounts only 200 Romans killed or wounded,10 000 killed and prisoners
 85,Rhodes/Roman Republic,Seleucid Empire,,,,
 86,Roman Republic Rhodes,Seleucid Empire Rhodians,83 ships (25 Rhodians),90 ships,2 ships,13 ships captured; 16 sunk
 87,Roman Republic,Seleucid Empire,30 000 (ancient sources) 50 000 (Grainger),70 000 (ancient sources) - 50 000 (Grainger),at least 349 (ancient sources) 5 000 (Grainger),up to 50 000 dead and captured (ancient sources) - 10 000 (Grainger)
-88,Galatians,Roman Republic; Pergamum,Over 50 000 men,Unknown number of Romans; 2 800 Pergamese troops,,
-89,Galatian Gauls,Rome; Pergamum,Over 50 000,-,10 000 dead; 40 000 captured,Light
+88,Roman Republic; Pergamum,Galatians,Unknown number of Romans; 2 800 Pergamese troops,Over 50 000 men,,
+89,Rome; Pergamum,Galatian Gauls,-,Over 50 000,Light,10 000 dead; 40 000 captured
 90,Roman Republic,Celtiberians,,,4 491,17 000
-91,Macedon,Roman Republic,,,20 cavalry; 20 infantry,200 cavalry; 2 000 infantry
-92,Macedon,Roman Republic,44 000,38 000,25 000 killed and wounded,1 000+ dead; numerous wounded
+91,Roman Republic,Macedon,,,200 cavalry; 2 000 infantry,20 cavalry; 20 infantry
+92,Roman Republic,Macedon,38 000,44 000,1 000+ dead; numerous wounded,25 000 killed and wounded
 93,Rome,Popular uprising in Macedon,,,,
 94,,,,,,
 95,,,,,,
@@ -99,11 +99,11 @@ id,RomanAllies,EnemyAllies,RomanStrength,EnemyStrength,RomanLosses,EnemyLosses
 98,,,,,,
 99,Roman Republic,Cimbri Teutones Ambrones,30 000,300 000,24 000,unknown
 100,,,,,,
-101,Numidia,Roman Republic,20 000 men (light infantry; cavalry); 84 war elephants,35 000 infantry men,Low,High
+101,Roman Republic,Numidia,35 000 infantry men,20 000 men (light infantry; cavalry); 84 war elephants,High,Low
 102,,,,,,
-103,Cimbri Teutones,Roman Republic,About 200 000,80 000 troops (10-12 legions); up to 40 000 auxiliaries and camp followers,15 000 killed,80 000 killed or up to 120 000 killed if support troops and camp followers included
-104,Teutones,Roman Republic,about 120 000 warriors,40 000 men (6 legions with cavalry and auxiliaries),about 90 000 killed 20 000 captured,less than 1 000 killed
-105,Cimbri,Roman Republic,about 210 000,50 000 men (8 legions with cavalry and auxiliaries),about 140 000 killed; 60 000 captured,less than 1 000 killed
+103,Roman Republic,Cimbri Teutones,80 000 troops (10-12 legions); up to 40 000 auxiliaries and camp followers,About 200 000,80 000 killed or up to 120 000 killed if support troops and camp followers included,15 000 killed
+104,Roman Republic,Teutones,40 000 men (6 legions with cavalry and auxiliaries),about 120 000 warriors,less than 1 000 killed,about 90 000 killed 20 000 captured
+105,Roman Republic,Cimbri,50 000 men (8 legions with cavalry and auxiliaries),about 210 000,less than 1 000 killed,about 140 000 killed; 60 000 captured
 106,Roman Republic,Italian rebels,,,,
 107,Italian rebels,Roman Republic,,,,
 108,,,,,,
@@ -118,7 +118,7 @@ id,RomanAllies,EnemyAllies,RomanStrength,EnemyStrength,RomanLosses,EnemyLosses
 117,,,,,,
 118,,,,,,
 119,,,,,,
-120,Sertorius' rebels,Roman Republic,,,,
+120,Roman Republic,Sertorius' rebels,,,,
 121,Roman Republic,Pontus,,,,
 122,,,,,,
 123,Roman Republic,Pontus,,,,

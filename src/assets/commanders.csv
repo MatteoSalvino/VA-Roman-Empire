@@ -1,6 +1,6 @@
 id,RomanCommanders,EnemyCommanders
-1,Lucius Junius Brutus†  Publius Valerius Publicola,Lucius Tarquinius Superbus Aruns Tarquinius † 
-2,,
+1,Lucius Junius Brutus†; Publius Valerius Publicola,Lucius Tarquinius Superbus Aruns Tarquinius † 
+2,Agrippa Menenius; Publius Postumius,-
 3,Aulus Postumius Albus; Titus Aebutius Elva (master of the horse),Octavius Mamilius; Tarquinius Superbus
 4,,
 5,,
@@ -15,7 +15,7 @@ id,RomanCommanders,EnemyCommanders
 14,Quintus Sulpicius,Brennus
 15,Valerius Corvus,
 16,,
-17,Unknown,Publius Decius Mus†  Titus Manlius Torquatus
+17,Publius Decius Mus†  Titus Manlius Torquatus,Numisius
 18,Manlius Imperiosus,Unknown
 19,Titus Veturius Calvinus Spurius Postumius Albinus,Gaius Pontius
 20,Fabius Maximus Rullianus,
@@ -32,7 +32,7 @@ id,RomanCommanders,EnemyCommanders
 31,Publius Decius Mus,Pyrrhus of Epirus
 32,Manius Curius Dentatus,Pyrrhus of Epirus
 33,L. Postumius Megellus Q. Mamilius Vitulus,Hanno Hannibal Gisco
-34,Boodes Hannibal Gisco,Gnaeus Cornelius Scipio Asina
+34,Gnaeus Cornelius Scipio Asina,Boodes Hannibal Gisco
 35,Gaius Duilius,Hannibal Gisco
 36,Gaius Sulpicius Paterculus,Hannibal Gisco
 37,Gaius Atilius Regulus,Hamilcar
@@ -41,56 +41,56 @@ id,RomanCommanders,EnemyCommanders
 40,Marcus Atilius Regulus  (POW),Xanthippus
 41,Lucius Caecilius Metellus,Hasdrubal
 42,,
-43,Ad Herbal Hamilcar,Publius Claudius Pulcher
+43,Publius Claudius Pulcher,Ad Herbal Hamilcar
 44,Gaius Lutatius Catulus,Hanno the Great
 45,,
 46,Lucius Aemilius Papus and a Roman Praetor,
 47,Atilius Regulus † ; Aemilius Papus,Concolitanus; Aneroëstes † 
 48,Marcellus,Viridomarus† 
-49,Unknown,Amellius; Praetor of Sicily
-50,Hanno,Gnaeus Cornelius Scipio Calvus
-51,Hannibal,Publius Cornelius Scipio the elder
-52,Hannibal,Tiberius Sempronius Longus
-53,Himilco,Gnaeus Cornelius Scipio Calvus
-54,Hannibal Barca,Quintus Fabius Maximus
-55,Hannibal,Gaius Flaminius † 
-56,Hannibal,Gaius Terentius Varro; Lucius Aemilius Paullus † 
-57,Hannibal,Marcus Claudius Marcellus
-58,Hannibal,Marcus Claudius Marcellus
-59,Hannibal,Marcus Claudius Marcellus
-60,Hannibal,Quintus Fulvius Flaccus; Appius Claudius Pulcher
-61,Hannibal,Gnaeus Fulvius Flaccus
-62,Hannibal,Marcus Centenius Penula † 
-63,Hannibal; Bostar; Hanno; son of Bomilcar,Quintus Fulvius Flaccus; Appius Claudius Pulcher
-64,Hasdrubal Barca Mago Barca Hasdrubal Gisco,Publius Cornelius Scipio†  Gnaeus Cornelius Scipio Calvus† 
-65,Hannibal,Gn. Fulvius Centumalus
-66,Hannibal,Marcus Claudius Marcellus
+49,Amellius; Praetor of Sicily,Unknown
+50,Gnaeus Cornelius Scipio Calvus,Hanno
+51,Publius Cornelius Scipio the elder,Hannibal
+52,Tiberius Sempronius Longus,Hannibal
+53,Gnaeus Cornelius Scipio Calvus,Himilco
+54,Quintus Fabius Maximus,Hannibal Barca
+55,Gaius Flaminius † ,Hannibal
+56,Gaius Terentius Varro; Lucius Aemilius Paullus † ,Hannibal
+57,Marcus Claudius Marcellus,Hannibal
+58,Marcus Claudius Marcellus,Hannibal
+59,Marcus Claudius Marcellus,Hannibal
+60,Quintus Fulvius Flaccus; Appius Claudius Pulcher,Hannibal
+61,Gnaeus Fulvius Flaccus,Hannibal
+62,Marcus Centenius Penula † ,Hannibal
+63,Quintus Fulvius Flaccus; Appius Claudius Pulcher,Hannibal; Bostar; Hanno; son of Bomilcar
+64,Publius Cornelius Scipio†  Gnaeus Cornelius Scipio Calvus† ,Hasdrubal Barca Mago Barca Hasdrubal Gisco
+65,Gn. Fulvius Centumalus,Hannibal
+66,Marcus Claudius Marcellus,Hannibal
 67,,
-68,Hasdrubal Barca,Scipio Africanus Major
-69,Hasdrubal Gisco,Publius Cornelius Scipio
-70,Hannibal; Mago,Gaius Claudius Nero
-71,Hasdrubal Barca † ,Marcus Livius Salinator; Gaius Claudius Nero; Porcius Licinus
+68,Scipio Africanus Major,Hasdrubal Barca
+69,Publius Cornelius Scipio,Hasdrubal Gisco
+70,Gaius Claudius Nero,Hannibal; Mago
+71,Marcus Livius Salinator; Gaius Claudius Nero; Porcius Licinus,Hasdrubal Barca † 
 72,,
 73,,
-74,Mago Barca Hasdrubal Gisco Masinissa,Scipio Africanus Major
-75,Hannibal,Sempronius Tuditanus Publius Licinius Crassus
+74,Scipio Africanus Major,Mago Barca Hasdrubal Gisco Masinissa
+75,Sempronius Tuditanus Publius Licinius Crassus,Hannibal
 76,Scipio Africanus Masinissa Gaius Laelius,Hasdrubal Gisco Syphax
-77,Hannibal,Scipio Africanus
+77,Scipio Africanus,Hannibal
 78,Lucius Furius Purpurio,Hamilcar
 79,,
 80,T. Quinctius Flamininus,Philip V of Macedon
-81,Dexagoridas; †  Gorgopas,Titus Quinctius Flaminius; Eumenes II of Pergamum
+81,Titus Quinctius Flaminius; Eumenes II of Pergamum,Dexagoridas; †  Gorgopas
 82,Tiberius Sempronius,
 83,Merula,Unknown
 84,Manius Acilius Glabrio,Antiochus III the Great
 85,Eudamos,Hannibal
 86,Lucius Aemilius Regillus Eudorus,Polyxenidas of Rhodes
 87,Lucius Cornelius Scipio Asiaticus; Scipio Africanus; Eumenes II of Pergamum,Antiochus III the Great; Zeuxis ; Seleucus
-88,Eposognatus Orgiagon Chiomara,Gnaeus Manlius Vulso; Attalus
-89,-,Gnaeus Manlius Vulso; Attalus
+88,Gnaeus Manlius Vulso; Attalus,Eposognatus Orgiagon Chiomara
+89,Gnaeus Manlius Vulso; Attalus,-
 90,Q. Fulvius Flaccus,unknown
-91,Perseus of Macedon,Licinius Crassus
-92,Perseus (POW),Lucius Aemilius Paullus
+91,Licinius Crassus,Perseus of Macedon
+92,Lucius Aemilius Paullus,Perseus (POW)
 93,Quintus Caecilius Metellus,Andriscus
 94,,
 95,,
@@ -99,12 +99,12 @@ id,RomanCommanders,EnemyCommanders
 98,,
 99,Gnaeus Papirius Carbo,King Boiorix King Teutobod
 100,,
-101,Jugurtha Bomilcar,Quintus Caecilius Metellus Gaius Marius
+101,Quintus Caecilius Metellus Gaius Marius,Jugurtha Bomilcar
 102,,
-103,King Boiorix King Teutobod,Quintus Servilius Caepio Gnaeus Mallius Maximus
-104,King Teutobod (POW),Gaius Marius
-105,King Boiorix † ,Gaius Marius; Quintus Lutatius Catulus
-106,Pompeius Strabo,
+103,Quintus Servilius Caepio Gnaeus Mallius Maximus,King Boiorix King Teutobod
+104,Gaius Marius,King Teutobod (POW)
+105,Gaius Marius; Quintus Lutatius Catulus,King Boiorix † 
+106,,Pompeius Strabo
 107,,Lucius Porcius Cato
 108,,
 109,Sulla,Archelaus
@@ -118,7 +118,7 @@ id,RomanCommanders,EnemyCommanders
 117,,
 118,,
 119,,
-120,Quintus Sertorius,Lucius Fulfidas
+120,Lucius Fufidius,Quintus Sertorius
 121,Lucullus,Mithridates VI of Pontus
 122,,
 123,Lucullus,Mithridates VI of Pontus
