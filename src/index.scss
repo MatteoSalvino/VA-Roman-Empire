@@ -23,11 +23,19 @@ rect {
 }
 
 #modal_container {
-  text-align: center;
+    text-align: center;
 }
 
-#battle_date, #battle_location, #battle_war, #battle_outcome {
-  text-align: left;
+#battle_date,
+#battle_location,
+#battle_war,
+#battle_outcome {
+    text-align: left;
+}
+
+.modal-info {
+    text-align: end;
+    font-weight: 700!important;
 }
 
 #cumulativeBtn,

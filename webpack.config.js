@@ -49,6 +49,7 @@ const config = {
             { from: './src/assets/wars.csv', to: './assets' },
             { from: './src/assets/allies.csv', to: './assets' },
             { from: './src/assets/commanders.csv', to: './assets' },
+            { from: './src/assets/images.csv', to: './assets' },
             { from: './src/assets/dark-eye-off.png', to: './assets' },
             { from: './src/assets/light-eye-off.png', to: './assets' },
             { from: './src/assets/dark-eye-on.png', to: './assets' },
