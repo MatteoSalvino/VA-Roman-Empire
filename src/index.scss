@@ -22,6 +22,14 @@ rect {
     border: 5px solid #b1d4e7;
 }
 
+#modal_container {
+  text-align: center;
+}
+
+#battle_date, #battle_location, #battle_war, #battle_outcome {
+  text-align: left;
+}
+
 #cumulativeBtn,
 #centuriesBtn {
     margin: 5px;

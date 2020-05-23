@@ -115,6 +115,8 @@ class Map extends BorderedChart {
                     .classed('selected', true);
                 setLabel(self, d)
             })
+            .attr('data-toggle', 'modal')
+            .attr('data-target', '#modal_container')
             .style('visibility', 'visible');
 
         legend = this.setupLegend()
@@ -353,6 +355,7 @@ class Map extends BorderedChart {
 }
 
 function updateLegend(numBattles, min, max) {
+  /*
     if (numBattles == 1) {
         legend.select('#war-info-btn')
             .style('visibility', 'visible')
@@ -360,14 +363,18 @@ function updateLegend(numBattles, min, max) {
             .style('visibility', 'visible')
         return;
     }
-
+  */
     resetLegend()
     if (numBattles != 0) {
+      if(numBattles == 1)
         legend.select('#battle_label')
-            .text(numBattles + " battles selected");
-        legend.select('#battle_year')
+              .text(numBattles + " battle selected");
+      else
+        legend.select('#battle_label')
+              .text(numBattles + " battles selected");
+      legend.select('#battle_year')
             .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)));
-        legend.select('#battle_war')
+      legend.select('#battle_war')
             .text('')
     }
 }
@@ -379,6 +386,7 @@ function parseRoman(y) {
 }
 
 function setLabel(self, d) {
+  /*
     legend.select('#battle_label')
         .text(d.label);
     legend.select('#battle_year')
@@ -387,21 +395,33 @@ function setLabel(self, d) {
         .text('Coordinates: (' + d.latitude + ',' + d.longitude + ')');
     legend.select('#battle_outcome')
         .text('Outcome: ' + d.outcome);
-
+  */
     var war = self.wars.filter(x => d.warId === x.id)
     var commanders = controller.commanders.filter(x => d.id === x.id)
     var allies = controller.allies.filter(x => d.id === x.id)
-
+  /*
     legend.select('#battle_war')
         .text(function() {
             return 'War: ' + (war.length == 0 || war == null ? '-' : war[0].label);
         })
-
+ */
     //update modal fields
     var modal_container = d3.select('#modal_container')
 
     modal_container.select('.modal-title')
         .text(d.label)
+
+    modal_container.select('#battle_date')
+                   .text(parseRoman(d.year))
+
+    modal_container.select('#battle_location')
+                   .text(d.locationLabel)
+
+    modal_container.select('#battle_war')
+                   .text("-")
+
+    modal_container.select('#battle_outcome')
+                   .text(d.outcome)
 
     modal_container.select('#romanCommanders')
         .text(function() {
@@ -431,37 +451,41 @@ function setLabel(self, d) {
             return allies[0].EnemyAllies
         })
 
-    modal_container.select('#romanStatistics')
+    modal_container.select('#romanStrength')
         .text(function() {
-            var to_ret = ""
             if (allies[0].RomanStrength == "")
-                to_ret += "Roman strength : -"
-            to_ret += "Roman strength:" + allies[0].RomanStrength
-
-            if (allies[0].RomanLosses == "")
-                to_ret += ", Roman losses : -"
-            to_ret += ", Roman losses:" + allies[0].RomanLosses
-
-            return to_ret
+                return "-"
+            return allies[0].RomanStrength
         })
 
-    modal_container.select('#enemyStatistics')
+    modal_container.select('#romanLosses')
         .text(function() {
-            var to_ret = ""
+          if (allies[0].RomanLosses == "")
+              return "-"
+          return allies[0].RomanLosses
+
+        })
+
+
+    modal_container.select('#enemyStrength')
+        .text(function() {
             if (allies[0].EnemyStrength == "")
-                to_ret += "Enemy strength : -"
-            to_ret += "Enemy strength:" + allies[0].EnemyStrength
+                return "-"
+            return allies[0].EnemyStrength
+        })
 
-            if (allies[0].EnemyLosses == "")
-                to_ret += ", Enemy losses : -"
-            to_ret += ", Enemy losses:" + allies[0].EnemyLosses
-
-            return to_ret
+    modal_container.select('#enemyLosses')
+        .text(function() {
+          if (allies[0].EnemyLosses == "")
+              return "-"
+          return allies[0].EnemyLosses
         })
 
 
     var modalOnClick = function() {}
     if (war != null && war.length > 0 && war[0].wikidata != '') {
+      modal_container.select('#battle_war')
+                     .text(war[0].label)
 
         modalOnClick = function() {
             window.open("https://www.wikidata.org/wiki/" + war[0].wikidata)
@@ -471,10 +495,12 @@ function setLabel(self, d) {
     modal_container.select('#explore-btn')
         .on('click', modalOnClick)
 
+    /*
     legend.select('#war-info-btn')
         .style('visibility', 'visible')
     legend.select('#war-info-label')
         .style('visibility', 'visible')
+    */
 }
 
 function resetLegend() {
