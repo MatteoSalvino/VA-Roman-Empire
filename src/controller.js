@@ -39,6 +39,7 @@ class Controller {
             self.wars = data[2]
             self.allies = data[3]
             self.commanders = data[4]
+            self.images = data[5]
             self.setupFilters()
             self.setupGraphs()
         }).catch(function(error) {
@@ -60,7 +61,8 @@ class Controller {
             d3.csv('./assets/battles.csv'),
             d3.csv('./assets/wars.csv'),
             d3.csv('./assets/allies.csv'),
-            d3.csv('./assets/commanders.csv')
+            d3.csv('./assets/commanders.csv'),
+            d3.csv('./assets/images.csv')
         ])
     }
 

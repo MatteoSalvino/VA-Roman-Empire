@@ -366,7 +366,7 @@ function updateLegend(numBattles, min, max) {
   */
     resetLegend()
     if (numBattles != 0) {
-      if(numBattles == 1)
+        if (numBattles == 1)
         legend.select('#battle_label')
               .text(numBattles + " battle selected");
       else
@@ -399,6 +399,7 @@ function setLabel(self, d) {
     var war = self.wars.filter(x => d.warId === x.id)
     var commanders = controller.commanders.filter(x => d.id === x.id)
     var allies = controller.allies.filter(x => d.id === x.id)
+    var image = controller.images.filter(x => d.id === x.id)[0].img
   /*
     legend.select('#battle_war')
         .text(function() {
@@ -407,6 +408,8 @@ function setLabel(self, d) {
  */
     //update modal fields
     var modal_container = d3.select('#modal_container')
+
+    modal_container.select('#modalImg').style('visibility', image == '' ? 'hidden' : 'visible').attr('src', image)
 
     modal_container.select('.modal-title')
         .text(d.label)
