@@ -1,7 +1,7 @@
 import controller from './controller'
-import BorderedChart from './borderedChart';
+import BorderedChart from './borderedChart'
 
-const d3 = require('d3');
+const d3 = require('d3')
 
 var isBrushing = false,
     brushedArea = undefined
@@ -76,13 +76,13 @@ class Map extends BorderedChart {
             .attr('id', function(d) {
                 return d.properties['OBJECTID'];
             })
-            .attr('d', path);
+            .attr('d', path)
 
         markerGroup = this.chart.append('g')
             .attr('class', 'brush')
-            .call(this.brush);
+            .call(this.brush)
 
-        var self = this;
+        var self = this
         markerGroup.append('g')
             .selectAll('circle')
             .data(this.battles)
@@ -117,7 +117,7 @@ class Map extends BorderedChart {
             })
             .attr('data-toggle', 'modal')
             .attr('data-target', '#modal_container')
-            .style('visibility', 'visible');
+            .style('visibility', 'visible')
 
         legend = this.setupLegend()
 
@@ -145,7 +145,7 @@ class Map extends BorderedChart {
                         .attr('stroke', 'white')
                     setLabel(self, d);
                 } else d3.select(this).style('visibility', 'hidden')
-            });
+            })
 
         updateLegend(points, minYear, maxYear)
     }
@@ -154,14 +154,14 @@ class Map extends BorderedChart {
         //reset previous scatter brush
         this.setScatterBattles()
         var self = this
-        var selection = d3.event.selection;
+        var selection = d3.event.selection
 
         var isClick = JSON.stringify(brushedArea) == JSON.stringify(selection)
         brushedArea = selection
 
-        var points = 0;
-        var minYear = Infinity;
-        var maxYear = -Infinity;
+        var points = 0
+        var minYear = Infinity
+        var maxYear = -Infinity
 
         var echo = []
         if (selection) {
@@ -169,27 +169,27 @@ class Map extends BorderedChart {
                 isBrushing = true
                 markerGroup.selectAll('circle')
                     .style('visibility', function(d) {
-                        var cx = d3.select(this).attr('cx');
-                        var cy = d3.select(this).attr('cy');
-                        //Check if the point is inside the brushed area
+                        var cx = d3.select(this).attr('cx')
+                        var cy = d3.select(this).attr('cy')
+                            //Check if the point is inside the brushed area
                         var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
                             cy >= selection[0][1] && cy <= selection[1][1]);
 
                         if (isBrushed) {
                             echo.push(d)
-                            points++;
-                            minYear = d3.min([minYear, +d.year]);
-                            maxYear = d3.max([maxYear, +d.year]);
+                            points++
+                            minYear = d3.min([minYear, +d.year])
+                            maxYear = d3.max([maxYear, +d.year])
                             d3.select(this)
                                 .classed('brushed', true)
                                 .attr('stroke-width', 0.5)
-                                .attr('stroke', 'white');
+                                .attr('stroke', 'white')
 
-                            setLabel(self, d);
-                            return 'visible';
+                            setLabel(self, d)
+                            return 'visible'
                         }
                         d3.select(this).attr('stroke-width', 0).classed('brushed', false);
-                        return 'hidden';
+                        return 'hidden'
                     });
                 updateLegend(points, minYear, maxYear)
                 controller.setBrushedMapData(echo)
@@ -197,7 +197,7 @@ class Map extends BorderedChart {
         } else {
             isBrushing = false
             markerGroup.selectAll('circle')
-                .style('visibility', "visible");
+                .style('visibility', "visible")
             resetLegend();
             controller.resetBrushedMapData()
         }
@@ -208,7 +208,7 @@ class Map extends BorderedChart {
             .attr("width", 200)
             .attr("height", 120)
             .attr('x', 400)
-            .attr('y', 10);
+            .attr('y', 10)
 
         legend.append('text')
             .attr('id', 'battle_label')
@@ -216,62 +216,17 @@ class Map extends BorderedChart {
             .attr('x', 5)
             .attr('y', 20)
             .attr('font-size', 12)
-            .attr('font-weight', 'bold');
+            .attr('font-weight', 'bold')
 
         legend.append('text')
             .attr('id', 'battle_year')
             .attr('class', 'legend-label')
             .attr('x', 5)
             .attr('y', 40)
-            .attr('font-size', 10);
-
-        legend.append('text')
-            .attr('id', 'battle_coordinate')
-            .attr('class', 'legend-label')
-            .attr('x', 5)
-            .attr('y', 60)
-            .attr('font-size', 10);
-
-        legend.append('text')
-            .attr('id', 'battle_outcome')
-            .attr('class', 'legend-label')
-            .attr('x', 5)
-            .attr('y', 80)
-            .attr('font-size', 10);
-
-        legend.append('text')
-            .attr('id', 'battle_war')
-            .attr('class', 'legend-label')
-            .attr('x', 5)
-            .attr('y', 100)
             .attr('font-size', 10)
-        this.setupInfoButton(legend)
 
-        return legend;
+        return legend
     }
-
-    setupInfoButton(legend) {
-        legend.append('circle')
-            .attr('id', 'war-info-btn')
-            .style("stroke", "black")
-            .style("fill", "gray")
-            .attr("r", 6)
-            .attr("cx", 10)
-            .attr("cy", 112)
-            .attr('data-toggle', 'modal')
-            .attr('data-target', '#modal_container')
-            .style('cursor', 'pointer')
-
-
-        legend.append('text')
-            .attr('id', 'war-info-label')
-            .attr("fill", "white")
-            .attr('x', 9)
-            .text("i")
-            .attr('y', 115)
-            .attr('font-size', 10)
-    }
-
 
     applyThemeChanged(darkmode, blindsafe) {
         if (darkmode && !blindsafe) {
@@ -355,38 +310,30 @@ class Map extends BorderedChart {
 }
 
 function updateLegend(numBattles, min, max) {
-    /*
-      if (numBattles == 1) {
-          legend.select('#war-info-btn')
-              .style('visibility', 'visible')
-          legend.select('#war-info-label')
-              .style('visibility', 'visible')
-          return;
-      }
-    */
     resetLegend()
-    if (numBattles != 0) {
-        if (numBattles == 1)
+    switch (numBattles) {
+        case 0:
+            break
+        case 1:
             legend.select('#battle_label')
-            .text(numBattles + " battle selected");
-        else
+                .text(numBattles + " battle selected")
+            break
+        default:
             legend.select('#battle_label')
-            .text(numBattles + " battles selected");
-        legend.select('#battle_year')
-            .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)));
-        legend.select('#battle_war')
-            .text('')
+                .text(numBattles + " battles selected")
+            legend.select('#battle_year')
+                .text('From ' + parseRoman(Math.trunc(min)) + ' to ' + parseRoman(Math.trunc(max)))
+            break
     }
 }
 
 function parseRoman(y) {
-    if (y == 0) return 0;
-    if (y < 0) return -y + "BC";
+    if (y == 0) return 0
+    if (y < 0) return -y + "BC"
     return y + "AD"
 }
 
 function setLabel(self, d) {
-
     var war = self.wars.filter(x => d.warId === x.id)
     var commanders = controller.commanders.filter(x => d.id === x.id)
     var allies = controller.allies.filter(x => d.id === x.id)
@@ -487,19 +434,9 @@ function setLabel(self, d) {
 
 function resetLegend() {
     legend.select('#battle_label')
-        .text('');
-    legend.select('#battle_year')
-        .text('');
-    legend.select('#battle_coordinate')
-        .text('');
-    legend.select('#battle_outcome')
-        .text('');
-    legend.select('#battle_war')
         .text('')
-    legend.select('#war-info-btn')
-        .style('visibility', 'hidden')
-    legend.select('#war-info-label')
-        .style('visibility', 'hidden')
+    legend.select('#battle_year')
+        .text('')
 }
 
 export default new Map()
