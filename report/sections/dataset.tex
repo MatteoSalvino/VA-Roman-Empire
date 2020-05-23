@@ -12,14 +12,20 @@ We obtained ten different tables:
     \item Battles allies
     \item Battle commanders
     \item Battles period
+    \item Battles images
     \item Wars info
     \item Wars period
     \item Wars bibliographical sources
 \end{itemize}
 
-However, we decided to focus only on a subset of them for this project.
-For sake of simplicity and to avoid to compute joins on tables at runtime, we organized the final (i.e. the one passed in input to the visualization tool) dataset into two main tables: the former for the battles and the latter for the wars, both available as csv files and hosted on the project repository.
-In the future, our tool will support the other tables as well (see \ref{sec:conclusions}).
+For sake of simplicity and in order to avoid to compute joins on tables at runtime, we organized the final (i.e. the one passed in input to the visualization tool) dataset into 5 csv files, hosted on the project repository and loaded only once, when the tool is started:
+\begin{itemize}
+    \item battles.csv: the join of many different tables is precomputed
+    \item wars.csv: this is the join of wars info and period
+    \item allies.csv, commanders.csv, images.csv
+\end{itemize}
+
+In the future, our tool will support other tables as well (see \ref{sec:conclusions}): in particular, we remark that the only table not yet integrated is the one containing the bibliographical sources.
 
 \subsubsection{Battles}
 This table comes with different attributes:
@@ -27,7 +33,7 @@ This table comes with different attributes:
     \item id - unique identifier of the battle
     \item warId - identifier of the corresponding war (if any)
     \item year - year of the event
-    \item yearAU - year of the event, ab urbe condita
+    \item yearAU - year of the event, ab Urbe condita
     \item relativeYear - year of the event, relative to roman phase
     \item label - the name of the battle
     \item locationLabel - place of the battle
@@ -39,7 +45,23 @@ This table comes with different attributes:
     \item siege - indicates that the battle is actually a blockade
     \item sack - indicates the event as a sack
     \item final - marks the battle as decisive fight
-    \item period - roman phase
+    \item period - Roman phase
+\end{itemize}
+
+\subsubsection{Allies}
+This table comes with different attributes:
+\begin{itemize}
+    \item id - unique identifier of the battle
+    \item RomanAllies \ EnemyAllies - list of allies
+    \item RomanStrength \ EnemyStrength -
+    \item RomanLosses \ EnemyLosses -
+\end{itemize}
+
+\subsubsection{Commanders}
+This table comes with two main attributes:
+\begin{itemize}
+    \item RomanCommanders - list of Roman commanders
+    \item EnemyCommanders - list of adversarial commanders
 \end{itemize}
 
 \subsubsection{Wars}
