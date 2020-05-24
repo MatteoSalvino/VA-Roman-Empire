@@ -7,11 +7,27 @@ Roman Empire is a project for Visual Analytics course held by professor G. Santu
 
 ## About
 
-The full report is available [here](report/).
+This is an innovative tool for an interactive analysis of the Roman military, available [here](https://matteosalvino.github.io/VA-Roman-Empire).
+
+For further details check the [full report](report/).
 
 ## Contributing
 
 Feel free to report any bug and open pull requests.
+
+### How to
+
+In order to locally build the project:
+
+    # clone the repository (e.g. via git clone)
+    > git clone <project.git>
+
+    # install the dependencies
+    > cd <project_folder>
+    > npm install
+
+    # optionally, to start the project
+    > npm run start
 
 ## Dependencies
 
