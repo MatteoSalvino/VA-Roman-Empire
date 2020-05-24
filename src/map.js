@@ -334,7 +334,8 @@ function setLabel(self, d) {
     var image = controller.images.filter(x => d.id === x.id)[0].img
     var modal_container = d3.select('#modal_container')
 
-    modal_container.select('#modalImg').style('visibility', image == '' ? 'hidden' : 'visible').attr('src', image)
+    modal_container.select('#modalImg').attr('src', image == "" ? './assets/placeholder.png' : image)
+
 
     modal_container.select('.modal-title')
         .text(d.label)

@@ -42,6 +42,26 @@ class Controller {
             self.images = data[5]
             self.setupFilters()
             self.setupGraphs()
+
+
+            if(localStorage.getItem('theme') == 'dark') {
+              self.darkmode = true
+              self.applyDarkMode(0)
+
+              d3.select('#darkModeBtn')
+                .attr('src', './assets/light-theme.png')
+
+              d3.select('#blindsafeBtn')
+                .attr('src', './assets/light-eye-off.png')
+            }
+
+            if(localStorage.getItem('blindsafe') == 'on') {
+              self.blindsafe = true
+              self.applyDarkMode(0)
+
+              d3.select('#blindsafeBtn')
+                .attr('src', self.darkmode ? './assets/light-eye-on.png' : './assets/dark-eye-on.png')
+            }
         }).catch(function(error) {
             console.log(error);
             throw error;
@@ -136,6 +156,7 @@ class Controller {
             d3.select(this).transition(t).attr('src', './assets/' + bg + '-eye-' + blind + '.png ')
 
             self.blindsafe = !self.blindsafe
+            localStorage.setItem('blindsafe', self.blindsafe ? 'on' : 'off')
             self.applyDarkMode()
         })
 
@@ -149,6 +170,7 @@ class Controller {
 
             // update self
             self.darkmode = !self.darkmode
+            localStorage.setItem('theme', self.darkmode ? 'dark' : 'light')
 
             self.applyDarkMode()
         })
@@ -192,7 +214,7 @@ class Controller {
     /**
      * Updates UI depending on dark mode boolean flag
      */
-    applyDarkMode() {
+    applyDarkMode(t=750) {
         mapChart.applyThemeChanged(this.darkmode, this.blindsafe);
         lineChart.applyThemeChanged(this.darkmode, this.blindsafe);
         stackedBarChart.applyThemeChanged(this.darkmode, this.blindsafe);
@@ -200,7 +222,7 @@ class Controller {
         scatterPlot.applyThemeChanged(this.darkmode, this.blindsafe);
 
         //General changes
-        var t = d3.transition().duration(750)
+        var t = d3.transition().duration(t)
 
         if (this.darkmode) {
             d3.selectAll('.svg-content-responsive')

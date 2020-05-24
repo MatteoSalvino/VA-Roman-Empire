@@ -55,7 +55,8 @@ const config = {
             { from: './src/assets/dark-eye-on.png', to: './assets' },
             { from: './src/assets/light-eye-on.png', to: './assets' },
             { from: './src/assets/dark-theme.png', to: './assets' },
-            { from: './src/assets/light-theme.png', to: './assets' }
+            { from: './src/assets/light-theme.png', to: './assets' },
+            { from: './src/assets/placeholder.png', to: './assets' }
         ])
     ]
 }
