@@ -138,10 +138,10 @@ class StackedBarChart extends BorderedChart {
 
     _setupLegend(colors) {
         legend = this.chart.append("svg")
-            .attr("width", 150)
-            .attr("height", 85)
-            .attr('x', 410)
-            .attr('y', 30);
+            .attr("width", 120)
+            .attr("height", 60)
+            .attr('x', 320)
+            .attr('y', 15);
 
 
         legend.selectAll('circle')

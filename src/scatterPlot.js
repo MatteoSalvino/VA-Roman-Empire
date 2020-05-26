@@ -6,7 +6,7 @@ var xScale, yScale, xAxis, yAxis, points, legend
 
 class ScatterPlot extends BorderedChart {
     constructor() {
-        super({ width: 600, height: 400 }, { top: 30, bottom: 30, left: 30, right: 120 })
+        super({ width: 500, height: 270 }, { top: 30, bottom: 30, left: 30, right: 120 })
             //for testing purpose
         this.battles = []
     }
@@ -263,8 +263,8 @@ class ScatterPlot extends BorderedChart {
         legend = this.chart.append("svg")
             .attr("width", 90)
             .attr("height", 90)
-            .attr('x', 480)
-            .attr('y', 30)
+            .attr('x', 380)
+            .attr('y', 15)
 
         legend.selectAll('circle')
             .data(labels)

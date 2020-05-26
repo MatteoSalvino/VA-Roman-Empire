@@ -40,8 +40,8 @@ class Map extends BorderedChart {
 
         // create a Geo Projection
         projection = d3.geoMercator()
-            .translate([120, 600])
-            .scale(500)
+            .translate([120, 370])
+            .scale(300)
             .precision(10)
 
         path = d3.geoPath()
@@ -199,9 +199,9 @@ class Map extends BorderedChart {
 
     setupLegend() {
         var legend = this.chart.append("svg")
-            .attr("width", 200)
-            .attr("height", 120)
-            .attr('x', 400)
+            .attr("width", 170)
+            .attr("height", 90)
+            .attr('x', 350)
             .attr('y', 10)
 
         legend.append('text')

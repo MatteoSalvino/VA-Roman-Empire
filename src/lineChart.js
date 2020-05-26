@@ -6,7 +6,7 @@ var xScale, yScale, xAxis, yAxis, line, path, legend, centuryBtn, cumulativeBtn
 
 class LineChart extends BorderedChart {
     constructor() {
-        super({ width: 600, height: 400 }, { top: 60, bottom: 30, left: 30, right: 30 })
+        super({ width: 500, height: 270 }, { top: 60, bottom: 30, left: 30, right: 30 })
         this.battles = []
     }
 
@@ -229,7 +229,7 @@ class LineChart extends BorderedChart {
         var self = this
         centuryBtn = this.chart
             .append('rect')
-            .attr("x", 400)
+            .attr("x", 300)
             .attr("width", "90")
             .attr("height", "24")
             .attr("fill", "#b1d4e7")
@@ -242,7 +242,7 @@ class LineChart extends BorderedChart {
 
         cumulativeBtn = this.chart
             .append('rect')
-            .attr("x", 492)
+            .attr("x", 392)
             .attr("fill", "#b1d4e7")
             .attr("width", "90")
             .attr("height", "24")
@@ -255,7 +255,7 @@ class LineChart extends BorderedChart {
 
         this.chart
             .append('text')
-            .attr('x', 410)
+            .attr('x', 310)
             .attr('y', 12)
             .text("by century")
             .attr("fill", "white")
@@ -263,7 +263,7 @@ class LineChart extends BorderedChart {
 
         this.chart
             .append('text')
-            .attr('x', 498)
+            .attr('x', 398)
             .attr('y', 12)
             .attr('class', 'cumulative-label')
             .text("cumulative")
@@ -275,9 +275,9 @@ class LineChart extends BorderedChart {
         var labels = ['won battles', 'lost battles'];
 
         legend = this.chart.append("svg")
-            .attr("width", 150)
-            .attr("height", 55)
-            .attr('x', 0)
+            .attr("width", 100)
+            .attr("height", 50)
+            .attr('x', this.margin.left)
             .attr('y', 0)
 
         legend.selectAll('circle')
@@ -290,11 +290,11 @@ class LineChart extends BorderedChart {
                 else
                     return 'lost';
             })
-            .attr('cx', 30)
+            .attr('cx', 20)
             .attr('cy', function(_d, i) {
                 return 12 + i * 15;
             })
-            .attr('r', 5)
+            .attr('r', 4)
             .attr('fill', '#ffab00');
 
         legend.selectAll('text')
@@ -302,12 +302,13 @@ class LineChart extends BorderedChart {
             .enter()
             .append('text')
             .attr('class', 'legend-label')
-            .attr('x', 50)
+            .attr('x', 35)
             .attr('y', function(_, i) {
                 return 12 + i * 15;
             })
             .text(d => d)
             .style('alignment-baseline', 'middle')
+            .attr('font-size', '12px')
 
         this.setupButtons()
     }
