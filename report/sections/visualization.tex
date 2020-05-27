@@ -28,8 +28,13 @@ The first component of our visualization tool is the geographic map, whose goal 
 In this scenario, the other charts of the visualization will be properly updated. Conversely, also the geographic map will be updated when a particular time period is selected in the Line chart or a group of battles is selected in the Scatter plot. In the first case, the battles outside the selected time period are hidden, whereas in the second scenario the selected battles are highlighted with a black border.
 
 \subsection{Infobox}
-\todo[inline]{add description}
-
+In order to allow the end customer to explore further information about a specific battle, we have implemented an information container, using Bootstrap modal feature, that will be shown to him when he will click on the marker of a battle. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.20]{./images/infobox.png}
+	\caption{Infobox example}
+\end{figure}
+In this container we can find the image of the battle if present, otherwise it will be shown a placeholder, the battle data, location, war and outcome. If the corresponding location has the pleiades identifier, then it will be clickable to explore more information about it. Furthermore, we can find the commanders of the Roman and enemies empire, as well as their allies. At the end of the container, we can find some statistical measures about the strength and losses of the two counterparts. The last thing we want to underline is the possibility to explore further war details of the chosen battle through the button Explore, if and only if the corresponding war identifier is present.
 \subsection{Line Chart}
 The next component is the Line chart, which is responsible to communicate to the analyst the trends of won and lost battles in a given time period. We provided two analysis approaches:
 \begin{itemize}
