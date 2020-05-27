@@ -3,20 +3,29 @@
 The dataset used in this project has been generated starting from the (english) Wikipedia article \href{https://en.wikipedia.org/w/index.php?title=List_of_Roman_wars_and_battles}{List of Roman wars and battles}. As all the Wikipedia pages, this article is written using the wikitext, a special hypertext markup used by the MediaWiki software as default formatter. In order to acquire the necessary information, we have used some script to scrap the content of the page and produce ER-tables: this is a much more flexible way to represent data \cite{Chen76}, with respect to the wikitext, and in particular makes it possible to export as comma-separated values (\textbf{csv}) file the entire dataset.
 
 \subsection{ER Tables}
-We obtained ten different tables:
-\begin{itemize}
-    \item Battles info
-    \item Battles type
-    \item Battles outcome
-    \item Battles places
-    \item Battles allies
-    \item Battle commanders
-    \item Battles period
-    \item Battles images
-    \item Wars info
-    \item Wars period
-    \item Wars bibliographical sources
-\end{itemize}
+We obtained ten different relationships, listed in table \ref{table:dataset}.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Main    & Relationship            \\
+        \midrule
+        Battles & info                    \\
+                & type                    \\
+                & outcome                 \\
+                & places                  \\
+                & allies                  \\
+                & commanders              \\
+                & period                  \\
+                & images                  \\
+        Wars    & info                    \\
+                & period                  \\
+                & bibliographical sources \\
+        \bottomrule
+    \end{tabular}
+    \caption{The underlying dataset as set of tables.}
+    \label{table:dataset}
+\end{table}
 
 For sake of simplicity and in order to avoid to compute joins on tables at runtime, we organized the final (i.e. the one passed in input to the visualization tool) dataset into 5 csv files, hosted on the project repository and loaded only once, when the tool is started:
 \begin{itemize}
@@ -87,9 +96,9 @@ and one extra attribute for wars
 \end{itemize}
 
 \subsubsection{Pleiades Identifier}
-\href{https://pleiades.stoa.org}{Pleiades} is a community-built gazetteer and graph of ancient places. It publishes authoritative information about ancient places and spaces, providing unique services for finding, displaying, and reusing that information under open license. It publishes not just for individual human users, but also for search engines and for the widening array of computational research and visualization tools that support humanities teaching and research.
+\href{https://pleiades.stoa.org}{Pleiades} is a community-built gazetteer and graph of ancient places. It publishes authoritative information about ancient places and spaces, providing unique services for finding, displaying, and reusing that information under open license: it publishes for the widening array of computational research and visualization tools that support humanities teaching and research.
 
-We downloaded one of their dumps in order to statically retrieve the place identifier and to adjust some latitude and longitude values. This allowed the visualization tool to properly render the position on the geographic map of an event. Moreover, we adopted this strategy since it is more flexible. Indeed, binding an ancient place to its corresponding Pleiades entry allows many benefits, among them we remark:
+We downloaded one of their dumps in order to statically retrieve the place identifier and to adjust some latitude and longitude values. This allowed the visualization tool to properly render the position on the geographic map of an event and to provide an hyperlink to Pleiades website in the battle info-box. Moreover, we adopted this strategy since it is more flexible. Indeed, binding an ancient place to its corresponding Pleiades entry allows many benefits, among them we remark:
 \begin{itemize}
     \item we can fully exploit the Pleiades graph and its daily-basis update system
     \item it is simpler to detect errors and eventually fix them
