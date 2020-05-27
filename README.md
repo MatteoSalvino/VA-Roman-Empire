@@ -32,6 +32,6 @@ In order to locally build the project:
 ## Dependencies
 
 * [d3.js](https://github.com/d3/d3)
-* [Bootsrtap](https://github.com/twbs/bootstrap)
+* [Bootstrap](https://github.com/twbs/bootstrap)
 * [Node.js](https://github.com/nodejs/node)
 * [Webpack](https://github.com/webpack/webpack)
