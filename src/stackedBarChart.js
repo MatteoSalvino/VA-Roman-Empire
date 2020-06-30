@@ -26,11 +26,11 @@ class StackedBarChart extends BorderedChart {
         xScale = d3.scaleBand()
             .range([this.margin.left, this.width - this.margin.right])
             .padding(0.5)
-            .domain(barData.map(function(d) { return d.attack; }));
+            .domain(barData.map(function (d) { return d.attack; }));
 
         yScale = d3.scaleLinear()
             .range([this.height - this.margin.bottom, this.margin.top])
-            .domain([0, d3.max(barData, function(d) { return d.total + 1; })]);
+            .domain([0, d3.max(barData, function (d) { return d.total + 1; })]);
 
 
         xAxis = this.chart.append('g')
@@ -41,7 +41,7 @@ class StackedBarChart extends BorderedChart {
         yAxis = this.chart.append('g')
             .attr('class', 'y axis')
             .attr('transform', 'translate(' + this.margin.bottom + ', 0)')
-            .call(d3.axisLeft(yScale).ticks(d3.max(barData, function(d) { return d.total + 1; })));
+            .call(d3.axisLeft(yScale).ticks(d3.max(barData, function (d) { return d.total + 1; })));
 
         //Split our dataset in layers
         var stack = d3.stack()
@@ -54,7 +54,7 @@ class StackedBarChart extends BorderedChart {
             .enter()
             .append('g')
             .attr('class', 'layer')
-            .attr('fill', function(_d, i) {
+            .attr('fill', function (_d, i) {
                 if (i == 0)
                     return '#33a02c';
                 else if (i == 1)
@@ -64,24 +64,24 @@ class StackedBarChart extends BorderedChart {
             });
 
         groups.selectAll("rect")
-            .data(function(d) { return d; })
+            .data(function (d) { return d; })
             .enter()
             .append("rect")
             .attr("class", "bar")
-            .attr('x', function(d) { return xScale(d.data.attack); })
-            .attr('y', function(d) { return yScale(d[1]); })
+            .attr('x', function (d) { return xScale(d.data.attack); })
+            .attr('y', function (d) { return yScale(d[1]); })
             .attr("width", xScale.bandwidth())
-            .attr("height", function(d) { return yScale(d[0]) - yScale(d[1]); })
-            .on('mouseover', function(d) {
+            .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+            .on('mouseover', function (d) {
                 tooltip.select('text').text(d[1] - d[0]);
                 tooltip.style('display', null);
             })
-            .on('mousemove', function() {
+            .on('mousemove', function () {
                 const xPosition = d3.mouse(this)[0] - 20;
                 const yPosition = d3.mouse(this)[1] - 25;
                 tooltip.attr('transform', 'translate(' + xPosition + ',' + yPosition + ')');
             })
-            .on('mouseout', function() {
+            .on('mouseout', function () {
                 tooltip.style('display', 'none');
             });
 
@@ -113,7 +113,7 @@ class StackedBarChart extends BorderedChart {
 
     makeDataset() {
         var dataset = resetDataset()
-        this.battles.forEach(function(d) {
+        this.battles.forEach(function (d) {
 
             var outcome = d.outcome != "" ? d.outcome : "-";
 
@@ -138,17 +138,17 @@ class StackedBarChart extends BorderedChart {
 
     _setupLegend(colors) {
         legend = this.chart.append("svg")
-            .attr("width", 120)
-            .attr("height", 60)
-            .attr('x', 320)
-            .attr('y', 15);
+            .attr("width", 150)
+            .attr("height", 85)
+            .attr('x', 410)
+            .attr('y', 30);
 
 
         legend.selectAll('circle')
             .data(colors)
             .enter()
             .append('circle')
-            .attr('class', function(d, i) {
+            .attr('class', function (d, i) {
                 if (i == 0)
                     return 'won';
                 else if (i == 1)
@@ -157,11 +157,11 @@ class StackedBarChart extends BorderedChart {
                     return 'uncertain';
             })
             .attr('cx', 30)
-            .attr('cy', function(_d, i) {
+            .attr('cy', function (_d, i) {
                 return 20 + i * 15;
             })
             .attr('r', 5)
-            .attr('fill', function(d) { return d; });
+            .attr('fill', function (d) { return d; });
 
         legend.selectAll('text')
             .data(colors)
@@ -169,10 +169,10 @@ class StackedBarChart extends BorderedChart {
             .append('text')
             .attr('class', 'legend-label')
             .attr('x', 50)
-            .attr('y', function(_d, i) {
+            .attr('y', function (_d, i) {
                 return 20 + i * 15;
             })
-            .text(function(_d, i) {
+            .text(function (_d, i) {
                 switch (i) {
                     case 0:
                         return 'Won';
@@ -189,7 +189,7 @@ class StackedBarChart extends BorderedChart {
         if (blindsafe) {
             //Update stacked chart layers
             this.chart.selectAll('g.layer')
-                .style('fill', function(_d, i) {
+                .style('fill', function (_d, i) {
                     if (i == 0)
                         return '#33a02c';
                     else if (i == 1)
@@ -211,7 +211,7 @@ class StackedBarChart extends BorderedChart {
             if (darkmode) {
                 //Update stacked chart layers
                 this.chart.selectAll('g.layer')
-                    .style('fill', function(_d, i) {
+                    .style('fill', function (_d, i) {
                         if (i == 0)
                             return '#1b9e77';
                         else if (i == 1)
@@ -232,7 +232,7 @@ class StackedBarChart extends BorderedChart {
             } else {
                 //Update stacked chart layers
                 this.chart.selectAll('g.layer')
-                    .style('fill', function(_d, i) {
+                    .style('fill', function (_d, i) {
                         if (i == 0)
                             return '#8dd3c7';
                         else if (i == 1)

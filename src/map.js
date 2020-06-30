@@ -40,8 +40,8 @@ class Map extends BorderedChart {
 
         // create a Geo Projection
         projection = d3.geoMercator()
-            .translate([120, 370])
-            .scale(300)
+            .translate([120, 550])
+            .scale(460)
             .precision(10)
 
         path = d3.geoPath()
@@ -60,7 +60,7 @@ class Map extends BorderedChart {
      */
     setScatterBattles(ids = []) {
         markerGroup.selectAll("circle")
-            .each(function(d) {
+            .each(function (d) {
                 d3.select(this)
                     .classed('scattered', ids.includes(+d.id))
             })
@@ -72,7 +72,7 @@ class Map extends BorderedChart {
             .enter()
             .append('path')
             .attr('class', 'state')
-            .attr('id', function(d) {
+            .attr('id', function (d) {
                 return d.properties['OBJECTID']
             })
             .attr('d', path)
@@ -89,7 +89,7 @@ class Map extends BorderedChart {
             .append('circle')
             .attr('cx', d => projection([d.longitude, d.latitude])[0])
             .attr('cy', d => projection([d.longitude, d.latitude])[1])
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 switch (d.outcome) {
                     case 'W':
                         return 'won'
@@ -104,7 +104,7 @@ class Map extends BorderedChart {
             .attr('r', 4)
             .attr('fill', 'blue')
             .attr('pointer-events', 'visible')
-            .on('click', function(d) {
+            .on('click', function (d) {
                 d3.selectAll('.selected')
                     .classed('selected', false)
 
@@ -127,7 +127,7 @@ class Map extends BorderedChart {
             maxYear = -Infinity
         var selector = isBrushing ? ".brushed" : "circle"
         markerGroup.selectAll(selector)
-            .each(function(d) {
+            .each(function (d) {
                 var ok = self.battles.filter(b => b.id == d.id).length > 0
                 if (ok && +d.year >= self.period.min && +d.year <= self.period.max) {
                     points++
@@ -162,10 +162,10 @@ class Map extends BorderedChart {
             if (!isClick) {
                 isBrushing = true
                 markerGroup.selectAll('circle')
-                    .style('visibility', function(d) {
+                    .style('visibility', function (d) {
                         var cx = d3.select(this).attr('cx')
                         var cy = d3.select(this).attr('cy')
-                            //Check if the point is inside the brushed area
+                        //Check if the point is inside the brushed area
                         var isBrushed = (cx >= selection[0][0] && cx <= selection[1][0] &&
                             cy >= selection[0][1] && cy <= selection[1][1])
 
@@ -199,9 +199,9 @@ class Map extends BorderedChart {
 
     setupLegend() {
         var legend = this.chart.append("svg")
-            .attr("width", 170)
-            .attr("height", 90)
-            .attr('x', 350)
+            .attr("width", 200)
+            .attr("height", 120)
+            .attr('x', 400)
             .attr('y', 10)
 
         legend.append('text')
@@ -355,42 +355,42 @@ function setLabel(self, d) {
         .text(d.outcome)
 
     modal_container.select('#romanCommanders')
-        .text(function() {
+        .text(function () {
             if (commanders[0].RomanCommanders == "")
                 return "-"
             return commanders[0].RomanCommanders
         })
 
     modal_container.select('#enemyCommanders')
-        .text(function() {
+        .text(function () {
             if (commanders[0].EnemyCommanders == "")
                 return "-"
             return commanders[0].EnemyCommanders
         })
 
     modal_container.select('#romanAllies')
-        .text(function() {
+        .text(function () {
             if (allies[0].RomanAllies == "")
                 return "-"
             return allies[0].RomanAllies
         })
 
     modal_container.select('#enemyAllies')
-        .text(function() {
+        .text(function () {
             if (allies[0].EnemyAllies == "")
                 return "-"
             return allies[0].EnemyAllies
         })
 
     modal_container.select('#romanStrength')
-        .text(function() {
+        .text(function () {
             if (allies[0].RomanStrength == "")
                 return "-"
             return allies[0].RomanStrength
         })
 
     modal_container.select('#romanLosses')
-        .text(function() {
+        .text(function () {
             if (allies[0].RomanLosses == "")
                 return "-"
             return allies[0].RomanLosses
@@ -398,25 +398,25 @@ function setLabel(self, d) {
         })
 
     modal_container.select('#enemyStrength')
-        .text(function() {
+        .text(function () {
             if (allies[0].EnemyStrength == "")
                 return "-"
             return allies[0].EnemyStrength
         })
 
     modal_container.select('#enemyLosses')
-        .text(function() {
+        .text(function () {
             if (allies[0].EnemyLosses == "")
                 return "-"
             return allies[0].EnemyLosses
         })
 
-    var modalOnClick = function() {}
+    var modalOnClick = function () { }
     if (war != null && war.length > 0 && war[0].wikidata != '') {
         modal_container.select('#battle_war')
             .text(war[0].label)
 
-        modalOnClick = function() {
+        modalOnClick = function () {
             window.open("https://www.wikidata.org/wiki/" + war[0].wikidata)
         }
     }

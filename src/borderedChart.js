@@ -1,7 +1,7 @@
 const d3 = require('d3')
 
 class BorderedChart {
-    constructor(size = { width: 500, height: 270 }, margin = { top: 30, bottom: 30, left: 30, right: 30 }) {
+    constructor(size = { width: 600, height: 400 }, margin = { top: 30, bottom: 30, left: 30, right: 30 }) {
         this.width = size.width
         this.height = size.height
         this.margin = margin

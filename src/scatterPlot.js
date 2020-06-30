@@ -6,8 +6,8 @@ var xScale, yScale, xAxis, yAxis, points, legend
 
 class ScatterPlot extends BorderedChart {
     constructor() {
-        super({ width: 500, height: 270 }, { top: 30, bottom: 30, left: 30, right: 120 })
-            //for testing purpose
+        super({ width: 600, height: 400 }, { top: 30, bottom: 30, left: 30, right: 120 })
+        //for testing purpose
         this.battles = []
     }
 
@@ -51,7 +51,7 @@ class ScatterPlot extends BorderedChart {
             .data(this.battles)
             .enter()
             .append('circle')
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 if (d.outcome == 'W')
                     return 'won-point';
                 else if (d.outcome == 'L')
@@ -62,10 +62,10 @@ class ScatterPlot extends BorderedChart {
                     return 'uncertain-point';
             })
             .attr('r', 6)
-            .attr('cx', function(d) {
+            .attr('cx', function (d) {
                 return xScale(d.y1)
             })
-            .attr('cy', function(d) {
+            .attr('cy', function (d) {
                 return yScale(d.y2)
             });
 
@@ -79,7 +79,7 @@ class ScatterPlot extends BorderedChart {
         var echo = []
         if (selection) {
             points.selectAll('circle')
-                .each(function(d) {
+                .each(function (d) {
                     var cx = d3.select(this).attr('cx');
                     var cy = d3.select(this).attr('cy');
 
@@ -256,25 +256,25 @@ class ScatterPlot extends BorderedChart {
 
     setupLegend() {
         var civil_flag = controller.filters.civil;
-        var labels = ['won', 'lost', 'civil', 'uncertain'].filter(function(d, i) {
+        var labels = ['won', 'lost', 'civil', 'uncertain'].filter(function (d, i) {
             return !(i == 2 && !civil_flag)
         })
 
         legend = this.chart.append("svg")
             .attr("width", 90)
             .attr("height", 90)
-            .attr('x', 380)
-            .attr('y', 15)
+            .attr('x', 480)
+            .attr('y', 30)
 
         legend.selectAll('circle')
             .data(labels)
             .enter()
             .append('circle')
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return d + '-point';
             })
             .attr('cx', 10)
-            .attr('cy', function(_d, i) {
+            .attr('cy', function (_d, i) {
                 return 10 + i * 15;
             })
             .attr('r', 5);
@@ -285,7 +285,7 @@ class ScatterPlot extends BorderedChart {
             .append('text')
             .attr('class', 'legend-label')
             .attr('x', 25)
-            .attr('y', function(_, i) {
+            .attr('y', function (_, i) {
                 return 10 + i * 15;
             })
             .text(d => d)

@@ -6,7 +6,7 @@ var xScale, yScale, xAxis, yAxis, line, path, legend, centuryBtn, cumulativeBtn
 
 class LineChart extends BorderedChart {
     constructor() {
-        super({ width: 500, height: 270 }, { top: 60, bottom: 30, left: 30, right: 30 })
+        super({ width: 600, height: 400 }, { top: 60, bottom: 30, left: 30, right: 30 })
         this.battles = []
     }
 
@@ -28,12 +28,12 @@ class LineChart extends BorderedChart {
         controller.resetBrushedLineData()
 
         this.isCumulative = true
-        var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
-        var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
+        var wonBattles = this.battles.filter(function (d) { return d.outcome == 'W'; });
+        var lostBattles = this.battles.filter(function (d) { return d.outcome == 'L'; });
 
         //Axis scales
         xScale = d3.scaleLinear()
-            .domain([d3.min(this.battles, function(d) { return +d.year; }), d3.max(this.battles, function(d) { return +d.year; })])
+            .domain([d3.min(this.battles, function (d) { return +d.year; }), d3.max(this.battles, function (d) { return +d.year; })])
             .range([this.margin.left, this.width - this.margin.right]);
 
         yScale = d3.scaleLinear()
@@ -46,10 +46,10 @@ class LineChart extends BorderedChart {
             .attr('clip-path', 'url(#clip)');
 
         path = d3.line()
-            .x(function(d) {
+            .x(function (d) {
                 return xScale(+d.year);
             })
-            .y(function(_d, i) {
+            .y(function (_d, i) {
                 return yScale(i);
             })
             .curve(d3.curveMonotoneX);
@@ -72,7 +72,7 @@ class LineChart extends BorderedChart {
             .attr('class', 'x-axis')
             .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
             .call(d3.axisBottom(xScale)
-                .tickFormat(function(d) {
+                .tickFormat(function (d) {
                     if (d == 0) return 0;
                     if (d < 0) return -d + "BC";
                     return d + "AD"
@@ -90,10 +90,10 @@ class LineChart extends BorderedChart {
 
         //Reset zoom
         var self = this
-        this.chart.on('dblclick', function() {
-            xScale.domain([d3.min(self.battles, function(d) { return +d.year; }), d3.max(self.battles, function(d) { return +d.year; })]);
+        this.chart.on('dblclick', function () {
+            xScale.domain([d3.min(self.battles, function (d) { return +d.year; }), d3.max(self.battles, function (d) { return +d.year; })]);
             xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
-                .tickFormat(function(d) {
+                .tickFormat(function (d) {
                     if (d == 0) return 0;
                     if (d < 0) return -d + "BC";
                     return d + "AD"
@@ -121,8 +121,8 @@ class LineChart extends BorderedChart {
         controller.resetBrushedLineData();
 
         this.isCumulative = false
-        var wonBattles = this.battles.filter(function(d) { return d.outcome == 'W'; });
-        var lostBattles = this.battles.filter(function(d) { return d.outcome == 'L'; });
+        var wonBattles = this.battles.filter(function (d) { return d.outcome == 'W'; });
+        var lostBattles = this.battles.filter(function (d) { return d.outcome == 'L'; });
 
         var won = [],
             lost = [];
@@ -172,7 +172,7 @@ class LineChart extends BorderedChart {
             .attr('class', 'x-axis')
             .attr('transform', 'translate(0, ' + (this.height - this.margin.bottom) + ')')
             .call(d3.axisBottom(xScale)
-                .tickFormat(function(d) {
+                .tickFormat(function (d) {
                     if (d == 0) return 0;
                     if (d < 0) return -d + "BC";
                     return d + "AD"
@@ -190,10 +190,10 @@ class LineChart extends BorderedChart {
 
         //Reset zoom
         var self = this
-        this.chart.on('dblclick', function() {
+        this.chart.on('dblclick', function () {
             xScale.domain([-6, 6]);
             xAxis.transition().duration(1500).call(d3.axisBottom(xScale)
-                .tickFormat(function(d) {
+                .tickFormat(function (d) {
                     if (d == 0) return 0;
                     if (d < 0) return -d + "BC";
                     return d + "AD"
@@ -229,12 +229,12 @@ class LineChart extends BorderedChart {
         var self = this
         centuryBtn = this.chart
             .append('rect')
-            .attr("x", 300)
+            .attr("x", 400)
             .attr("width", "90")
             .attr("height", "24")
             .attr("fill", "#b1d4e7")
             .attr('class', 'btn btn-primary')
-            .on("click", function() {
+            .on("click", function () {
                 self.clear()
                 self.drawChart()
                 controller.resetBrushedLineData()
@@ -242,12 +242,12 @@ class LineChart extends BorderedChart {
 
         cumulativeBtn = this.chart
             .append('rect')
-            .attr("x", 392)
+            .attr("x", 492)
             .attr("fill", "#b1d4e7")
             .attr("width", "90")
             .attr("height", "24")
             .attr('class', 'btn btn-primary')
-            .on("click", function() {
+            .on("click", function () {
                 self.clear()
                 self.drawCumulativeChart()
                 controller.resetBrushedLineData()
@@ -255,7 +255,7 @@ class LineChart extends BorderedChart {
 
         this.chart
             .append('text')
-            .attr('x', 310)
+            .attr('x', 410)
             .attr('y', 12)
             .text("by century")
             .attr("fill", "white")
@@ -263,7 +263,7 @@ class LineChart extends BorderedChart {
 
         this.chart
             .append('text')
-            .attr('x', 398)
+            .attr('x', 498)
             .attr('y', 12)
             .attr('class', 'cumulative-label')
             .text("cumulative")
@@ -275,8 +275,8 @@ class LineChart extends BorderedChart {
         var labels = ['won battles', 'lost battles'];
 
         legend = this.chart.append("svg")
-            .attr("width", 100)
-            .attr("height", 50)
+            .attr("width", 150)
+            .attr("height", 55)
             .attr('x', this.margin.left)
             .attr('y', 0)
 
@@ -284,17 +284,17 @@ class LineChart extends BorderedChart {
             .data(labels)
             .enter()
             .append('circle')
-            .attr('class', function(_d, i) {
+            .attr('class', function (_d, i) {
                 if (i == 0)
                     return 'won';
                 else
                     return 'lost';
             })
-            .attr('cx', 20)
-            .attr('cy', function(_d, i) {
+            .attr('cx', 30)
+            .attr('cy', function (_d, i) {
                 return 12 + i * 15;
             })
-            .attr('r', 4)
+            .attr('r', 5)
             .attr('fill', '#ffab00');
 
         legend.selectAll('text')
@@ -302,8 +302,8 @@ class LineChart extends BorderedChart {
             .enter()
             .append('text')
             .attr('class', 'legend-label')
-            .attr('x', 35)
-            .attr('y', function(_, i) {
+            .attr('x', 50)
+            .attr('y', function (_, i) {
                 return 12 + i * 15;
             })
             .text(d => d)
@@ -444,7 +444,7 @@ function zooming(self) {
 
     //Transitioning x axis
     xAxis.transition(transition).call(d3.axisBottom(xScale)
-        .tickFormat(function(d) {
+        .tickFormat(function (d) {
             if (d == 0) return 0;
             if (d < 0) return -d + "BC";
             return d + "AD"
