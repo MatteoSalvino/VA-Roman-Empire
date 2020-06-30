@@ -208,15 +208,15 @@ id,warId,year,yearAU,relativeYear,label,locationLabel,latitude,longitude,stoaId,
 207,63,298,1051,330,Battle of Lingones,Lingones,47.864221,5.335214,177564,FR,W,n,n,n,n,,E,0.1163221834,1.733814462
 208,61,298,1051,330,Battle of Satala,Satala,40.027787,39.597934,874684,TR,W,n,n,n,n,,E,0.1204957137,1.693370456
 209,63,298,1051,330,Battle of Vindonissa,Vindonissa,47.478494,8.220204,177661,CH,W,n,n,n,n,,E,0.2155879639,1.367109903
-210,65,312,1065,344,Battle of Milvian Bridge,Milvian Bridge,,,-,-,C,n,n,n,n,,E,0.2021474402,1.376821372
-211,65,312,1065,344,Battle of Turin,Turin,,,,-,C,n,n,n,n,,E,0.2232038689,1.22519874
-212,65,312,1065,344,Battle of Verona,Verona,45.438954,10.994371,383816,IT,C,n,n,n,n,,E,0.2747167703,1.406037978
-213,65,313,1066,345,Battle of Tzirallum,Tzirallum,,,-,-,C,n,n,n,n,,E,0.1981096286,1.381040418
-214,65,314,1067,346,Battle of Cibalae,Cibalae,45.291016,18.801056,197207,HR,C,n,n,n,n,,E,0.2201082195,1.357245314
-215,65,316,1069,348,Battle of Mardia,Mardia,,,-,-,C,n,n,n,n,,E,0.2682085854,1.400712729
-216,65,324,1077,356,Battle of Adrianople,Adrianople,41.676459,26.562891,501428,TR,C,n,n,n,n,,E,0.2610914483,1.42877085
-217,65,324,1077,356,Battle of Chrysopolis,Chrysopolis,41.020639,29.012856,520995,TR,C,n,n,n,n,,E,0.1180904785,1.68233194
-218,65,324,1077,356,Battle of the Hellespont,Hellespont,40.2,26.4,501434,TR,C,n,n,n,n,,E,0.1894538939,1.406128832
+210,65,312,1065,344,Battle of Milvian Bridge,Milvian Bridge,,,-,-,C,y,n,n,n,,E,0.2021474402,1.376821372
+211,65,312,1065,344,Battle of Turin,Turin,,,,-,C,y,n,n,n,,E,0.2232038689,1.22519874
+212,65,312,1065,344,Battle of Verona,Verona,45.438954,10.994371,383816,IT,C,y,n,n,n,,E,0.2747167703,1.406037978
+213,65,313,1066,345,Battle of Tzirallum,Tzirallum,,,-,-,C,y,n,n,n,,E,0.1981096286,1.381040418
+214,65,314,1067,346,Battle of Cibalae,Cibalae,45.291016,18.801056,197207,HR,C,y,n,n,n,,E,0.2201082195,1.357245314
+215,65,316,1069,348,Battle of Mardia,Mardia,,,-,-,C,y,n,n,n,,E,0.2682085854,1.400712729
+216,65,324,1077,356,Battle of Adrianople,Adrianople,41.676459,26.562891,501428,TR,C,y,n,n,n,,E,0.2610914483,1.42877085
+217,65,324,1077,356,Battle of Chrysopolis,Chrysopolis,41.020639,29.012856,520995,TR,C,y,n,n,n,,E,0.1180904785,1.68233194
+218,65,324,1077,356,Battle of the Hellespont,Hellespont,40.2,26.4,501434,TR,C,y,n,n,n,,E,0.1894538939,1.406128832
 219,66,344,1097,376,Battle of Singara,Singara,36.3224685,41.861983,874699,IQ,,n,n,n,n,,E,0.1823448719,1.377027099
 220,67,351,1104,383,Battle of Mursa Major,Mursa Major,45.560018,18.675749,197389,HR,C,y,n,n,n,,E,0.2138025594,1.359620139
 221,67,353,1106,385,Battle of Mons Seleucus,Mons Seleucus,,,-,-,C,y,n,n,n,,E,0.1242607745,1.651526343
