@@ -1,5 +1,6 @@
 # VA-Roman-Empire
 
+[![Build Status](https://travis-ci.com/MatteoSalvino/VA-Roman-Empire.svg?branch=master)](https://travis-ci.com/MatteoSalvino/VA-Roman-Empire)
 [![made-with-d3](https://img.shields.io/badge/Made%20with-D3-ec8448.svg)](https://d3js.org/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
