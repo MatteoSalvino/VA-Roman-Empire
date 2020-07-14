@@ -19,9 +19,6 @@ class StackedBarChart extends BorderedChart {
         //Process given battles
         var barData = this.makeDataset();
 
-        //sample colors
-        var colors = ["b33040", "#d25c4d", "#f2b447"];
-
         //Axis scales and axis
         xScale = d3.scaleBand()
             .range([this.margin.left, this.width - this.margin.right])
@@ -45,7 +42,7 @@ class StackedBarChart extends BorderedChart {
 
         //Split our dataset in layers
         var stack = d3.stack()
-            .keys(['won', 'lost', 'uncertain']);
+            .keys(['won', 'lost', 'civil']);
 
         var dataset = stack(barData);
 
@@ -102,7 +99,7 @@ class StackedBarChart extends BorderedChart {
             .attr('font-weight', 'bold')
             .style('text-anchor', 'middle');
 
-        this._setupLegend(colors);
+        this._setupLegend();
         this.applyThemeChanged(controller.darkmode, controller.blindsafe);
     }
 
@@ -119,6 +116,7 @@ class StackedBarChart extends BorderedChart {
 
             if (d.siege == 'y') dataset['sieges'][outcome] += 1
             if (d.sack == 'y') dataset['sacks'][outcome] += 1
+            if (d.final == 'y') dataset['final'][outcome] += 1
         });
 
         //console.log(dataset);
@@ -130,13 +128,17 @@ class StackedBarChart extends BorderedChart {
             var curr = dataset[keys[i]];
             var total = Object.values(curr).reduce((a, b) => a + b, 0);
 
-            barData.push({ 'attack': keys[i], 'won': curr['W'], 'lost': curr['L'], 'uncertain': curr['-'], 'total': total });
+            barData.push({ 'attack': keys[i], 'won': curr['W'], 'lost': curr['L'], 'uncertain': curr['-'], 'civil' : curr['C'], 'total': total });
         }
-
         return barData;
     }
 
-    _setupLegend(colors) {
+    _setupLegend() {
+        var civil_flag = controller.filters.civil;
+        var labels = ['won', 'lost', 'civil'].filter(function (d, i) {
+          return !(i == 2 && !civil_flag)
+        })
+
         legend = this.chart.append("svg")
             .attr("width", 150)
             .attr("height", 85)
@@ -145,7 +147,7 @@ class StackedBarChart extends BorderedChart {
 
 
         legend.selectAll('circle')
-            .data(colors)
+            .data(labels)
             .enter()
             .append('circle')
             .attr('class', function (d, i) {
@@ -154,17 +156,16 @@ class StackedBarChart extends BorderedChart {
                 else if (i == 1)
                     return 'lost';
                 else
-                    return 'uncertain';
+                    return 'civil';
             })
             .attr('cx', 30)
             .attr('cy', function (_d, i) {
                 return 20 + i * 15;
             })
-            .attr('r', 5)
-            .attr('fill', function (d) { return d; });
+            .attr('r', 5);
 
         legend.selectAll('text')
-            .data(colors)
+            .data(labels)
             .enter()
             .append('text')
             .attr('class', 'legend-label')
@@ -172,15 +173,8 @@ class StackedBarChart extends BorderedChart {
             .attr('y', function (_d, i) {
                 return 20 + i * 15;
             })
-            .text(function (_d, i) {
-                switch (i) {
-                    case 0:
-                        return 'Won';
-                    case 1:
-                        return 'Lost';
-                    case 2:
-                        return 'Uncertain';
-                }
+            .text(function(d) {
+              return d;
             })
             .style('alignment-baseline', 'middle');
     }
@@ -195,7 +189,7 @@ class StackedBarChart extends BorderedChart {
                     else if (i == 1)
                         return '#1f78b4';
                     else
-                        return '#a6cee3';
+                        return '#b2df8a';
                 });
 
             //Update legend components
@@ -205,8 +199,8 @@ class StackedBarChart extends BorderedChart {
             legend.select('circle.lost')
                 .style('fill', '#1f78b4');
 
-            legend.select('circle.uncertain')
-                .style('fill', '#a6cee3');
+            legend.select('circle.civil')
+                .style('fill', '#b2df8a');
         } else {
             if (darkmode) {
                 //Update stacked chart layers
@@ -217,7 +211,7 @@ class StackedBarChart extends BorderedChart {
                         else if (i == 1)
                             return '#d95f02';
                         else
-                            return '#e7298a';
+                            return '#7570b3';
                     });
 
                 //Update legend components
@@ -227,8 +221,8 @@ class StackedBarChart extends BorderedChart {
                 legend.select('circle.lost')
                     .style('fill', '#d95f02');
 
-                legend.select('circle.uncertain')
-                    .style('fill', '#e7298a');
+                legend.select('circle.civil')
+                    .style('fill', '#7570b3');
             } else {
                 //Update stacked chart layers
                 this.chart.selectAll('g.layer')
@@ -238,7 +232,7 @@ class StackedBarChart extends BorderedChart {
                         else if (i == 1)
                             return '#fb8072';
                         else
-                            return '#bebada';
+                            return '#ffffb3';
                     });
 
                 //Update legend components
@@ -248,8 +242,8 @@ class StackedBarChart extends BorderedChart {
                 legend.select('circle.lost')
                     .style('fill', '#fb8072');
 
-                legend.select('circle.uncertain')
-                    .style('fill', '#bebada');
+                legend.select('circle.civil')
+                    .style('fill', '#ffffb3');
             }
         }
     }
@@ -314,8 +308,8 @@ class StackedBarChart extends BorderedChart {
 
 function resetDataset() {
     var dataset = {};
-    const keys = ['sacks', 'sieges'];
-    const status = ['W', 'L', '-'];
+    const keys = ['sacks', 'sieges', 'final'];
+    const status = ['W', 'L', 'C', '-'];
 
     for (var i = 0; i < keys.length; i++) {
         dataset[keys[i]] = [];
